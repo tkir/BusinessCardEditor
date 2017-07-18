@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
 import $ from 'jquery/dist/jquery';
+import {Text} from "../data/TextCSS";
 
 @Component({
   selector: 'card-editor',
@@ -14,15 +15,17 @@ export class EditorComponent implements OnInit {
   }
 
   model: CardData = null;
+  selectedItem: Text = null;
 
   ngOnInit() {
     this.model = this.dataService.getCardData();
   }
 
-  addItem(items, i){
+  addItem(items, i) {
     items.push($.extend(true, {}, items[i]));
   }
-  removeItem(items, i){
+
+  removeItem(items, i) {
     items.splice(i, 1);
   }
 

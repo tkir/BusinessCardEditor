@@ -1,10 +1,11 @@
 <div>
   <form #cardForm="ngForm">
     <div>
+      <card-style-editor [item]="selectedItem"></card-style-editor>
       <div class="form-group">
         <ul>
           <li *ngFor="let item of model.owners; let i = index" class="input-group">
-            <input type="text" class="form-control" name="owner" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="owner" [(ngModel)]="item.text" (focus)="selectedItem=item">
             <a class="input-group-addon" (click)="addItem(model.owners, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.owners, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
