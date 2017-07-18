@@ -1,3 +1,4 @@
+import {DomSanitizer} from "@angular/platform-browser";
 export class Logo{
   constructor(public src:string,
   public width:number,
@@ -5,7 +6,11 @@ export class Logo{
   public left:number,
   public top:number){}
 
-  public getLogoStyle():string{
-    return `width=${this.width}; height=${this.height}; left=${this.left}; top=${this.top}`;
+  public sanitizer: DomSanitizer = null;
+
+  get style() {
+    return this.sanitizer ?
+      this.sanitizer.bypassSecurityTrustStyle(`width:${this.width}; height:${this.height}; left:${this.left}; top:${this.top}`) :
+      null;
   }
 }
