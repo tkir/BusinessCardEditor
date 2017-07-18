@@ -1,0 +1,6 @@
+<button
+  class="btn btn-default btn-sm"
+  [ngClass]="{'disabled':!item, 'active':(item && item.fontWeight=='bold')}"
+><b>B</b></button>
+<button class="btn btn-default btn-sm" styleBtn [styledItem]="item"><i>I</i></button>
+<button class="btn btn-default btn-sm" [ngClass]="{'disabled':!item, 'active':(item && item.textDecoration=='underline')}"><u>U</u></button>
