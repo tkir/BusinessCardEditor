@@ -9,8 +9,6 @@ export class Logo{
   public sanitizer: DomSanitizer = null;
 
   get style() {
-    return this.sanitizer ?
-      this.sanitizer.bypassSecurityTrustStyle(`width:${this.width}; height:${this.height}; left:${this.left}; top:${this.top}`) :
-      null;
+    return {'width':this.width, 'height':this.height};
   }
 }

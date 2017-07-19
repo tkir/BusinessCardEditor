@@ -1,0 +1,21 @@
+.card-wrap{
+  display: block;
+  float: left;
+  padding: 20px;
+  background-color: darkgray;
+}
+
+.business-card{
+  /* 85x55 mm */
+  width:592px;
+  height: 383px;
+  position: relative;
+}
+
+.card-field{
+  position: absolute;
+}
+
+.card-field.selected{
+  outline: 5px dashed darkgray;
+}

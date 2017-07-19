@@ -1,5 +1,10 @@
-<div *ngFor="let item of cardData.emails">
-  <p [style]=item.style>
-    {{item.text}}
-  </p>
+<div class="card-wrap">
+  <div class="business-card" [ngStyle]="cardData.background.style">
+    <div
+      class="card-field"
+      *ngFor="let item of dataArr"
+      [ngStyle]="{'left.px':item.left, 'top.px':item.top}">
+      <span *ngIf="item.text" [ngStyle]="item.style">{{item.text}}</span>
+    </div>
+  </div>
 </div>

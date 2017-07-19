@@ -1,11 +1,11 @@
 <div>
   <form #cardForm="ngForm">
     <div>
-      <card-style-editor [item]="selectedItem"></card-style-editor>
+      <card-style-editor [item]="selectedItem" (returnFocus)="onFocusReturn()"></card-style-editor>
       <div class="form-group">
         <ul>
           <li *ngFor="let item of model.owners; let i = index" class="input-group">
-            <input type="text" class="form-control" name="owner" [(ngModel)]="item.text" (focus)="selectedItem=item">
+            <input type="text" class="form-control" name="owner" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.owners, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.owners, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -13,7 +13,7 @@
 
         <ul>
           <li *ngFor="let item of model.positions; let i = index" class="input-group">
-            <input type="text" class="form-control" name="position" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="position" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.positions, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.positions, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -23,7 +23,7 @@
       <div class="form-group">
         <ul>
           <li *ngFor="let item of model.organisations; let i = index" class="input-group">
-            <input type="text" class="form-control" name="email" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="email" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.organisations, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.organisations, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -31,7 +31,7 @@
 
         <ul>
           <li *ngFor="let item of model.addreses; let i = index" class="input-group">
-            <input type="text" class="form-control" name="address" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="address" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.addreses, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.addreses, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -39,7 +39,7 @@
 
         <ul>
           <li *ngFor="let item of model.phones; let i = index" class="input-group">
-            <input type="text" class="form-control" name="phone" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="phone" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.phones, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.phones, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -49,7 +49,7 @@
       <div class="form-group">
         <ul>
           <li *ngFor="let item of model.emails; let i = index" class="input-group">
-            <input type="text" class="form-control" name="email" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="email" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.emails, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.emails, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -59,7 +59,7 @@
       <div class="form-group">
         <ul>
           <li *ngFor="let item of model.sites; let i = index" class="input-group">
-            <input type="text" class="form-control" name="site" [(ngModel)]="item.text">
+            <input type="text" class="form-control" name="site" [(ngModel)]="item.text" (focus)="focusItem(item, $event)">
             <a class="input-group-addon" (click)="addItem(model.sites, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.sites, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>

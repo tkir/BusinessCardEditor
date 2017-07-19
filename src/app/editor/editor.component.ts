@@ -16,6 +16,7 @@ export class EditorComponent implements OnInit {
 
   model: CardData = null;
   selectedItem: Text = null;
+  selectetInput:any=null;
 
   ngOnInit() {
     this.model = this.dataService.getCardData();
@@ -27,6 +28,15 @@ export class EditorComponent implements OnInit {
 
   removeItem(items, i) {
     items.splice(i, 1);
+  }
+
+  focusItem(item: Text, event) {
+    this.selectedItem = item;
+    this.selectetInput=event.target;
+  }
+
+  onFocusReturn(){
+    this.selectetInput.focus();
   }
 
 }

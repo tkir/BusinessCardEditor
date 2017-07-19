@@ -1,13 +1,12 @@
-import {DomSanitizer} from "@angular/platform-browser";
-export class Background{
-  constructor(public _src:string){}
+export class Background {
+  constructor(public color: string,
+              public url: string) {
+  }
 
-  public sanitizer: DomSanitizer = null;
-
-  set src(_src:any){this._src=_src;}
-  get src():any{
-    return this.sanitizer?
-      this.sanitizer.bypassSecurityTrustStyle(this._src):
-      null;
+  get style() {
+    return {
+      'background-color': `#${this.color.replace('#', '')}`,
+      'background-image': `url(${this.url})`
+    };
   }
 }

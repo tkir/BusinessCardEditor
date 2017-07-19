@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
+import {Text} from "../data/TextCSS";
 
 @Component({
   selector: 'card-result',
@@ -11,15 +11,19 @@ import {CardData} from "../data/CardData";
 })
 export class ResultComponent implements OnInit {
 
-  constructor(private dataService: DataService,
-              private sanitizer: DomSanitizer) {
+  constructor(private dataService: DataService) {
   }
 
   cardData: CardData = null;
+  dataArr: Text[] = [];
 
   ngOnInit() {
     this.cardData = this.dataService.getCardData();
-    this.cardData.sanitizeAll(this.sanitizer)
+
+    Object.keys(this.cardData).forEach(key => {
+      if (Array.isArray(this.cardData[key]))
+        this.dataArr.push(...this.cardData[key]);
+    });
   }
 
 }
