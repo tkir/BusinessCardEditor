@@ -16,7 +16,7 @@ export class EditorComponent implements OnInit {
 
   model: CardData = null;
   selectedItem: Text = null;
-  selectetInput:any=null;
+  selectetInput: any = null;
 
   ngOnInit() {
     this.model = this.dataService.getCardData();
@@ -31,11 +31,20 @@ export class EditorComponent implements OnInit {
   }
 
   focusItem(item: Text, event) {
+    if (!item.isSelected) item.isSelected = true;
     this.selectedItem = item;
-    this.selectetInput=event.target;
+    this.selectetInput = event.target;
   }
 
-  onFocusReturn(){
+  blurItem() {
+    if (!this.selectedItem.isStyling) {
+      this.selectedItem.isSelected = false;
+      this.selectedItem = null;
+      this.selectetInput = null;
+    }
+  }
+
+  onFocusReturn() {
     this.selectetInput.focus();
   }
 

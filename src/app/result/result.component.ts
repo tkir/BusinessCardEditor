@@ -15,7 +15,7 @@ export class ResultComponent implements OnInit {
   }
 
   cardData: CardData = null;
-  dataArr: Text[] = [];
+  dataArr = [];
 
   ngOnInit() {
     this.cardData = this.dataService.getCardData();

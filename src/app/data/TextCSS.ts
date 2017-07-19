@@ -11,6 +11,9 @@ export class Text {
               public top: number) {
   }
 
+  public isSelected: boolean = false;
+  public isStyling: boolean = false;
+
   get style() {
     return {
       'font-family': this.fontFamily,

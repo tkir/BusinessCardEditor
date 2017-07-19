@@ -15,7 +15,12 @@
 .card-field{
   position: absolute;
 }
+.card-field span{
+  cursor: default;
+}
 
-.card-field.selected{
+.card-field.selected-field{
   outline: 5px dashed darkgray;
+  z-index: 100;
+  background-color:rgba(0, 0, 0, 0.08);
 }

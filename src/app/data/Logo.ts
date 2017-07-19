@@ -6,9 +6,7 @@ export class Logo{
   public left:number,
   public top:number){}
 
-  public sanitizer: DomSanitizer = null;
-
   get style() {
-    return {'width':this.width, 'height':this.height};
+    return {'width.px':this.width, 'height.px':this.height};
   }
 }

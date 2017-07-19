@@ -1,12 +1,12 @@
-<button
+<a
   class="btn btn-default btn-sm"
   [ngClass]="{'disabled':!item, 'active':(item && item.fontWeight=='bold')}"
-  (click)="toggleStyle('fontWeight')"><b>B</b></button>
-<button
+  (click)="toggleStyle('fontWeight')"><b>B</b></a>
+<a
   class="btn btn-default btn-sm"
   [ngClass]="{'disabled':!item, 'active':(item && item.fontStyle=='italic')}"
-  (click)="toggleStyle('fontStyle')"><i>I</i></button>
-<button
+  (click)="toggleStyle('fontStyle')"><i>I</i></a>
+<a
   class="btn btn-default btn-sm"
   [ngClass]="{'disabled':!item, 'active':(item && item.textDecoration=='underline')}"
-  (click)="toggleStyle('textDecoration')"><u>U</u></button>
+  (click)="toggleStyle('textDecoration')"><u>U</u></a>

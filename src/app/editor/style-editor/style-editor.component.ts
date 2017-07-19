@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {Text} from "../../data/TextCSS";
 
 @Component({
@@ -10,6 +10,10 @@ export class StyleEditorComponent implements OnInit {
 
   @Input() item: Text;
   @Output() returnFocus: EventEmitter<any> = new EventEmitter();
+
+  @HostListener('mousedown')func() {
+    if (this.item) this.item.isStyling = true;
+  }
 
   constructor() {
   }
@@ -33,6 +37,11 @@ export class StyleEditorComponent implements OnInit {
         break;
     }
 
+    this.endStyling();
+  }
+
+  private endStyling() {
     this.returnFocus.emit();
+    if (this.item) this.item.isStyling = false;
   }
 }
