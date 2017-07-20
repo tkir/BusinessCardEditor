@@ -1,25 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
 import $ from 'jquery/dist/jquery';
 import {Text} from "../data/TextCSS";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'card-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
-
-  constructor(private dataService: DataService) {
-  }
+export class EditorComponent implements OnInit, OnDestroy {
 
   model: CardData = null;
   selectedItem: Text = null;
   selectetInput: any = null;
 
+  private subscription: Subscription;
+
+  constructor(private dataService: DataService) {
+  }
+
   ngOnInit() {
-    this.model = this.dataService.getCardData();
+    this.subscription = this.dataService.getCardData()
+      .subscribe(cardData => this.model = cardData);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription)
+      this.subscription.unsubscribe();
   }
 
   addItem(items, i?: number) {

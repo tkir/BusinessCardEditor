@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CardData} from "./CardData";
 import {cardData} from "../design/defaultParams";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class DataService {
@@ -8,10 +10,10 @@ export class DataService {
   constructor() {
   }
 
-  public getCardData(design?: string): CardData {
+  public getCardData(design?: string): Observable<CardData> {
     switch (design) {
       default:
-        return cardData;
+        return Observable.of(cardData);
     }
   }
 }

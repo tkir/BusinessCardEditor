@@ -35,7 +35,7 @@ export class MovableDirective implements OnInit {
     if (event.which != 1)return;
 
     //is click out of item
-    if(this.el.nativeElement == event.target){
+    if (this.el.nativeElement == event.target) {
 
       //skip selection
       this.selectedItems = [];
@@ -44,38 +44,56 @@ export class MovableDirective implements OnInit {
       return;
     }
 
-      this.startMovingCoords = {x: event.pageX, y: event.pageY};
+    this.startMovingCoords = {x: event.pageX, y: event.pageY};
 
-      //find item in dataArr by offset
-      let left = parseInt(getComputedStyle(event.target.parentElement).left);
-      let top = parseInt(getComputedStyle(event.target.parentElement).top);
+    //find item in dataArr by offset
+    let left = parseInt(getComputedStyle(event.target.parentElement).left);
+    let top = parseInt(getComputedStyle(event.target.parentElement).top);
 
-      let item = this.dataArr.find(it => it.left == left && it.top == top);
-      if (!item)return;
+    let item = this.dataArr.find(it => it.left == left && it.top == top);
+    if (!item)return;
 
-      //multiselection
-      if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
-        if (~this.selectedItems.indexOf(item)) {
-          this.selectedItems = [];
-          this.dataArr.forEach(item => item.isSelected = false);
-        }
-      }
+    //multiselection
+    if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
+      this.multiselection(item);
+    }
 
-      //set item selected, add to selection array
-      item.isSelected = true;
-      if (!~this.selectedItems.indexOf(item))
-        this.selectedItems.push({
-          item: item,
-          element: event.target.parentElement,
-          devX: 0,
-          devY: 0
-        });
+    this.updateSelectionArray(item, event)
+  }
 
-      //add deviation with mouse to all selected items
-      this.selectedItems.forEach(it => {
-        it.devX = event.pageX - it.item.left;
-        it.devY = event.pageY - it.item.top;
+  private multiselection(item){
+    let isMulti = false;
+    this.selectedItems.forEach(obj => {
+      if (obj.item == item) isMulti = true;
+    })
+    if (!isMulti) {
+      this.selectedItems = [];
+      this.dataArr.forEach(item => item.isSelected = false);
+    }
+  }
+
+  //set item selected, add to selection array
+  private updateSelectionArray(item, event){
+    item.isSelected = true;
+
+    let isDublingItems=false;
+    this.selectedItems.forEach(obj=>{
+      if(obj.item==item)
+        isDublingItems=true;
+    })
+    if (!isDublingItems)
+      this.selectedItems.push({
+        item: item,
+        element: event.target.parentElement,
+        devX: 0,
+        devY: 0
       });
+
+    //add deviation with mouse to all selected items
+    this.selectedItems.forEach(it => {
+      it.devX = event.pageX - it.item.left;
+      it.devY = event.pageY - it.item.top;
+    });
   }
 
   @HostListener('mousemove', ['$event'])
