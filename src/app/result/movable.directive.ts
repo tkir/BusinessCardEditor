@@ -12,34 +12,35 @@ export class MovableDirective {
   private isStartMoving: boolean = false;
   private isMoving: boolean = false;
   private startMovingCoords: { x: number, y: number } = null;
-  private movingCoords: { x: number, y: number } = null;
+  private mouseElementDev: { x: number, y: number } = null;
 
   @HostListener('mousedown', ['$event'])onMouseDoun(event: MouseEvent) {
-    console.log(event);
     if (event.which != 1)return;
 
     this.fieldItem.isSelected = true;
 
     this.isStartMoving = true;
     this.startMovingCoords = {x: event.pageX, y: event.pageY};
+    this.mouseElementDev = {
+      x: event.pageX - this.fieldItem.left,
+      y: event.pageY - this.fieldItem.top
+    }
   }
 
   @HostListener('mousemove', ['$event'])onMouseMove(event: MouseEvent) {
     if (!this.isStartMoving)return;
 
-    this.movingCoords = {x: event.pageX, y: event.pageY};
-    if (Math.abs(this.startMovingCoords.x - this.movingCoords.x) +
-      Math.abs(this.startMovingCoords.y - this.movingCoords.y) > 2) {
-      this.fieldItem.left += this.startMovingCoords.x - this.movingCoords.x;
-      this.fieldItem.top += this.startMovingCoords.y - this.movingCoords.y;
+    if (Math.abs(this.startMovingCoords.x - event.pageX) +
+      Math.abs(this.startMovingCoords.y - event.pageY) > 2) {
+      this.fieldItem.left = event.pageX - this.mouseElementDev.x;
+      this.fieldItem.top = event.pageY - this.mouseElementDev.y;
     }
   }
 
   @HostListener('window:mouseup')onMouseUp() {
-    // this.fieldItem.isSelected = false;
     this.isStartMoving = this.isMoving = false;
     this.startMovingCoords = null;
-    this.movingCoords = null;
+    this.mouseElementDev = null;
   }
 
 }
