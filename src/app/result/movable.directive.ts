@@ -34,9 +34,15 @@ export class MovableDirective implements OnInit {
   onMouseDown(event) {
     if (event.which != 1)return;
 
-    //is click on item?
-    if (this.el.nativeElement !== event.target &&
-      this.el.nativeElement.contains(event.target)) {
+    //is click out of item
+    if(this.el.nativeElement == event.target){
+
+      //skip selection
+      this.selectedItems = [];
+      this.dataArr.forEach(item => item.isSelected = false);
+
+      return;
+    }
 
       this.startMovingCoords = {x: event.pageX, y: event.pageY};
 
@@ -70,8 +76,6 @@ export class MovableDirective implements OnInit {
         it.devX = event.pageX - it.item.left;
         it.devY = event.pageY - it.item.top;
       });
-
-    }
   }
 
   @HostListener('mousemove', ['$event'])
