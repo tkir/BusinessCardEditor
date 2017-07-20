@@ -1,11 +1,10 @@
 <div class="card-wrap unselectable">
-  <div class="business-card" [ngStyle]="cardData.background.style">
+  <div class="business-card" [ngStyle]="cardData.background.style" fieldMovable [dataArr]="dataArr">
     <div
       class="card-field"
       *ngFor="let item of dataArr"
       [ngStyle]="{'left.px':item.left, 'top.px':item.top}"
-      [ngClass]="{'selected-field':item.isSelected}"
-      fieldMovable [fieldItem]="item">
+      [ngClass]="{'selected-field':item.isSelected}">
       <span *ngIf="item.text" [ngStyle]="item.style">{{item.text}}</span>
       <div *ngIf="item.src" [ngStyle]="item.style"></div>
     </div>

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
-import {Text} from "../data/TextCSS";
 
 @Component({
   selector: 'card-result',
@@ -25,5 +24,4 @@ export class ResultComponent implements OnInit {
         this.dataArr.push(...this.cardData[key]);
     });
   }
-
 }
