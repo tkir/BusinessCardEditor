@@ -15,6 +15,13 @@
             <a class="input-group-addon" (click)="addItem(model.owners, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.owners, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
+          <li *ngIf="!model.owners || !model.owners.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
         </ul>
 
         <ul>
@@ -27,7 +34,15 @@
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
             <a class="input-group-addon" (click)="addItem(model.positions, i)"><i class="glyphicon glyphicon-plus"></i></a>
-            <a class="input-group-addon" (click)="removeItem(model.positions, i)"><i class="glyphicon glyphicon-minus"></i></a>
+            <a class="input-group-addon" (click)="removeItem(model.positions, i)"><i
+              class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.positions || !model.positions.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
       </div>
@@ -42,8 +57,17 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.organisations, i)"><i class="glyphicon glyphicon-plus"></i></a>
-            <a class="input-group-addon" (click)="removeItem(model.organisations, i)"><i class="glyphicon glyphicon-minus"></i></a>
+            <a class="input-group-addon" (click)="addItem(model.organisations, i)"><i
+              class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="removeItem(model.organisations, i)"><i
+              class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.organisations || !model.organisations.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
 
@@ -56,8 +80,17 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.addreses, i)"><i class="glyphicon glyphicon-plus"></i></a>
-            <a class="input-group-addon" (click)="removeItem(model.addreses, i)"><i class="glyphicon glyphicon-minus"></i></a>
+            <a class="input-group-addon" (click)="addItem(model.addreses, i)"><i
+              class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="removeItem(model.addreses, i)"><i
+              class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.addreses || !model.addreses.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
 
@@ -72,6 +105,13 @@
               (blur)="blurItem()">
             <a class="input-group-addon" (click)="addItem(model.phones, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.phones, i)"><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.phones || !model.phones.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
       </div>
@@ -89,6 +129,13 @@
             <a class="input-group-addon" (click)="addItem(model.emails, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.emails, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
+          <li *ngIf="!model.emails || !model.emails.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
         </ul>
       </div>
 
@@ -104,6 +151,13 @@
               (blur)="blurItem()">
             <a class="input-group-addon" (click)="addItem(model.sites, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.sites, i)"><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.sites || !model.sites.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
       </div>

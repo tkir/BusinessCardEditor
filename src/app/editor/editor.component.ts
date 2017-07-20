@@ -22,8 +22,21 @@ export class EditorComponent implements OnInit {
     this.model = this.dataService.getCardData();
   }
 
-  addItem(items, i) {
-    items.push($.extend(true, {}, items[i]));
+  addItem(items, i?: number) {
+    if (items && items.length)
+      items.push($.extend(true, {}, items[i]));
+    else
+      items.push(new Text('', this.getItemFont(), 12, 'normal', 'normal', "none", "left", 200, 20));
+  }
+
+  private getItemFont(): string {
+    let fontFamily;
+    Object.keys(this.model).forEach(key => {
+      if (Array.isArray(this.model[key]))
+        this.model[key].forEach(item => fontFamily = item.fontFamily);
+    });
+
+    return fontFamily;
   }
 
   removeItem(items, i) {
