@@ -14,7 +14,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   model: CardData = null;
   selectedItem: Text = null;
-  selectetInput: any = null;
+  selectedInput: any = null;
 
   private subscription: Subscription;
 
@@ -53,21 +53,26 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   focusItem(item: Text, event) {
-    if (!item.isSelected) item.isSelected = true;
+    Object.keys(this.model).forEach(key => {
+      if (Array.isArray(this.model[key]))
+        this.model[key].forEach(item => item.isSelected = false);
+    });
+
+    item.isSelected = true;
     this.selectedItem = item;
-    this.selectetInput = event.target;
+    this.selectedInput = event.target;
   }
 
   blurItem() {
     if (!this.selectedItem.isStyling) {
       this.selectedItem.isSelected = false;
       this.selectedItem = null;
-      this.selectetInput = null;
+      this.selectedInput = null;
     }
   }
 
   onFocusReturn() {
-    this.selectetInput.focus();
+    this.selectedInput.focus();
   }
 
 }
