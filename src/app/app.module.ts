@@ -10,6 +10,7 @@ import { EditorContainerComponent } from './editor-container/editor-container.co
 import {DataService} from "./data/data.service";
 import { ResultComponent } from './result/result.component';
 import { StyleEditorComponent } from './editor/style-editor/style-editor.component';
+import { MovableDirective } from './result/movable.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StyleEditorComponent } from './editor/style-editor/style-editor.compone
     DesignComponent,
     EditorContainerComponent,
     ResultComponent,
-    StyleEditorComponent
+    StyleEditorComponent,
+    MovableDirective
   ],
   imports: [
     BrowserModule,
