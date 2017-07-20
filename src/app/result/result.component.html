@@ -7,7 +7,7 @@
       [ngClass]="{'selected-field':item.isSelected}"
       fieldMovable [fieldItem]="item">
       <span *ngIf="item.text" [ngStyle]="item.style">{{item.text}}</span>
-      <img *ngIf="item.src" src="{{item.src}}" [ngStyle]="item.style">
+      <div *ngIf="item.src" [ngStyle]="item.style"></div>
     </div>
   </div>
 </div>

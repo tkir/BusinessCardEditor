@@ -4,29 +4,31 @@
   -ms-user-select: none;
   user-select: none;
 }
-.card-wrap{
+
+.card-wrap {
   display: block;
   float: left;
   padding: 20px;
   background-color: darkgray;
 }
 
-.business-card{
+.business-card {
   /* 85x55 mm */
-  width:592px;
+  width: 592px;
   height: 383px;
   position: relative;
 }
 
-.card-field{
+.card-field {
   position: absolute;
 }
-.card-field span{
+
+.card-field span {
   cursor: default;
 }
 
-.card-field.selected-field{
+.card-field.selected-field {
   outline: 5px dashed darkgray;
   z-index: 100;
-  background-color:rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.08);
 }

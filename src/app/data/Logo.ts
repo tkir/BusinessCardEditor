@@ -7,6 +7,11 @@ export class Logo{
   public top:number){}
 
   get style() {
-    return {'width.px':this.width, 'height.px':this.height};
+    return {
+      'width.px':this.width,
+      'height.px':this.height,
+      'background-image':`url(${this.src})`,
+      'background-size': 'cover'
+    };
   }
 }
