@@ -29,7 +29,7 @@ export class ResultComponent implements OnInit, OnDestroy {
         Object.keys(this.cardData).forEach(key => {
           if (Array.isArray(this.cardData[key]))
             this.dataArr.push(...this.cardData[key]);
-        });console.log(this.dataArr);
+        });
       });
   }
 
