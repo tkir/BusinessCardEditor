@@ -11,6 +11,7 @@ import {DataService} from "./data/data.service";
 import { ResultComponent } from './result/result.component';
 import { StyleEditorComponent } from './editor/style-editor/style-editor.component';
 import { MovableDirective } from './result/movable.directive';
+import {Store} from "./data/store";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { MovableDirective } from './result/movable.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [DataService],
+  providers: [Store, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

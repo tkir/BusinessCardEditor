@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
 import {Subscription} from "rxjs/Subscription";
+import {Store} from "../data/store";
 
 @Component({
   selector: 'card-result',
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.css']
 })
-export class ResultComponent implements OnInit {
+export class ResultComponent implements OnInit, OnDestroy {
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+              private store: Store) {
   }
 
   cardData: CardData = null;
@@ -19,14 +21,15 @@ export class ResultComponent implements OnInit {
   private subscription: Subscription;
 
   ngOnInit() {
-
-    this.subscription = this.dataService.getCardData()
-      .subscribe(cardData => {
+    this.dataService.setCardData();
+    this.subscription = this.store.changes
+      .subscribe((cardData: any) => {
         this.cardData = cardData;
+        this.dataArr=[];
         Object.keys(this.cardData).forEach(key => {
           if (Array.isArray(this.cardData[key]))
             this.dataArr.push(...this.cardData[key]);
-        })
+        });console.log(this.dataArr);
       });
   }
 

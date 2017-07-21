@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {Text} from "../../data/TextCSS";
 
 @Component({
@@ -6,7 +6,7 @@ import {Text} from "../../data/TextCSS";
   templateUrl: './style-editor.component.html',
   styleUrls: ['./style-editor.component.css']
 })
-export class StyleEditorComponent implements OnInit {
+export class StyleEditorComponent {
 
   @Input() item: Text;
   @Output() returnFocus: EventEmitter<any> = new EventEmitter();
@@ -16,9 +16,6 @@ export class StyleEditorComponent implements OnInit {
   }
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
   toggleStyle(style: string) {
