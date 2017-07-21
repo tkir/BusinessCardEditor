@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
-import $ from 'jquery/dist/jquery';
 import {Text} from "../data/TextCSS";
 import {Subscription} from "rxjs/Subscription";
 
@@ -31,11 +30,19 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  addItem(items, i?: number) {
-    if (items && items.length)
-      items.push($.extend(true, {}, items[i]));
+  addItem(items: Text[], i?: number) {
+    if (items && items.length) {
+
+      let newText=Object.create(Text);
+      Object.keys(items[i]).forEach(key=>newText[key]=items[i][key]);
+      newText.top += 20;
+
+      items.push(newText);
+    }
     else
       items.push(new Text('', this.getItemFont(), 12, 'normal', 'normal', "none", "left", 200, 20));
+
+    // this.dataService.updateCard(this.model);
   }
 
   private getItemFont(): string {
