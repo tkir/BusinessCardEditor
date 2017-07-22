@@ -1,12 +1,19 @@
 export class Background {
   constructor(public color: string,
-              public url: string) {
+              public url: string,
+              public width_mm: number,
+              public height_mm: number) {
   }
+
+  //TODO вынести в config
+  private k: number = 7;
 
   get style() {
     return {
       'background-color': `#${this.color.replace('#', '')}`,
-      'background-image': `url(${this.url})`
+      'background-image': `url(${this.url})`,
+      'width.px': this.width_mm * this.k,
+      'height.px': this.height_mm * this.k
     };
   }
 }

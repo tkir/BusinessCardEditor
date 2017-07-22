@@ -1,4 +1,5 @@
 import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Background} from "../data/Background";
 
 @Directive({
   selector: '[fieldMovable]'
@@ -11,22 +12,25 @@ export class MovableDirective implements OnInit {
   private startMovingCoords: { x: number, y: number } = null;
   private maxCoords: { x: number, y: number } = null;
   private minCoords: { x: number, y: number } = null;
+  private indent: number = 0;
 
   constructor(private el: ElementRef) {
   }
 
   ngOnInit(): void {
     //set indents
-    //TODO перенести отступы в config
-    let indent = 10;
+    //TODO перенести в config
+    let k = 7, polygraphPadding = 5;
+    this.indent = polygraphPadding * k;
+
     this.maxCoords = {
-      x: this.el.nativeElement.offsetWidth - indent,
-      y: this.el.nativeElement.offsetHeight - indent
+      x: this.el.nativeElement.offsetWidth - this.indent,
+      y: this.el.nativeElement.offsetHeight - this.indent
     };
 
     this.minCoords = {
-      x: indent,
-      y: indent
+      x: this.indent,
+      y: this.indent
     };
   }
 
@@ -61,7 +65,7 @@ export class MovableDirective implements OnInit {
     this.updateSelectionArray(item, event)
   }
 
-  private multiselection(item){
+  private multiselection(item) {
     let isMulti = false;
     this.selectedItems.forEach(obj => {
       if (obj.item == item) isMulti = true;
@@ -73,13 +77,13 @@ export class MovableDirective implements OnInit {
   }
 
   //set item selected, add to selection array
-  private updateSelectionArray(item, event){
+  private updateSelectionArray(item, event) {
     item.isSelected = true;
 
-    let isDublingItems=false;
-    this.selectedItems.forEach(obj=>{
-      if(obj.item==item)
-        isDublingItems=true;
+    let isDublingItems = false;
+    this.selectedItems.forEach(obj => {
+      if (obj.item == item)
+        isDublingItems = true;
     })
     if (!isDublingItems)
       this.selectedItems.push({
