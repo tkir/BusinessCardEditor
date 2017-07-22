@@ -35,7 +35,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addItem(items: Text[], i?: number) {
 
-    let newText: Text = new Text('', this.getItemFont(), 12, 'normal', 'normal', "none", "left", 200, 20);
+    let newText: Text = new Text('', this.getItemFont(), 12, 'normal', 'normal', "none", "left", '000', 200, 20);
 
     if (items && items.length) {
       Object.keys(items[i]).forEach(key => newText[key] = items[i][key]);

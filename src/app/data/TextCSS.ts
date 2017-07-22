@@ -7,6 +7,7 @@ export class Text {
               public fontStyle: string,
               public textDecoration: string,
               public textAlign: string,
+              public colorStr: string,
               public left: number,
               public top: number) {
   }
@@ -21,7 +22,12 @@ export class Text {
       'font-weight': this.fontWeight,
       'font-style': this.fontStyle,
       'text-decoration': this.textDecoration,
-      'text-align': this.textAlign
+      'text-align': this.textAlign,
+      'color': this.color
     }
+  }
+
+  get color():string{
+    return `#${this.colorStr}`
   }
 }

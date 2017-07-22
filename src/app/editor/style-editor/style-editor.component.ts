@@ -41,4 +41,10 @@ export class StyleEditorComponent {
     this.returnFocus.emit();
     if (this.item) this.item.isStyling = false;
   }
+
+  setColor(color:string){
+    this.item.colorStr=color;
+
+    this.endStyling();
+  }
 }
