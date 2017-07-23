@@ -6,7 +6,7 @@
       [ngStyle]="{'left.px':item.left, 'top.px':item.top}"
       [ngClass]="{'selected-field':item.isSelected}">
       <span *ngIf="item.text" [ngStyle]="item.style">{{item.text}}</span>
-      <div *ngIf="item.src" [ngStyle]="item.style"></div>
+      <div *ngIf="item.src" [ngStyle]="item.style" imageDroppable [logoItem]="item"></div>
     </div>
   </div>
 </div>

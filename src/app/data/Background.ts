@@ -16,4 +16,11 @@ export class Background {
       'height.px': this.height_mm * this.k
     };
   }
+
+  get size(): { x: any, y: any } {
+    return {
+      x: this.width_mm * this.k,
+      y: this.height_mm * this.k
+    }
+  }
 }

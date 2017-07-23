@@ -29,3 +29,12 @@
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.08);
 }
+
+.has-advanced-upload{
+  background-color: #0000CC;
+  outline: 1px dashed black;
+  outline-offset: 3px;
+}
+.is-dragover {
+  background-color: grey;
+}

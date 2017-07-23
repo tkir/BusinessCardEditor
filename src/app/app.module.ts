@@ -12,6 +12,8 @@ import { ResultComponent } from './result/result.component';
 import { StyleEditorComponent } from './editor/style-editor/style-editor.component';
 import { MovableDirective } from './result/movable.directive';
 import {Store} from "./data/store";
+import { DroppableDirective } from './result/droppable.directive';
+import {ImageService} from "./utils/image.service";
 
 @NgModule({
   declarations: [
@@ -21,13 +23,14 @@ import {Store} from "./data/store";
     EditorContainerComponent,
     ResultComponent,
     StyleEditorComponent,
-    MovableDirective
+    MovableDirective,
+    DroppableDirective
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [Store, DataService],
+  providers: [Store, DataService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
