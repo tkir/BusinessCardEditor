@@ -1,4 +1,6 @@
-export class Text {
+import {CardField} from "./interfaces";
+
+export class Text implements CardField {
 
   constructor(public text: string,
               public fontFamily: string,
@@ -29,5 +31,9 @@ export class Text {
 
   get color():string{
     return `#${this.colorStr}`
+  }
+
+  get instanceOf():string{
+    return 'Text';
   }
 }

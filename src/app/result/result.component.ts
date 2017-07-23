@@ -30,7 +30,6 @@ export class ResultComponent implements OnInit, OnDestroy {
         Object.keys(this.cardData).forEach(key => {
           if (Array.isArray(this.cardData[key]))
             this.dataArr.push(...this.cardData[key]);
-          else this.dataArr.push(this.cardData[key]);
         });
       });
   }
@@ -38,9 +37,5 @@ export class ResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription)
       this.subscription.unsubscribe();
-  }
-
-  isLogo(item):boolean{
-    return item instanceof Logo;
   }
 }

@@ -1,4 +1,12 @@
 import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {CardField} from "../data/interfaces";
+
+interface MovEl {
+  item: CardField;
+  dev: { x: number, y: number };
+  max: { x: number, y: number };
+  min: { x: number, y: number };
+}
 
 @Directive({
   selector: '[fieldMovable]'
@@ -7,10 +15,8 @@ export class MovableDirective implements OnInit {
 
   @Input() dataArr = [];
 
-  selectedItems = [];
+  selectedItems: MovEl[] = [];
   private startMovingCoords: { x: number, y: number } = null;
-  private maxCoords: { x: number, y: number } = null;
-  private minCoords: { x: number, y: number } = null;
 
   //set indents
   //TODO перенести в config
@@ -25,41 +31,68 @@ export class MovableDirective implements OnInit {
     this.indent = this.polygraphPadding * this.k;
   }
 
-  updateLimits() {
-    this.maxCoords = {
-      x: this.el.nativeElement.offsetWidth - this.indent,
-      y: this.el.nativeElement.offsetHeight - this.indent
-    };
+  //return max element position
+  private getMax(item:CardField, element): { x: number, y: number } {
+    switch (item.instanceOf) {
+      case 'Logo':
+      case 'Text':
+        return {
+          x: this.el.nativeElement.offsetWidth - this.indent - parseInt(getComputedStyle(element).width),
+          y: this.el.nativeElement.offsetHeight - this.indent - parseInt(getComputedStyle(element).height)
+        };
+      case 'Line':
+        return {
+          x: this.el.nativeElement.offsetWidth - parseInt(getComputedStyle(element).width),
+          y: this.el.nativeElement.offsetHeight - parseInt(getComputedStyle(element).height)
+        }
+    }
+  }
 
-    this.minCoords = {
-      x: this.indent,
-      y: this.indent
-    };
+  //return min element position
+  private getMin(item:CardField, element): { x: number, y: number } {
+    switch (item.instanceOf) {
+      case 'Logo':
+      case 'Text':
+        return {
+          x: this.indent,
+          y: this.indent
+        };
+      case 'Line':
+        return {
+          x: 0,
+          y: 0
+        }
+    }
   }
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
     if (event.which != 1)return;
 
-    this.updateLimits();
-
     //is click out of item
     if (this.el.nativeElement == event.target) {
 
       //skip selection
       this.selectedItems = [];
-      this.dataArr.forEach(item => item.isSelected = false);
+      this.dataArr.forEach((item:CardField) => item.isSelected = false);
 
       return;
     }
 
     this.startMovingCoords = {x: event.pageX, y: event.pageY};
 
-    //find item in dataArr by offset
-    let left = parseInt(getComputedStyle(event.target.parentElement).left);
-    let top = parseInt(getComputedStyle(event.target.parentElement).top);
+    //find .card-field
+    let target = event.target;
+    while (target != this.el.nativeElement) {
+      if (target.classList.contains('card-field'))break;
+      target = target.parentElement;
+    }
 
-    let item = this.dataArr.find(it => it.left == left && it.top == top);
+    //find item in dataArr by offset
+    let left = parseInt(getComputedStyle(target).left);
+    let top = parseInt(getComputedStyle(target).top);
+
+    let item:CardField = this.dataArr.find((it:CardField) => it.left == left && it.top == top);
     if (!item)return;
 
     //multiselection
@@ -67,22 +100,22 @@ export class MovableDirective implements OnInit {
       this.multiselection(item);
     }
 
-    this.updateSelectionArray(item, event)
+    this.updateSelectionArray(item, target, event)
   }
 
-  private multiselection(item) {
+  private multiselection(item:CardField) {
     let isMulti = false;
     this.selectedItems.forEach(obj => {
       if (obj.item == item) isMulti = true;
     });
     if (!isMulti) {
       this.selectedItems = [];
-      this.dataArr.forEach(item => item.isSelected = false);
+      this.dataArr.forEach((item:CardField) => item.isSelected = false);
     }
   }
 
   //set item selected, add to selection array
-  private updateSelectionArray(item, event) {
+  private updateSelectionArray(item:CardField, target: Element, event: MouseEvent) {
     item.isSelected = true;
 
     let isDublingItems = false;
@@ -93,16 +126,13 @@ export class MovableDirective implements OnInit {
     if (!isDublingItems)
       this.selectedItems.push({
         item: item,
-        element: event.target.parentElement,
-        devX: 0,
-        devY: 0
+        dev: {
+          x: event.pageX - item.left,
+          y: event.pageY - item.top
+        },
+        max: this.getMax(item, target),
+        min: this.getMin(item, target)
       });
-
-    //add deviation with mouse to all selected items
-    this.selectedItems.forEach(it => {
-      it.devX = event.pageX - it.item.left;
-      it.devY = event.pageY - it.item.top;
-    });
   }
 
   @HostListener('mousemove', ['$event'])
@@ -113,25 +143,23 @@ export class MovableDirective implements OnInit {
     if (Math.abs(this.startMovingCoords.x - event.pageX) +
       Math.abs(this.startMovingCoords.y - event.pageY) > 2) {
 
-      this.selectedItems.forEach(it => this.updateOffset(it, event));
+      this.selectedItems.forEach((it:MovEl) => this.updateOffset(it, event));
 
     }
   }
 
   //checking is field in card bounds & update card offsets
-  private updateOffset(it, event) {
+  private updateOffset(it: MovEl, event) {
 
-    let pageX = event.pageX - it.devX;
-    let pageY = event.pageY - it.devY;
-    let maxX = this.maxCoords.x - parseInt(getComputedStyle(it.element).width);
-    let maxY = this.maxCoords.y - parseInt(getComputedStyle(it.element).height);
+    let pageX = event.pageX - it.dev.x;
+    let pageY = event.pageY - it.dev.y;
 
-    if (pageX < this.minCoords.x || pageX > maxX) {
-      pageX = pageX < this.minCoords.x ? this.minCoords.x : maxX;
+    if (pageX < it.min.x || pageX > it.max.x) {
+      pageX = pageX < it.min.x ? it.min.x : it.max.x;
     }
 
-    if (pageY < this.minCoords.y || pageY > maxY) {
-      pageY = pageY < this.minCoords.y ? this.minCoords.y : maxY;
+    if (pageY < it.min.y || pageY > it.max.y) {
+      pageY = pageY < it.min.y ? it.min.y : it.max.y;
     }
 
     if (it.item.left != pageX) it.item.left = pageX;

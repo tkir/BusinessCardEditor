@@ -73,7 +73,7 @@
         </ul>
 
         <ul>
-          <li *ngFor="let item of model.addreses; let i = index" class="input-group">
+          <li *ngFor="let item of model.addresses; let i = index" class="input-group">
             <input
               type="text"
               class="form-control"
@@ -81,16 +81,16 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.addreses, i)"><i
+            <a class="input-group-addon" (click)="addItem(model.addresses, i)"><i
               class="glyphicon glyphicon-plus"></i></a>
-            <a class="input-group-addon" (click)="removeItem(model.addreses, i)"><i
+            <a class="input-group-addon" (click)="removeItem(model.addresses, i)"><i
               class="glyphicon glyphicon-minus"></i></a>
           </li>
-          <li *ngIf="!model.addreses || !model.addreses.length">
+          <li *ngIf="!model.addresses || !model.addresses.length">
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.addreses)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addItem(model.addresses)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>

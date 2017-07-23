@@ -11,7 +11,7 @@ export interface Data {
   owners: Text[],
   positions: Text[],
   organisations: Text[],
-  addreses: Text[],
+  addresses: Text[],
   phones: Text[],
   emails: Text[],
   sites: Text[],
@@ -20,7 +20,7 @@ export interface Data {
 }
 
 export interface State {
-  data: Data;
+  data: CardData;
 }
 
 const defaultState: State = {

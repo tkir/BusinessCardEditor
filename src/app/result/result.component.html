@@ -5,8 +5,10 @@
       *ngFor="let item of dataArr"
       [ngStyle]="{'left.px':item.left, 'top.px':item.top}"
       [ngClass]="{'selected-field':item.isSelected}">
-      <span *ngIf="item.text" [ngStyle]="item.style">{{item.text}}</span>
-      <div *ngIf="isLogo(item)" [ngStyle]="item.style" imageDroppable [logoItem]="item"></div>
+      <span *ngIf="item.instanceOf=='Text'" [ngStyle]="item.style">{{item.text}}</span>
+      <div *ngIf="item.instanceOf=='Logo'" [ngStyle]="item.style" imageDroppable [logoItem]="item"></div>
+      <card-hr *ngIf="item.instanceOf=='Line'" [line]="item"></card-hr>
     </div>
+
   </div>
 </div>

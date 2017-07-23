@@ -34,4 +34,8 @@ export class Background {
   get backgroundColor(){
     return `#${this._backgroundColor.replace('#', '')}`;
   }
+
+  get instanceOf():string{
+    return 'Background';
+  }
 }

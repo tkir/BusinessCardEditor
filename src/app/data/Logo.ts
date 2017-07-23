@@ -1,4 +1,6 @@
-export class Logo {
+import {CardField} from "./interfaces";
+export class Logo implements CardField {
+
   constructor(public src: string,
               public width: number,
               public height: number,
@@ -6,6 +8,7 @@ export class Logo {
               public top: number) {
   }
 
+  public isSelected: boolean;
   public dataType: string;
   private _maxWidth: number;
   private _maxHeight: number;
@@ -30,5 +33,9 @@ export class Logo {
 
   get maxHeight(): number {
     return this._maxHeight;
+  }
+
+  get instanceOf():string{
+    return 'Logo';
   }
 }

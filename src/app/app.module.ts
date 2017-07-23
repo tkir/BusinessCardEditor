@@ -16,6 +16,7 @@ import {DroppableDirective} from './result/droppable.directive';
 import {ImageService} from "./utils/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
 import { ColorPickerComponent } from './editor/color-picker/color-picker.component';
+import { HrComponent } from './hr/hr.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ColorPickerComponent } from './editor/color-picker/color-picker.compone
     MovableDirective,
     DroppableDirective,
     BackgroundEditorComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    HrComponent
   ],
   imports: [
     BrowserModule,
