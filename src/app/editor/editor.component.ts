@@ -4,6 +4,8 @@ import {CardData} from "../data/CardData";
 import {Text} from "../data/TextCSS";
 import {Subscription} from "rxjs/Subscription";
 import {Store} from "../data/store";
+import {ImageService} from "../utils/image.service";
+import {Logo} from "../data/Logo";
 
 @Component({
   selector: 'card-editor',
@@ -19,7 +21,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private dataService: DataService,
-              private store: Store) {
+              private store: Store,
+              private imageService: ImageService) {
   }
 
   ngOnInit() {
@@ -43,6 +46,15 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
 
     items.push(newText);
+    this.dataService.updateCard(this.model);
+  }
+
+  addLogo(items: Logo[], i?: number) {
+
+    //TODO дефалтная картинка из config
+    let newLogo: Logo = new Logo("https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png", 150, 70, 10, 10);
+
+    items.push(newLogo);
     this.dataService.updateCard(this.model);
   }
 
@@ -83,6 +95,11 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   onFocusReturn() {
     this.selectedInput.focus();
+  }
+
+  uploadImage(item, event) {
+    this.imageService.uploadImage(item, event.target.files[0]);
+    // console.log(event.target.files);
   }
 
 }

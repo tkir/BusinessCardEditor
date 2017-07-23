@@ -7,7 +7,7 @@ import {Subscription} from "rxjs/Subscription";
 @Injectable()
 export class ImageService implements OnInit, OnDestroy {
 
-  private logo: Logo;
+  private item;
   private imageUpload: ImageUpload;
   private subscription: Subscription = null;
 
@@ -31,12 +31,12 @@ export class ImageService implements OnInit, OnDestroy {
     this.subscription = null;
   }
 
-  uploadLogo(logo: Logo, image: File) {
-    this.logo = logo;
+  uploadImage(item, image: File) {
+    this.item = item;
 
     let resizeOptions = {
-      resizeMaxHeight: logo.maxHeight,
-      resizeMaxWidth: logo.maxWidth,
+      resizeMaxHeight: item.maxHeight,
+      resizeMaxWidth: item.maxWidth,
       resizeQuality: this.resizeQuality,
       resizeType: this.resizeType
     };
@@ -47,10 +47,10 @@ export class ImageService implements OnInit, OnDestroy {
 
   private updateLogo(imageResult: ImageResult) {
     if(imageResult.resized) {
-      this.logo.width = imageResult.resized.width;
-      this.logo.height=imageResult.resized.height;
-      this.logo.dataType=imageResult.resized.type;
-      this.logo.src=imageResult.resized.dataURL;
+      this.item.width = imageResult.resized.width;
+      this.item.height=imageResult.resized.height;
+      this.item.dataType=imageResult.resized.type;
+      this.item.src=imageResult.resized.dataURL;
     }
 
     //TODO обработать ошибки загрузки файлов

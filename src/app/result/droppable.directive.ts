@@ -65,7 +65,7 @@ export class DroppableDirective implements OnInit {
     this.el.nativeElement.classList.remove('has-advanced-upload');
     this.el.nativeElement.classList.remove('is-dragover');
 
-    this.imageService.uploadLogo(this.logoItem, event.dataTransfer.files[0]);
+    this.imageService.uploadImage(this.logoItem, event.dataTransfer.files[0]);
   }
 
   private _stopPropagation(event: Event) {
