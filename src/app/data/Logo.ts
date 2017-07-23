@@ -1,4 +1,3 @@
-import {DomSanitizer} from "@angular/platform-browser";
 export class Logo {
   constructor(public src: string,
               public width: number,
@@ -7,7 +6,7 @@ export class Logo {
               public top: number) {
   }
 
-  public dataType:string;
+  public dataType: string;
   private _maxWidth: number;
   private _maxHeight: number;
 
@@ -20,9 +19,9 @@ export class Logo {
     };
   }
 
-  public setMaxSize({x,y}) {
-    this._maxWidth = x * 0.8;
-    this._maxHeight = y * 0.8;
+  public setMaxSize(maxWidth, maxHeight) {
+    this._maxWidth = maxWidth * 0.8;
+    this._maxHeight = maxHeight * 0.8;
   }
 
   get maxWidth(): number {

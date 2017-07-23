@@ -4,6 +4,7 @@ import {DataService} from "../data/data.service";
 import {CardData} from "../data/CardData";
 import {Subscription} from "rxjs/Subscription";
 import {Store} from "../data/store";
+import {Logo} from "../data/Logo";
 
 @Component({
   selector: 'card-result',
@@ -37,5 +38,9 @@ export class ResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription)
       this.subscription.unsubscribe();
+  }
+
+  isLogo(item):boolean{
+    return item instanceof Logo;
   }
 }

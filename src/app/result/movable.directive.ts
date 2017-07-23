@@ -11,17 +11,21 @@ export class MovableDirective implements OnInit {
   private startMovingCoords: { x: number, y: number } = null;
   private maxCoords: { x: number, y: number } = null;
   private minCoords: { x: number, y: number } = null;
+
+  //set indents
+  //TODO перенести в config
+  private k = 7;
+  private polygraphPadding = 5;
   private indent: number = 0;
 
   constructor(private el: ElementRef) {
   }
 
   ngOnInit(): void {
-    //set indents
-    //TODO перенести в config
-    let k = 7, polygraphPadding = 5;
-    this.indent = polygraphPadding * k;
+    this.indent = this.polygraphPadding * this.k;
+  }
 
+  updateLimits() {
     this.maxCoords = {
       x: this.el.nativeElement.offsetWidth - this.indent,
       y: this.el.nativeElement.offsetHeight - this.indent
@@ -36,6 +40,8 @@ export class MovableDirective implements OnInit {
   @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
     if (event.which != 1)return;
+
+    this.updateLimits();
 
     //is click out of item
     if (this.el.nativeElement == event.target) {
@@ -68,7 +74,7 @@ export class MovableDirective implements OnInit {
     let isMulti = false;
     this.selectedItems.forEach(obj => {
       if (obj.item == item) isMulti = true;
-    })
+    });
     if (!isMulti) {
       this.selectedItems = [];
       this.dataArr.forEach(item => item.isSelected = false);
@@ -83,7 +89,7 @@ export class MovableDirective implements OnInit {
     this.selectedItems.forEach(obj => {
       if (obj.item == item)
         isDublingItems = true;
-    })
+    });
     if (!isDublingItems)
       this.selectedItems.push({
         item: item,

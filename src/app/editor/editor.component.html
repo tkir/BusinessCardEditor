@@ -1,6 +1,7 @@
 <div>
   <form #cardForm="ngForm">
     <div>
+      <card-background-editor></card-background-editor>
       <card-style-editor [item]="selectedItem" (returnFocus)="onFocusReturn()"></card-style-editor>
       <div class="form-group">
         <ul>
