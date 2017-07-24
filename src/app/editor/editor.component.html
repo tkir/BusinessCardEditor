@@ -1,7 +1,7 @@
 <div>
   <form #cardForm="ngForm">
     <div>
-      <card-background-editor></card-background-editor>
+      <card-background-editor></card-background-editor><br>
       <card-style-editor [item]="selectedItem" (returnFocus)="onFocusReturn()"></card-style-editor>
       <div class="form-group">
         <ul>
@@ -183,6 +183,25 @@
           </li>
         </ul>
       </div>
+
+
+      <div class="form-group">
+        <ul>
+          <li *ngFor="let item of model.lines; let i = index" class="input-group">
+            <card-hr-editor [hr]="item"></card-hr-editor>
+            <a class="input-group-addon" (click)="addLine(model.lines, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="removeItem(model.lines, i)"><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
+          <li *ngIf="!model.lines || !model.lines.length">
+            <input
+              type="text"
+              class="form-control" disabled>
+            <a class="input-group-addon" (click)="addLine(model.lines)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>

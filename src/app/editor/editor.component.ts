@@ -6,6 +6,7 @@ import {Subscription} from "rxjs/Subscription";
 import {Store} from "../data/store";
 import {ImageService} from "../utils/image.service";
 import {Logo} from "../data/Logo";
+import {Line} from "../data/Line";
 
 @Component({
   selector: 'card-editor',
@@ -55,6 +56,11 @@ export class EditorComponent implements OnInit, OnDestroy {
     let newLogo: Logo = new Logo("https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png", 150, 70, 10, 10);
 
     items.push(newLogo);
+    this.dataService.updateCard(this.model);
+  }
+
+  addLine(lines:Line[], i) {
+    lines.push(new Line(0, 200, 200, 1, true, 'solid', '000'));
     this.dataService.updateCard(this.model);
   }
 

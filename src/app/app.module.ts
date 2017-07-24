@@ -17,6 +17,7 @@ import {ImageService} from "./utils/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
 import { ColorPickerComponent } from './editor/color-picker/color-picker.component';
 import { HrComponent } from './hr/hr.component';
+import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HrComponent } from './hr/hr.component';
     DroppableDirective,
     BackgroundEditorComponent,
     ColorPickerComponent,
-    HrComponent
+    HrComponent,
+    HrEditorComponent
   ],
   imports: [
     BrowserModule,
