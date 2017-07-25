@@ -4,5 +4,5 @@
   background-color: rebeccapurple;
   position: absolute;
   z-index: 50;
-  cursor: nw-resize;
+  /*cursor: nw-resize;*/
 }

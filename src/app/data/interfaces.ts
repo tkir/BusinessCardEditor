@@ -5,4 +5,7 @@ export interface CardField{
 
   style:{};
   instanceOf:string;
+
+  width:number;
+  height:number;
 }

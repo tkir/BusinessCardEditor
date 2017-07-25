@@ -23,7 +23,7 @@ export class HrEditorComponent implements OnInit {
     if (param == 'design')
       this.hr.design = res;
     else if (param == 'thickness')
-      this.hr.height = res;
+      this.hr.thickness = res;
     else if (param == 'color')
       this.hr._color = res;
   }

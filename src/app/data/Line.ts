@@ -3,14 +3,42 @@ export class Line implements CardField {
 
   constructor(public left: number,
               public top: number,
-              public width: number,
-              public height: number,
+              public length_mm: number,
+              public _thickness: number,
               public isHorizontal: boolean = true,
               public design: string = 'solid',
               public _color: string = '000') {
   }
 
+  //TODO to config
+  private k = 7;
   public isSelected: boolean = false;
+
+  get thickness(){
+    return this.design == 'double' ? this._thickness + 2 : this._thickness
+  }
+
+  set thickness(val){
+    this._thickness=val;
+  }
+
+  get width() {
+    return this.isHorizontal ? this.length_mm * this.k : 0;
+  }
+
+  set width(val) {
+    if (this.isHorizontal)
+      this.length_mm = val / this.k;
+  }
+
+  get height() {
+    return this.isHorizontal ? 0 : this.length_mm * this.k
+  }
+
+  set height(val) {
+    if (!this.isHorizontal)
+      this.length_mm = val / this.k;
+  }
 
   get instanceOf(): string {
     return 'Line';
@@ -22,13 +50,14 @@ export class Line implements CardField {
 
   get style() {
     let direction = this.isHorizontal ? 'top' : 'right';
-    let size = this.isHorizontal ? 'width' : 'height';
 
     let _style = {};
     _style[`border-${direction}-style`] = this.design;
-    _style[`border-${direction}-width.px`] = this.design == 'double' ? this.height + 2 : this.height;
+    _style[`border-${direction}-width.px`] = this.thickness;
     _style[`border-${direction}-color`] = this.color;
-    _style[`${size}.px`] = this.width;
+    this.isHorizontal ?
+      _style['width.px'] = this.width :
+      _style['height.px'] = this.height;
     _style['margin'] = 0;
 
     return _style;

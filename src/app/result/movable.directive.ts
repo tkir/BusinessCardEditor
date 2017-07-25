@@ -205,7 +205,6 @@ export class MovableDirective implements OnInit {
         this.addResize(this.selectedItems[0].item, this.selectedItems[0].elem);
       else {
         if (this.resizeComponent.item != this.selectedItems[0].item) {
-          console.log('in');
           this.removeResize();
           this.addResize(this.selectedItems[0].item, this.selectedItems[0].elem);
         }

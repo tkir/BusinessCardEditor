@@ -29,11 +29,27 @@ export class Text implements CardField {
     }
   }
 
-  get color():string{
+  get color(): string {
     return `#${this.colorStr}`
   }
 
-  get instanceOf():string{
+  get instanceOf(): string {
     return 'Text';
+  }
+
+  get width() {
+    return 0;
+  }
+
+  set width(val) {
+
+  }
+
+  get height() {
+    return 0;
+  }
+
+  set height(val) {
+
   }
 }

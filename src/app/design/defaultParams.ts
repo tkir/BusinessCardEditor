@@ -13,6 +13,6 @@ export const cardData: CardData = new CardData(
   [new Text("marvelsubs@midtowncomics.com", "Open Sans", 10, "normal", "normal", "none", "left", '000', 200, 100)],
   [new Text("marvel.com", "Open Sans", 10, "normal", "normal", "none", "left", '000', 200, 120)],
   [new Logo("https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png", 150, 70, 10, 10)],
-  [new Line(0, 200, 300, 1, true, 'solid', '00f')],
+  [new Line(0, 200, 45, 1, true, 'solid', '00f')],
   new Background('#f5f5dc', '', 85, 55)
 );
