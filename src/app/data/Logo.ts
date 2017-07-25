@@ -1,4 +1,5 @@
 import {CardField} from "./interfaces";
+import {getMaxSize} from "../utils/size.util";
 export class Logo implements CardField {
 
   constructor(public src: string,
@@ -35,7 +36,13 @@ export class Logo implements CardField {
     return this._maxHeight;
   }
 
-  get instanceOf():string{
+  get instanceOf(): string {
     return 'Logo';
+  }
+
+  public onChangeBgSize(bg:{width, height, indent}) {
+    let max = getMaxSize(this.instanceOf, bg);
+    if (this.width > max.x) this.width = max.x;
+    if (this.height > max.y) this.height = max.y;
   }
 }

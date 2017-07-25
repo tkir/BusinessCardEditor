@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {getCoords} from "../../utils/size.util";
+import {getCoords, getMaxSize} from "../../utils/size.util";
 import {CardField} from "../../data/interfaces";
 import {Line} from "../../data/Line";
 import {Background} from "../../data/Background";
@@ -19,7 +19,7 @@ export class FieldResizeComponent {
 
   private item: CardField = null;
   private el: Element = null;
-  private background: Background = null;
+  private background:any = null;
   private max: { x: number, y: number } = null;
 
   constructor() {
@@ -30,7 +30,11 @@ export class FieldResizeComponent {
     this.el = el;
     this.background = background;
 
-    this.max = this.getMaxSize();
+    this.updateMax();
+  }
+
+  updateMax(){
+    this.max=getMaxSize(this.item.instanceOf, this.background);
   }
 
   get cursor(): string {
@@ -55,21 +59,4 @@ export class FieldResizeComponent {
       if (this.item.height > 0 || event.pageY - coords.bottom > 0)
         this.item.height += event.pageY - coords.bottom;
   }
-
-  private getMaxSize(): { x: number, y: number } {
-    switch (this.item.instanceOf) {
-      case 'Line':
-        return {
-          x: this.background.width,
-          y: this.background.height
-        };
-      case 'Logo':
-      default:
-        return {
-          x: this.background.width - (2 * this.background.indent),
-          y: this.background.height - (2 * this.background.indent)
-        };
-    }
-  }
-
 }

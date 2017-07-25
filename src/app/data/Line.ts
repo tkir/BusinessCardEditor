@@ -1,4 +1,5 @@
 import {CardField} from "./interfaces";
+import {getMaxSize} from "../utils/size.util";
 export class Line implements CardField {
 
   constructor(public left: number,
@@ -14,12 +15,12 @@ export class Line implements CardField {
   private k = 7;
   public isSelected: boolean = false;
 
-  get thickness(){
+  get thickness() {
     return this.design == 'double' ? this._thickness + 2 : this._thickness
   }
 
-  set thickness(val){
-    this._thickness=val;
+  set thickness(val) {
+    this._thickness = val;
   }
 
   get width() {
@@ -61,5 +62,11 @@ export class Line implements CardField {
     _style['margin'] = 0;
 
     return _style;
+  }
+
+  public onChangeBgSize(bg: { width, height, indent }) {
+    let max = getMaxSize(this.instanceOf, bg);
+    if (this.width > max.x) this.width = max.x;
+    if (this.height > max.y) this.height = max.y;
   }
 }

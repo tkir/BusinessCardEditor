@@ -66,3 +66,19 @@ export function getMin(item: CardField, element, background:Background): { x: nu
       }
   }
 }
+
+export function getMaxSize(instanceOf:string, bgSize:{width:number, height:number, indent:number}): { x: number, y: number } {
+  switch (instanceOf) {
+    case 'Line':
+      return {
+        x: bgSize.width,
+        y: bgSize.height
+      };
+    case 'Logo':
+    default:
+      return {
+        x: bgSize.width - (2 * bgSize.indent),
+        y: bgSize.height - (2 * bgSize.indent)
+      };
+  }
+}

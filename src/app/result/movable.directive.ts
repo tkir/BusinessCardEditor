@@ -55,6 +55,7 @@ export class MovableDirective implements OnInit {
       //если нажали на fieldResize
       if (target.tagName == 'CARD-FIELD-RESIZE') {
         this.startResizing = true;
+        this.resizeComponent.fieldResize.updateMax();
         return;
       }
 
