@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+
 import {getCoords} from "../../utils/size.util";
 import {CardField} from "../../data/interfaces";
 import {Line} from "../../data/Line";
@@ -9,22 +10,19 @@ import {Background} from "../../data/Background";
   templateUrl: './field-resize.component.html',
   styleUrls: ['./field-resize.component.css'],
   host: {
-    '[style.left.px]': 'elPos.x',
-    '[style.top.px]': 'elPos.y',
+    '[style.left.px]': 'this.item.width',
+    '[style.top.px]': 'this.item.height',
     '[style.cursor]': 'cursor'
   }
 })
-export class FieldResizeComponent implements OnInit {
+export class FieldResizeComponent {
 
   private item: CardField = null;
   private el: Element = null;
   private background: Background = null;
-  private elPos: { x: number, y: number } = {x: 0, y: 0};
+  private max: { x: number, y: number } = null;
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
   init(item, el, background) {
@@ -32,7 +30,7 @@ export class FieldResizeComponent implements OnInit {
     this.el = el;
     this.background = background;
 
-    this.updatePosition();
+    this.max = this.getMaxSize();
   }
 
   get cursor(): string {
@@ -44,21 +42,34 @@ export class FieldResizeComponent implements OnInit {
     }
   }
 
-  private updatePosition() {
-    this.elPos = {
-      x: this.item.width,
-      y: this.item.height
-    };
-  }
-
   resize(event: MouseEvent) {
 
     let coords = getCoords(this.item, this.el);
 
-    this.item.width += event.pageX - coords.right;
-    this.item.height += event.pageY - coords.bottom;
+    if (this.item.width < this.max.x || event.pageX - coords.right < 0)
+      if (this.item.width > 0 || event.pageX - coords.right > 0)
+        this.item.width += event.pageX - coords.right;
 
-    this.updatePosition();
+
+    if (this.item.height < this.max.y || event.pageY - coords.bottom < 0)
+      if (this.item.height > 0 || event.pageY - coords.bottom > 0)
+        this.item.height += event.pageY - coords.bottom;
+  }
+
+  private getMaxSize(): { x: number, y: number } {
+    switch (this.item.instanceOf) {
+      case 'Line':
+        return {
+          x: this.background.width,
+          y: this.background.height
+        };
+      case 'Logo':
+      default:
+        return {
+          x: this.background.width - (2 * this.background.indent),
+          y: this.background.height - (2 * this.background.indent)
+        };
+    }
   }
 
 }

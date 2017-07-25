@@ -1,5 +1,6 @@
 import {CardField} from "../data/interfaces";
 import {Background} from "../data/Background";
+
 export function getCoords(item, elem: Element) {
   return {
     left: elem.getBoundingClientRect().left + pageXOffset,
@@ -50,8 +51,6 @@ export function getMax(item: CardField, element, background:Background): { x: nu
       }
   }
 }
-
-
 export function getMin(item: CardField, element, background:Background): { x: number, y: number } {
   switch (item.instanceOf) {
     case 'Logo':
