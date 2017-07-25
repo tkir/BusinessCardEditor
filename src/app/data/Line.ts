@@ -1,5 +1,5 @@
 import {CardField} from "./interfaces";
-import {getMaxSize} from "../utils/size.util";
+import {getMaxPosition, getMaxSize} from "../utils/size.util";
 export class Line implements CardField {
 
   constructor(public left: number,
@@ -68,5 +68,9 @@ export class Line implements CardField {
     let max = getMaxSize(this.instanceOf, bg);
     if (this.width > max.x) this.width = max.x;
     if (this.height > max.y) this.height = max.y;
+
+    let maxPosition = getMaxPosition(this.instanceOf, {width: this.width, height: this.height}, bg);
+    if (maxPosition.x < this.left) this.left = maxPosition.x;
+    if (maxPosition.y < this.top) this.top = maxPosition.y;
   }
 }

@@ -1,5 +1,6 @@
 import {CardField} from "./interfaces";
-import {getMaxSize} from "../utils/size.util";
+import {getMaxPosition, getMaxSize} from "../utils/size.util";
+
 export class Logo implements CardField {
 
   constructor(public src: string,
@@ -40,9 +41,13 @@ export class Logo implements CardField {
     return 'Logo';
   }
 
-  public onChangeBgSize(bg:{width, height, indent}) {
-    let max = getMaxSize(this.instanceOf, bg);
-    if (this.width > max.x) this.width = max.x;
-    if (this.height > max.y) this.height = max.y;
+  public onChangeBgSize(bg: { width, height, indent }) {
+    let maxSize = getMaxSize(this.instanceOf, bg);
+    if (this.width > maxSize.x) this.width = maxSize.x;
+    if (this.height > maxSize.y) this.height = maxSize.y;
+
+    let maxPosition = getMaxPosition(this.instanceOf, {width: this.width, height: this.height}, bg);
+    if (maxPosition.x < this.left) this.left = maxPosition.x;
+    if (maxPosition.y < this.top) this.top = maxPosition.y;
   }
 }

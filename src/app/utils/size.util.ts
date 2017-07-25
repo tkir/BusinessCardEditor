@@ -36,28 +36,28 @@ export function updateOffset(it: MovEl, event) {
 }
 
 //return min & max element position
-export function getMax(item: CardField, element, background:Background): { x: number, y: number } {
-  switch (item.instanceOf) {
+export function getMax(instanceOf:string, element, bg:{width:number, height:number, indent:number}): { x: number, y: number } {
+  switch (instanceOf) {
     case 'Logo':
     case 'Text':
       return {
-        x: background.width - background.indent - parseInt(getComputedStyle(element).width),
-        y: background.height - background.indent - parseInt(getComputedStyle(element).height)
+        x: bg.width - bg.indent - parseInt(getComputedStyle(element).width),
+        y: bg.height - bg.indent - parseInt(getComputedStyle(element).height)
       };
     case 'Line':
       return {
-        x: background.width - parseInt(getComputedStyle(element).width),
-        y: background.height - parseInt(getComputedStyle(element).height)
+        x: bg.width - parseInt(getComputedStyle(element).width),
+        y: bg.height - parseInt(getComputedStyle(element).height)
       }
   }
 }
-export function getMin(item: CardField, element, background:Background): { x: number, y: number } {
-  switch (item.instanceOf) {
+export function getMin(instanceOf, element, bg:{width:number, height:number, indent:number}): { x: number, y: number } {
+  switch (instanceOf) {
     case 'Logo':
     case 'Text':
       return {
-        x: background.indent,
-        y: background.indent
+        x: bg.indent,
+        y: bg.indent
       };
     case 'Line':
       return {
@@ -80,5 +80,22 @@ export function getMaxSize(instanceOf:string, bgSize:{width:number, height:numbe
         x: bgSize.width - (2 * bgSize.indent),
         y: bgSize.height - (2 * bgSize.indent)
       };
+  }
+}
+export function getMaxPosition(instanceOf:string,
+                               el:{width:number, height:number},
+                               bg:{width:number, height:number, indent:number}): { x: number, y: number } {
+  switch (instanceOf) {
+    case 'Logo':
+    case 'Text':
+      return {
+        x: bg.width - bg.indent - el.width,
+        y: bg.height - bg.indent - el.height
+      };
+    case 'Line':
+      return {
+        x: bg.width - el.width,
+        y: bg.height - el.height
+      }
   }
 }

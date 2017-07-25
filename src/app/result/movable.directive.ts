@@ -102,8 +102,8 @@ export class MovableDirective implements OnInit {
           x: event.pageX - item.left,
           y: event.pageY - item.top
         };
-        obj.max = getMax(item, target,this.background);
-        obj.min = getMin(item, target,this.background);
+        obj.max = getMax(item.instanceOf, target,this.background);
+        obj.min = getMin(item.instanceOf, target,this.background);
 
         isDublingItems = true;
       }
@@ -116,8 +116,8 @@ export class MovableDirective implements OnInit {
           x: event.pageX - item.left,
           y: event.pageY - item.top
         },
-        max: getMax(item, target,this.background),
-        min: getMin(item, target,this.background)
+        max: getMax(item.instanceOf, target,this.background),
+        min: getMin(item.instanceOf, target,this.background)
       });
   }
 
