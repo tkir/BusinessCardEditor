@@ -18,6 +18,8 @@ import {BackgroundEditorComponent} from './editor/background-editor/background-e
 import { ColorPickerComponent } from './editor/color-picker/color-picker.component';
 import { HrComponent } from './hr/hr.component';
 import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
+import { FieldResizeComponent } from './result/field-resize/field-resize.component';
+import { AddResizeDirective } from './result/add-resize.directive';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,11 @@ import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
     BackgroundEditorComponent,
     ColorPickerComponent,
     HrComponent,
-    HrEditorComponent
+    HrEditorComponent,
+    AddResizeDirective,
+    FieldResizeComponent
   ],
+  entryComponents:[FieldResizeComponent],
   imports: [
     BrowserModule,
     FormsModule

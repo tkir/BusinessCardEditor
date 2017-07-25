@@ -1,8 +1,16 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentFactoryResolver, Directive, ElementRef, HostListener, Input, OnInit, Type, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {CardField} from "../data/interfaces";
+import {AddResizeDirective} from "./add-resize.directive";
+import {FieldResizeComponent} from "./field-resize/field-resize.component";
+import {ResultComponent} from "./result.component";
 
 interface MovEl {
   item: CardField;
+  elem: Element;
   dev: { x: number, y: number };
   max: { x: number, y: number };
   min: { x: number, y: number };
@@ -14,9 +22,11 @@ interface MovEl {
 export class MovableDirective implements OnInit {
 
   @Input() dataArr = [];
+  @Input() card: ResultComponent = null;
 
   selectedItems: MovEl[] = [];
   private startMovingCoords: { x: number, y: number } = null;
+  private startResizing = false;
 
   //set indents
   //TODO перенести в config
@@ -24,7 +34,9 @@ export class MovableDirective implements OnInit {
   private polygraphPadding = 5;
   private indent: number = 0;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,
+              //проверка
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
@@ -32,7 +44,7 @@ export class MovableDirective implements OnInit {
   }
 
   //return max element position
-  private getMax(item:CardField, element): { x: number, y: number } {
+  private getMax(item: CardField, element): { x: number, y: number } {
     switch (item.instanceOf) {
       case 'Logo':
       case 'Text':
@@ -49,7 +61,7 @@ export class MovableDirective implements OnInit {
   }
 
   //return min element position
-  private getMin(item:CardField, element): { x: number, y: number } {
+  private getMin(item: CardField, element): { x: number, y: number } {
     switch (item.instanceOf) {
       case 'Logo':
       case 'Text':
@@ -74,25 +86,33 @@ export class MovableDirective implements OnInit {
 
       //skip selection
       this.selectedItems = [];
-      this.dataArr.forEach((item:CardField) => item.isSelected = false);
+      this.dataArr.forEach((item: CardField) => item.isSelected = false);
 
       return;
     }
 
-    this.startMovingCoords = {x: event.pageX, y: event.pageY};
-
     //find .card-field
-    let target = event.target;
+    let target: Element = event.target;
     while (target != this.el.nativeElement) {
       if (target.classList.contains('card-field'))break;
+
+      //если нажали на fieldResize
+      if (target.tagName == 'CARD-FIELD-RESIZE') {
+        this.startResizing = true;
+        return;
+      }
+
       target = target.parentElement;
     }
+
+    this.startMovingCoords = {x: event.pageX, y: event.pageY};
+
 
     //find item in dataArr by offset
     let left = parseInt(getComputedStyle(target).left);
     let top = parseInt(getComputedStyle(target).top);
 
-    let item:CardField = this.dataArr.find((it:CardField) => it.left == left && it.top == top);
+    let item: CardField = this.dataArr.find((it: CardField) => it.left == left && it.top == top);
     if (!item)return;
 
     //multiselection
@@ -103,19 +123,19 @@ export class MovableDirective implements OnInit {
     this.updateSelectionArray(item, target, event)
   }
 
-  private multiselection(item:CardField) {
+  private multiselection(item: CardField) {
     let isMulti = false;
     this.selectedItems.forEach(obj => {
       if (obj.item == item) isMulti = true;
     });
     if (!isMulti) {
       this.selectedItems = [];
-      this.dataArr.forEach((item:CardField) => item.isSelected = false);
+      this.dataArr.forEach((item: CardField) => item.isSelected = false);
     }
   }
 
   //set item selected, add to selection array
-  private updateSelectionArray(item:CardField, target: Element, event: MouseEvent) {
+  private updateSelectionArray(item: CardField, target: Element, event: MouseEvent) {
     item.isSelected = true;
 
     let isDublingItems = false;
@@ -126,6 +146,7 @@ export class MovableDirective implements OnInit {
     if (!isDublingItems)
       this.selectedItems.push({
         item: item,
+        elem: target,
         dev: {
           x: event.pageX - item.left,
           y: event.pageY - item.top
@@ -137,13 +158,20 @@ export class MovableDirective implements OnInit {
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
+    //ресайз элемента
+    if(this.startResizing && this.resizeComponent.fieldResizeRef){
+      this.resizeComponent.fieldResize.resize(event);
+      return;
+    }
+
+
     if (!this.startMovingCoords)return;
 
     //check random deviations more then 2px
     if (Math.abs(this.startMovingCoords.x - event.pageX) +
       Math.abs(this.startMovingCoords.y - event.pageY) > 2) {
 
-      this.selectedItems.forEach((it:MovEl) => this.updateOffset(it, event));
+      this.selectedItems.forEach((it: MovEl) => this.updateOffset(it, event));
 
     }
   }
@@ -169,6 +197,59 @@ export class MovableDirective implements OnInit {
   @HostListener('window:mouseup')
   onMouseUp() {
     this.startMovingCoords = null;
+    this.startResizing = false;
+
+    //проверяем: не мультиселект, нет fieldResize, ели есть но другой элемент - удаляем старый добавляем новый
+    if (this.selectedItems.length == 1) {
+      if (!this.resizeComponent.fieldResizeRef)
+        this.addResize(this.selectedItems[0].item, this.selectedItems[0].elem);
+      else {
+        if (this.resizeComponent.item != this.selectedItems[0].item) {
+          console.log('in');
+          this.removeResize();
+          this.addResize(this.selectedItems[0].item, this.selectedItems[0].elem);
+        }
+      }
+    }
+    else this.removeResize();
+  }
+
+  //работаем с fieldResize
+  private resizeComponent: {
+    fieldResizeRef: any
+    item: CardField,
+    fieldResize: FieldResizeComponent
+  } = {
+    fieldResizeRef: null,
+    item: null,
+    fieldResize: null
+  }
+  private fieldResizeComponent: Type<any> = FieldResizeComponent;
+
+  //вставляем fieldResize
+  private addResize(item, elem: Element) {
+    let target = elem.querySelector('[cardAddResize]');
+    this.resizeComponent.item = item;
+
+    //если полю уже добавлено fieldResize, то больше не надо
+    if (document.getElementsByTagName('CARD-FIELD-RESIZE').length)return;
+
+    let resizable: AddResizeDirective = this.card.addResizeDirectives.find(
+      (dir: AddResizeDirective) => dir.viewContainerRef.element.nativeElement == target);
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.fieldResizeComponent);
+    this.resizeComponent.fieldResizeRef = resizable.viewContainerRef.createComponent(componentFactory);
+    this.resizeComponent.fieldResize=<FieldResizeComponent>this.resizeComponent.fieldResizeRef.instance;
+    this.resizeComponent.fieldResize.init(item, target);
+  }
+
+  //удаляем fieldResize
+  private removeResize() {
+    if (this.resizeComponent.fieldResizeRef) {
+      this.resizeComponent.fieldResizeRef.destroy();
+      this.resizeComponent.fieldResizeRef = null;
+      this.resizeComponent.item=null;
+      this.resizeComponent.fieldResize=null;
+    }
   }
 
 }
