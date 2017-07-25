@@ -4,7 +4,7 @@ export class Text implements CardField {
 
   constructor(public text: string,
               public fontFamily: string,
-              public fontSize: number,
+              public fontSize_mm: number,
               public fontWeight: string,
               public fontStyle: string,
               public textDecoration: string,
@@ -14,6 +14,8 @@ export class Text implements CardField {
               public top: number) {
   }
 
+  //TODO to config
+  private k = 7;
   public isSelected: boolean = false;
   public isStyling: boolean = false;
 
@@ -27,6 +29,14 @@ export class Text implements CardField {
       'text-align': this.textAlign,
       'color': this.color
     }
+  }
+
+  get fontSize(): number {
+    return this.fontSize_mm * this.k;
+  }
+
+  set fontSize(val: number) {
+    this.fontSize_mm = val / this.k;
   }
 
   get color(): string {

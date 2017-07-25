@@ -228,11 +228,12 @@ export class MovableDirective implements OnInit {
   //вставляем fieldResize
   private addResize(item, elem: Element) {
     let target = elem.querySelector('[cardAddResize]');
+
+    //если поле не resizable
+    //или полю уже добавлено fieldResize
+    if ( !target || target.getElementsByTagName('CARD-FIELD-RESIZE').length)return;
+
     this.resizeComponent.item = item;
-
-    //если полю уже добавлено fieldResize, то больше не надо
-    if (document.getElementsByTagName('CARD-FIELD-RESIZE').length)return;
-
     let resizable: AddResizeDirective = this.card.addResizeDirectives.find(
       (dir: AddResizeDirective) => dir.viewContainerRef.element.nativeElement == target);
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.fieldResizeComponent);

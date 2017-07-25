@@ -35,7 +35,6 @@ export class FieldResizeComponent implements OnInit {
 
   get cursor(): string {
     switch (this.item.instanceOf) {
-      case 'Text':
       case 'Logo':
         return 'nw-resize';
       case 'Line':
