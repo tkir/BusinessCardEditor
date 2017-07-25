@@ -3,18 +3,14 @@ import {
   ComponentFactoryResolver, Directive, ElementRef, HostListener, Input, OnInit, Type, ViewChild,
   ViewContainerRef
 } from '@angular/core';
+
 import {CardField} from "../data/interfaces";
 import {AddResizeDirective} from "./add-resize.directive";
 import {FieldResizeComponent} from "./field-resize/field-resize.component";
 import {ResultComponent} from "./result.component";
+import {getMax, getMin, MovEl, updateOffset} from '../utils/size.util';
+import {Background} from "../data/Background";
 
-interface MovEl {
-  item: CardField;
-  elem: Element;
-  dev: { x: number, y: number };
-  max: { x: number, y: number };
-  min: { x: number, y: number };
-}
 
 @Directive({
   selector: '[fieldMovable]'
@@ -23,58 +19,18 @@ export class MovableDirective implements OnInit {
 
   @Input() dataArr = [];
   @Input() card: ResultComponent = null;
+  private background:Background=null;
 
   selectedItems: MovEl[] = [];
   private startMovingCoords: { x: number, y: number } = null;
   private startResizing = false;
 
-  //set indents
-  //TODO перенести в config
-  private k = 7;
-  private polygraphPadding = 5;
-  private indent: number = 0;
-
   constructor(private el: ElementRef,
-              //проверка
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
-    this.indent = this.polygraphPadding * this.k;
-  }
-
-  //return max element position
-  private getMax(item: CardField, element): { x: number, y: number } {
-    switch (item.instanceOf) {
-      case 'Logo':
-      case 'Text':
-        return {
-          x: this.el.nativeElement.offsetWidth - this.indent - parseInt(getComputedStyle(element).width),
-          y: this.el.nativeElement.offsetHeight - this.indent - parseInt(getComputedStyle(element).height)
-        };
-      case 'Line':
-        return {
-          x: this.el.nativeElement.offsetWidth - parseInt(getComputedStyle(element).width),
-          y: this.el.nativeElement.offsetHeight - parseInt(getComputedStyle(element).height)
-        }
-    }
-  }
-
-  //return min element position
-  private getMin(item: CardField, element): { x: number, y: number } {
-    switch (item.instanceOf) {
-      case 'Logo':
-      case 'Text':
-        return {
-          x: this.indent,
-          y: this.indent
-        };
-      case 'Line':
-        return {
-          x: 0,
-          y: 0
-        }
-    }
+    this.background=this.dataArr.find((field: CardField) => field.instanceOf == 'Background');
   }
 
   @HostListener('mousedown', ['$event'])
@@ -140,8 +96,16 @@ export class MovableDirective implements OnInit {
 
     let isDublingItems = false;
     this.selectedItems.forEach(obj => {
-      if (obj.item == item)
+      if (obj.item == item) {
+        obj.dev = {
+          x: event.pageX - item.left,
+          y: event.pageY - item.top
+        };
+        obj.max = getMax(item, target,this.background);
+        obj.min = getMin(item, target,this.background);
+
         isDublingItems = true;
+      }
     });
     if (!isDublingItems)
       this.selectedItems.push({
@@ -151,15 +115,15 @@ export class MovableDirective implements OnInit {
           x: event.pageX - item.left,
           y: event.pageY - item.top
         },
-        max: this.getMax(item, target),
-        min: this.getMin(item, target)
+        max: getMax(item, target,this.background),
+        min: getMin(item, target,this.background)
       });
   }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     //ресайз элемента
-    if(this.startResizing && this.resizeComponent.fieldResizeRef){
+    if (this.startResizing && this.resizeComponent.fieldResizeRef) {
       this.resizeComponent.fieldResize.resize(event);
       return;
     }
@@ -171,33 +135,19 @@ export class MovableDirective implements OnInit {
     if (Math.abs(this.startMovingCoords.x - event.pageX) +
       Math.abs(this.startMovingCoords.y - event.pageY) > 2) {
 
-      this.selectedItems.forEach((it: MovEl) => this.updateOffset(it, event));
+      this.selectedItems.forEach((it: MovEl) => updateOffset(it, event));
 
     }
   }
 
   //checking is field in card bounds & update card offsets
-  private updateOffset(it: MovEl, event) {
 
-    let pageX = event.pageX - it.dev.x;
-    let pageY = event.pageY - it.dev.y;
-
-    if (pageX < it.min.x || pageX > it.max.x) {
-      pageX = pageX < it.min.x ? it.min.x : it.max.x;
-    }
-
-    if (pageY < it.min.y || pageY > it.max.y) {
-      pageY = pageY < it.min.y ? it.min.y : it.max.y;
-    }
-
-    if (it.item.left != pageX) it.item.left = pageX;
-    if (it.item.top != pageY) it.item.top = pageY;
-  }
 
   @HostListener('window:mouseup')
   onMouseUp() {
     this.startMovingCoords = null;
-    this.startResizing = false;
+    if (this.startResizing)
+      this.startResizing = false;
 
     //проверяем: не мультиселект, нет fieldResize, ели есть но другой элемент - удаляем старый добавляем новый
     if (this.selectedItems.length == 1) {
@@ -231,15 +181,15 @@ export class MovableDirective implements OnInit {
 
     //если поле не resizable
     //или полю уже добавлено fieldResize
-    if ( !target || target.getElementsByTagName('CARD-FIELD-RESIZE').length)return;
+    if (!target || target.getElementsByTagName('CARD-FIELD-RESIZE').length)return;
 
     this.resizeComponent.item = item;
     let resizable: AddResizeDirective = this.card.addResizeDirectives.find(
       (dir: AddResizeDirective) => dir.viewContainerRef.element.nativeElement == target);
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.fieldResizeComponent);
     this.resizeComponent.fieldResizeRef = resizable.viewContainerRef.createComponent(componentFactory);
-    this.resizeComponent.fieldResize=<FieldResizeComponent>this.resizeComponent.fieldResizeRef.instance;
-    this.resizeComponent.fieldResize.init(item, target);
+    this.resizeComponent.fieldResize = <FieldResizeComponent>this.resizeComponent.fieldResizeRef.instance;
+    this.resizeComponent.fieldResize.init(item, target, this.dataArr.find((field: CardField) => field.instanceOf == 'Background'));
   }
 
   //удаляем fieldResize
@@ -247,8 +197,8 @@ export class MovableDirective implements OnInit {
     if (this.resizeComponent.fieldResizeRef) {
       this.resizeComponent.fieldResizeRef.destroy();
       this.resizeComponent.fieldResizeRef = null;
-      this.resizeComponent.item=null;
-      this.resizeComponent.fieldResize=null;
+      this.resizeComponent.item = null;
+      this.resizeComponent.fieldResize = null;
     }
   }
 

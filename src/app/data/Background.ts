@@ -1,7 +1,7 @@
 export class Background {
 
-  public width: number;
-  public height: number;
+  // public width: number;
+  // public height: number;
   public dataType: string;
 
   constructor(public _backgroundColor: string,
@@ -12,22 +12,26 @@ export class Background {
 
   //TODO вынести в config
   private k: number = 7;
+  private polygraphPadding = 5;
+  get indent():number{
+    return this.polygraphPadding*this.k;
+  }
 
   get style() {
     return {
       'background-color': `#${this._backgroundColor.replace('#', '')}`,
       'background-image': `url(${this.src})`,
       'background-repeat': 'no-repeat',
-      'width.px': this.width_mm * this.k,
-      'height.px': this.height_mm * this.k
+      'width.px': this.width,
+      'height.px': this.height
     };
   }
 
-  get maxWidth(): number {
+  get width(): number {
     return this.width_mm * this.k;
   }
 
-  get maxHeight(): number {
+  get height(): number {
     return this.height_mm * this.k;
   }
 

@@ -1,7 +1,8 @@
-import {Component, HostBinding, HostListener, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {getCoords} from "../../utils/size.util";
 import {CardField} from "../../data/interfaces";
 import {Line} from "../../data/Line";
+import {Background} from "../../data/Background";
 
 @Component({
   selector: 'card-field-resize',
@@ -15,10 +16,10 @@ import {Line} from "../../data/Line";
 })
 export class FieldResizeComponent implements OnInit {
 
-  @Input() item: CardField = null;
-  @Input() el: Element = null;
-  temp = '10px';
-  elPos: { x: number, y: number } = {x: 0, y: 0};
+  private item: CardField = null;
+  private el: Element = null;
+  private background: Background = null;
+  private elPos: { x: number, y: number } = {x: 0, y: 0};
 
   constructor() {
   }
@@ -26,9 +27,10 @@ export class FieldResizeComponent implements OnInit {
   ngOnInit() {
   }
 
-  init(item, el) {
+  init(item, el, background) {
     this.item = item;
     this.el = el;
+    this.background = background;
 
     this.updatePosition();
   }

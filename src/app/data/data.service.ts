@@ -10,7 +10,7 @@ export class DataService {
   }
 
   updateCard(state): CardData {
-    state.logos.forEach(logo => logo.setMaxSize(cardData.background.maxWidth, cardData.background.maxHeight));
+    state.logos.forEach(logo => logo.setMaxSize(cardData.background.width, cardData.background.height));
     let currentState = state;
     return this.store.state = currentState;
   }
