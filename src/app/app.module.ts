@@ -10,16 +10,17 @@ import {EditorContainerComponent} from './editor-container/editor-container.comp
 import {DataService} from "./data/data.service";
 import {ResultComponent} from './result/result.component';
 import {StyleEditorComponent} from './editor/style-editor/style-editor.component';
-import {MovableDirective} from './result/movable.directive';
+import {MovableDirective} from './result/directives/movable.directive';
 import {Store} from "./data/store";
-import {DroppableDirective} from './result/droppable.directive';
+import {DroppableDirective} from './result/directives/droppable.directive';
 import {ImageService} from "./utils/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
 import { ColorPickerComponent } from './editor/color-picker/color-picker.component';
 import { HrComponent } from './hr/hr.component';
 import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
 import { FieldResizeComponent } from './result/field-resize/field-resize.component';
-import { AddResizeDirective } from './result/add-resize.directive';
+import { AddResizeDirective } from './result/directives/add-resize.directive';
+import { AlignableDirective } from './result/directives/alignable.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AddResizeDirective } from './result/add-resize.directive';
     HrComponent,
     HrEditorComponent,
     AddResizeDirective,
-    FieldResizeComponent
+    FieldResizeComponent,
+    AlignableDirective
   ],
   entryComponents:[FieldResizeComponent],
   imports: [

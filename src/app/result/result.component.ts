@@ -1,15 +1,10 @@
-import {
-  AfterViewInit, Component, ComponentFactoryResolver, OnChanges, OnDestroy, OnInit, SimpleChanges, Type, ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
+import {Subscription} from "rxjs/Subscription";
 
 import {DataService} from "../data/data.service";
-import {CardData} from "../data/CardData";
-import {Subscription} from "rxjs/Subscription";
 import {Store} from "../data/store";
-import {Logo} from "../data/Logo";
-import {AddResizeDirective} from "./add-resize.directive";
-import {FieldResizeComponent} from "./field-resize/field-resize.component";
+import {CardData} from "../data/CardData";
+import {AddResizeDirective} from "./directives/add-resize.directive";
 
 @Component({
   selector: 'card-result',

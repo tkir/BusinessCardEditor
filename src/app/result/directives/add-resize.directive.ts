@@ -7,9 +7,4 @@ export class AddResizeDirective {
 
   constructor(public viewContainerRef: ViewContainerRef) {
   }
-
-  @HostListener('mousedown')
-  onMouseDown() {
-  }
-
 }

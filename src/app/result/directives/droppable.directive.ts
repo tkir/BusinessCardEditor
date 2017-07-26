@@ -1,6 +1,6 @@
 import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {Logo} from "../data/Logo";
-import {ImageService} from "../utils/image.service";
+import {Logo} from "../../data/Logo";
+import {ImageService} from "../../utils/image.service";
 
 @Directive({
   selector: '[imageDroppable]'

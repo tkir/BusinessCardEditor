@@ -4,12 +4,12 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import {CardField} from "../data/interfaces";
+import {CardField} from "../../data/interfaces";
 import {AddResizeDirective} from "./add-resize.directive";
-import {FieldResizeComponent} from "./field-resize/field-resize.component";
-import {ResultComponent} from "./result.component";
-import {getMax, getMin, MovEl, updateOffset} from '../utils/size.util';
-import {Background} from "../data/Background";
+import {FieldResizeComponent} from "../field-resize/field-resize.component";
+import {ResultComponent} from "../result.component";
+import {getMax, getMin, MovEl, updateOffset} from '../../utils/size.util';
+import {Background} from "../../data/Background";
 
 
 @Directive({
