@@ -1,5 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {Text} from "../../data/TextCSS";
+import {AlignService} from "../../services/align.service";
 
 @Component({
   selector: 'card-style-editor',
@@ -15,7 +16,7 @@ export class StyleEditorComponent {
     if (this.item) this.item.isStyling = true;
   }
 
-  constructor() {
+  constructor(public alService:AlignService) {
   }
 
   toggleStyle(style: string) {
@@ -46,5 +47,9 @@ export class StyleEditorComponent {
     this.item.colorStr=color;
 
     this.endStyling();
+  }
+
+  setAlignment(alLine:string){
+    this.alService.alignTextFields(alLine);
   }
 }

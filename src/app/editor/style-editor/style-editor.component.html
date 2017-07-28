@@ -20,3 +20,21 @@
     <card-color-picker (colorSelected)="setColor($event)"></card-color-picker>
   </ul>
 </div>
+
+<div class="btn-group" role="group" aria-label="...">
+  <button
+    type="button" class="btn btn-default"
+    [ngClass]="{'disabled':!alService.isMultiselection}"
+    (click)="setAlignment('left')"
+  ><i class="glyphicon glyphicon-align-left"></i></button>
+  <button
+    type="button" class="btn btn-default"
+    [ngClass]="{'disabled':!alService.isMultiselection}"
+    (click)="setAlignment('middle')"
+  ><i class="glyphicon glyphicon-align-center"></i></button>
+  <button
+    type="button" class="btn btn-default"
+    [ngClass]="{'disabled':!alService.isMultiselection}"
+    (click)="setAlignment('right')"
+  ><i class="glyphicon glyphicon-align-right"></i></button>
+</div>

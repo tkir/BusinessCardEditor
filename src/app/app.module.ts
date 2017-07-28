@@ -21,6 +21,7 @@ import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
 import { FieldResizeComponent } from './result/field-resize/field-resize.component';
 import { AddResizeDirective } from './result/directives/add-resize.directive';
 import { AlignableDirective } from './result/directives/alignable.directive';
+import {AlignService} from "./services/align.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { AlignableDirective } from './result/directives/alignable.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [Store, DataService, ImageService],
+  providers: [Store, DataService, ImageService, AlignService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

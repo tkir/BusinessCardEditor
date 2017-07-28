@@ -18,6 +18,8 @@ export class Text implements CardField {
   private k = 7;
   public isSelected: boolean = false;
   public isStyling: boolean = false;
+  public div: Element = null;
+
 
   get style() {
     return {
@@ -47,12 +49,28 @@ export class Text implements CardField {
     return 'Text';
   }
 
+  //для выравнивания
+  get middle(): number {
+    return this.left + Math.round(parseInt(getComputedStyle(this.div).width) / 2);
+  }
+
+  set middle(val) {
+    this.left += val - this.middle;
+  }
+
+  get right(): number {
+    return this.left + parseInt(getComputedStyle(this.div).width);
+  }
+
+  set right(val) {
+    this.left += val - this.right;
+  }
+
   get width() {
     return 0;
   }
 
   set width(val) {
-
   }
 
   get height() {
@@ -60,6 +78,5 @@ export class Text implements CardField {
   }
 
   set height(val) {
-
   }
 }

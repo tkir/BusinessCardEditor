@@ -10,6 +10,8 @@ import {FieldResizeComponent} from "../field-resize/field-resize.component";
 import {ResultComponent} from "../result.component";
 import {getMax, getMin, MovEl, updateOffset} from '../../utils/size.util';
 import {Background} from "../../data/Background";
+import {AlignService} from "../../services/align.service";
+import {Text} from "../../data/TextCSS";
 
 
 @Directive({
@@ -19,18 +21,19 @@ export class MovableDirective implements OnInit {
 
   @Input() dataArr = [];
   @Input() card: ResultComponent = null;
-  private background:Background=null;
+  private background: Background = null;
 
   selectedItems: MovEl[] = [];
   private startMovingCoords: { x: number, y: number } = null;
   private startResizing = false;
 
   constructor(private el: ElementRef,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private alService: AlignService) {
   }
 
   ngOnInit(): void {
-    this.background=this.dataArr.find((field: CardField) => field.instanceOf == 'Background');
+    this.background = this.dataArr.find((field: CardField) => field.instanceOf == 'Background');
   }
 
   @HostListener('mousedown', ['$event'])
@@ -43,6 +46,9 @@ export class MovableDirective implements OnInit {
       //skip selection
       this.selectedItems = [];
       this.dataArr.forEach((item: CardField) => item.isSelected = false);
+
+      this.alService.textFields = [];
+      this.alService.isMultiselection=false;
 
       return;
     }
@@ -70,14 +76,29 @@ export class MovableDirective implements OnInit {
     let top = parseInt(getComputedStyle(target).top);
 
     let item: CardField = this.dataArr.find((it: CardField) => it.left == left && it.top == top);
-    if (!item)return;
+    if (!item) {
+      this.alService.textFields = [];
+      this.alService.isMultiselection=false;
+      return;
+    }
 
     //multiselection
     if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
       this.multiselection(item);
     }
 
-    this.updateSelectionArray(item, target, event)
+    this.updateSelectionArray(item, target, event);
+
+    //  установить мульти alService, отправить в alService selectionArray
+    if (this.selectedItems.length > 1) {
+      this.alService.isMultiselection = true;
+      this.selectedItems.forEach(obj => this.alService.textFields.push(<Text>obj.item));
+    }
+    else {
+      this.alService.textFields = [];
+      this.alService.isMultiselection = false;
+    }
+
   }
 
   private multiselection(item: CardField) {
@@ -102,8 +123,8 @@ export class MovableDirective implements OnInit {
           x: event.pageX - item.left,
           y: event.pageY - item.top
         };
-        obj.max = getMax(item.instanceOf, target,this.background);
-        obj.min = getMin(item.instanceOf, target,this.background);
+        obj.max = getMax(item.instanceOf, target, this.background);
+        obj.min = getMin(item.instanceOf, target, this.background);
 
         isDublingItems = true;
       }
@@ -116,8 +137,8 @@ export class MovableDirective implements OnInit {
           x: event.pageX - item.left,
           y: event.pageY - item.top
         },
-        max: getMax(item.instanceOf, target,this.background),
-        min: getMin(item.instanceOf, target,this.background)
+        max: getMax(item.instanceOf, target, this.background),
+        min: getMin(item.instanceOf, target, this.background)
       });
   }
 
