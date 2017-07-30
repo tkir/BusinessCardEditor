@@ -16,6 +16,7 @@ export class Text implements CardField {
 
   //TODO to config
   private k = 7;
+  private fontSizeStep: number = 0.2;
   public isSelected: boolean = false;
   public isStyling: boolean = false;
   public div: Element = null;
@@ -39,6 +40,11 @@ export class Text implements CardField {
 
   set fontSize(val: number) {
     this.fontSize_mm = val / this.k;
+  }
+
+  changeFontSize(dir: string) {
+    if (dir == 'increase') this.fontSize_mm += this.fontSizeStep;
+    if (dir == 'decrease') this.fontSize_mm -= this.fontSizeStep;
   }
 
   get color(): string {

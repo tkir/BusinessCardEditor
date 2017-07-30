@@ -11,8 +11,9 @@
   [ngClass]="{'disabled':!item, 'active':(item && item.textDecoration=='underline')}"
   (click)="toggleStyle('textDecoration')"><u>U</u></button>
 
+<!--text color-->
 <div class="btn-group dropup">
-  <button class="btn btn-sm" [ngClass]="{'disabled':!item}" [ngStyle]="{'color': item? item.color : '#a8a8a8'}"><b>color</b></button>
+  <button class="btn btn-sm" [ngClass]="{'disabled':!item}" [ngStyle]="{'color': item? item.color : '#a8a8a8'}"><i class="glyphicon glyphicon-text-color"></i></button>
   <button class="btn btn-sm dropdown-toggle" [ngClass]="{'disabled':!item}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="caret"></span>
   </button>
@@ -21,6 +22,21 @@
   </ul>
 </div>
 
+<!--font-size-->
+<div class="btn-group" role="group" aria-label="...">
+  <button
+    type="button" class="btn btn-default"
+    [ngClass]="{'disabled':!item}"
+    (click)="setFontSize('increase')"
+  ><i class="glyphicon glyphicon-text-size"></i></button>
+  <button
+    type="button" class="btn btn-default text-decrease"
+    [ngClass]="{'disabled':!item}"
+    (click)="setFontSize('decrease')"
+  ><i class="glyphicon glyphicon-text-size"></i></button>
+</div>
+
+<!--alignation-->
 <div class="btn-group" role="group" aria-label="...">
   <button
     type="button" class="btn btn-default"

@@ -20,6 +20,8 @@ export class StyleEditorComponent {
   }
 
   toggleStyle(style: string) {
+    if(!this.item)return;
+
     switch (style) {
       case 'fontWeight':
         this.item.fontWeight = (this.item.fontWeight === 'normal') ?
@@ -44,6 +46,8 @@ export class StyleEditorComponent {
   }
 
   setColor(color:string){
+    if(!this.item)return;
+
     this.item.colorStr=color;
 
     this.endStyling();
@@ -51,5 +55,12 @@ export class StyleEditorComponent {
 
   setAlignment(alLine:string){
     this.alService.alignTextFields(alLine);
+  }
+
+  setFontSize(direction:string){
+    if(!this.item)return;
+
+    this.item.changeFontSize(direction);
+    this.endStyling();
   }
 }
