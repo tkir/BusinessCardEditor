@@ -118,14 +118,13 @@ export class MovableDirective implements OnInit {
 
     let isDublingItems = false;
     this.selectedItems.forEach(obj => {
+      obj.dev = {
+        x: event.pageX - obj.item.left,
+        y: event.pageY - obj.item.top
+      };
+      obj.max = getMax(obj.item.instanceOf, target, this.background);
+      obj.min = getMin(obj.item.instanceOf, target, this.background);
       if (obj.item == item) {
-        obj.dev = {
-          x: event.pageX - item.left,
-          y: event.pageY - item.top
-        };
-        obj.max = getMax(item.instanceOf, target, this.background);
-        obj.min = getMin(item.instanceOf, target, this.background);
-
         isDublingItems = true;
       }
     });
