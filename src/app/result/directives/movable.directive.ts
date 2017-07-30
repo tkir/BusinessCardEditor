@@ -15,7 +15,12 @@ import {Text} from "../../data/TextCSS";
 
 
 @Directive({
-  selector: '[fieldMovable]'
+  selector: '[fieldMovable]',
+  host:{
+    '(mousedown)': 'onMouseDown($event)',
+    '(mousemove)': 'onMouseMove($event)',
+    '(window:mouseup)': 'onMouseUp()'
+  }
 })
 export class MovableDirective implements OnInit {
 
@@ -36,7 +41,6 @@ export class MovableDirective implements OnInit {
     this.background = this.dataArr.find((field: CardField) => field.instanceOf == 'Background');
   }
 
-  @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
     if (event.which != 1)return;
 
@@ -141,7 +145,6 @@ export class MovableDirective implements OnInit {
       });
   }
 
-  @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     //ресайз элемента
     if (this.startResizing && this.resizeComponent.fieldResizeRef) {
@@ -161,10 +164,6 @@ export class MovableDirective implements OnInit {
     }
   }
 
-  //checking is field in card bounds & update card offsets
-
-
-  @HostListener('window:mouseup')
   onMouseUp() {
     this.startMovingCoords = null;
     if (this.startResizing)
