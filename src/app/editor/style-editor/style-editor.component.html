@@ -36,6 +36,20 @@
   ><i class="glyphicon glyphicon-text-size"></i></button>
 </div>
 
+<!--font name-->
+<div class="btn-group" [ngClass]="{'disabled':!item}">
+  <button
+    class="btn btn-default btn-sm"
+    [ngClass]="{'disabled':!item}"
+  ><span *ngIf="item">{{item.fontName}}</span></button>
+  <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [ngClass]="{'disabled':!item}">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" *ngIf="item">
+    <li *ngFor="let font of item.allowedFonts"><a (click)="setFontName(font)">{{font}}</a></li>
+  </ul>
+</div>
+
 <!--alignation-->
 <div class="btn-group" role="group" aria-label="...">
   <button

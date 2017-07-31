@@ -1,4 +1,5 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+let WebFont = require('webfontloader');
 import {Text} from "../../data/TextCSS";
 import {AlignService} from "../../services/align.service";
 
@@ -16,11 +17,11 @@ export class StyleEditorComponent {
     if (this.item) this.item.isStyling = true;
   }
 
-  constructor(public alService:AlignService) {
+  constructor(public alService: AlignService) {
   }
 
   toggleStyle(style: string) {
-    if(!this.item)return;
+    if (!this.item)return;
 
     switch (style) {
       case 'fontWeight':
@@ -45,22 +46,36 @@ export class StyleEditorComponent {
     if (this.item) this.item.isStyling = false;
   }
 
-  setColor(color:string){
-    if(!this.item)return;
+  setColor(color: string) {
+    if (!this.item)return;
 
-    this.item.colorStr=color;
+    this.item.colorStr = color;
 
     this.endStyling();
   }
 
-  setAlignment(alLine:string){
+  setAlignment(alLine: string) {
     this.alService.alignTextFields(alLine);
   }
 
-  setFontSize(direction:string){
-    if(!this.item)return;
+  setFontSize(direction: string) {
+    if (!this.item)return;
 
     this.item.changeFontSize(direction);
+    this.endStyling();
+  }
+
+  setFontName(font: string) {
+
+    WebFont.load({
+      google: {
+        families: [font]
+      },
+      active: (function () {
+        this.item.fontName = font;
+      }).bind(this)
+    });
+
     this.endStyling();
   }
 }
