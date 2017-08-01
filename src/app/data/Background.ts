@@ -10,11 +10,16 @@ export class Background {
               public height_mm: number) {
   }
 
-  //TODO вынести в config
-  private k: number = 7;
-  private polygraphPadding = 5;
-  get indent():number{
-    return this.polygraphPadding*this.k;
+  private k: number;
+  private polygraphPadding: number;
+
+  public setConstants(config) {
+    this.k = config.get('ratio');
+    this.polygraphPadding = config.get('polygraphPadding');
+  }
+
+  get indent(): number {
+    return this.polygraphPadding * this.k;
   }
 
   get style() {
@@ -35,11 +40,11 @@ export class Background {
     return this.height_mm * this.k;
   }
 
-  get backgroundColor(){
+  get backgroundColor() {
     return `#${this._backgroundColor.replace('#', '')}`;
   }
 
-  get instanceOf():string{
+  get instanceOf(): string {
     return 'Background';
   }
 }

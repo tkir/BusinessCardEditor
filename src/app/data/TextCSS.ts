@@ -16,18 +16,17 @@ export class Text implements CardField {
               public top: number) {
   }
 
-  public setConstants(k:number, fontSizeStep: number){
-    this.k=k;
-    this.fontSizeStep=fontSizeStep;
-  }
-
-  //TODO to config
   private k: number;
   private fontSizeStep: number;
 
   public isSelected: boolean = false;
   public isStyling: boolean = false;
   public div: Element = null;
+
+  public setConstants(config) {
+    this.k = config.get('ratio');
+    this.fontSizeStep = config.get('fontSizeStep');
+  }
 
   get style() {
     return {

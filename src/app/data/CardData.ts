@@ -12,14 +12,18 @@ export class CardData {
               public emails: Text[],
               public sites: Text[],
               public logos: Logo[],
-              public lines:Line[],
+              public lines: Line[],
               public background: Background) {
   }
 
-  public setConstants(k:number, fontSizeStep: number){
-    Object.keys(this).forEach(key=>{
-      if(Array.isArray(this[key]) && this[key][0] && this[key][0].instanceOf=='Text')
-        this[key].forEach(txt=>txt.setConstants(k, fontSizeStep));
+  public setConstants(config) {
+    let fields=[];
+    Object.keys(this).forEach(key =>{
+      if (Array.isArray(this[key]))
+        fields.push(...this[key]);
+      else fields.push(this[key]);
     });
+
+    fields.forEach(field=>field.setConstants(config));
   }
 }

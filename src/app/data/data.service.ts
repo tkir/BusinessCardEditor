@@ -19,7 +19,7 @@ export class DataService {
   public setCardData(design?: string) {
     switch (design) {
       default:
-        cardData.setConstants(this.config.get('ratio'), this.config.get('fontSizeStep'));
+        cardData.setConstants(this.config);
         this.updateCard(cardData);
     }
   }

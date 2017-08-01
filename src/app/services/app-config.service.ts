@@ -33,6 +33,7 @@ export class AppConfigService {
         this.env = envResponse;
         let request:any = null;
 
+        //TODO перед production убрать '../../'
         switch (envResponse.env) {
           case 'production': {
             request = this.http.get('../../assets/config.' + envResponse.env + '.json');

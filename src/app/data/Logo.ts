@@ -15,6 +15,9 @@ export class Logo implements CardField {
   private _maxWidth: number;
   private _maxHeight: number;
 
+  public setConstants(config) {
+  }
+
   get style() {
     return {
       'width.px': this.width,

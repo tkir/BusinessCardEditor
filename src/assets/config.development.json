@@ -9,5 +9,6 @@
     "Lato"
   ],
   "ratio": 7,
-  "fontSizeStep": 0.2
+  "fontSizeStep": 0.2,
+  "polygraphPadding": 5
 }

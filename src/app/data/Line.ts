@@ -11,9 +11,12 @@ export class Line implements CardField {
               public _color: string = '000') {
   }
 
-  //TODO to config
-  private k = 7;
+  private k;
   public isSelected: boolean = false;
+
+  public setConstants(config) {
+    this.k = config.get('ratio');
+  }
 
   get thickness() {
     return this.design == 'double' ? this._thickness + 2 : this._thickness
