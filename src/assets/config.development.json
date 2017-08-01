@@ -1,4 +1,5 @@
 {
+  "host": "localhost:4200",
   "allowedFonts":[
     "Work Sans",
     "Playfair Display",

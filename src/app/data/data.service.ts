@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {CardData} from "./CardData";
 import {cardData} from "../design/defaultParams";
 import {Store} from "./store";
+import {AppConfigService} from "../services/app-config.service";
 
 @Injectable()
 export class DataService {
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private config:AppConfigService) {
   }
 
   updateCard(state): CardData {
@@ -18,6 +19,7 @@ export class DataService {
   public setCardData(design?: string) {
     switch (design) {
       default:
+        cardData.setConstants(this.config.get('ratio'), this.config.get('fontSizeStep'));
         this.updateCard(cardData);
     }
   }

@@ -15,4 +15,11 @@ export class CardData {
               public lines:Line[],
               public background: Background) {
   }
+
+  public setConstants(k:number, fontSizeStep: number){
+    Object.keys(this).forEach(key=>{
+      if(Array.isArray(this[key]) && this[key][0] && this[key][0].instanceOf=='Text')
+        this[key].forEach(txt=>txt.setConstants(k, fontSizeStep));
+    });
+  }
 }

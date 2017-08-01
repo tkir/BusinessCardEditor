@@ -1,4 +1,6 @@
 import {CardField} from "./interfaces";
+import {ReflectiveInjector} from '@angular/core';
+import {AppConfigService} from "../services/app-config.service";
 
 export class Text implements CardField {
 
@@ -14,17 +16,14 @@ export class Text implements CardField {
               public top: number) {
   }
 
+  public setConstants(k:number, fontSizeStep: number){
+    this.k=k;
+    this.fontSizeStep=fontSizeStep;
+  }
+
   //TODO to config
-  private k = 7;
-  private fontSizeStep: number = 0.2;
-  public allowedFonts: string[] = [
-    'Work Sans',
-    'Playfair Display',
-    'Open Sans',
-    'Josefin Slab',
-    'Arvo',
-    'Lato'
-  ];
+  private k: number;
+  private fontSizeStep: number;
 
   public isSelected: boolean = false;
   public isStyling: boolean = false;

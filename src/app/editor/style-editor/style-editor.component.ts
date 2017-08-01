@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 let WebFont = require('webfontloader');
 import {Text} from "../../data/TextCSS";
 import {AlignService} from "../../services/align.service";
+import {AppConfigService} from "../../services/app-config.service";
 
 @Component({
   selector: 'card-style-editor',
@@ -11,16 +12,21 @@ import {AlignService} from "../../services/align.service";
     '(mousedown)': 'onMouseDown()'
   }
 })
-export class StyleEditorComponent{
+export class StyleEditorComponent implements OnInit{
 
   @Input() item: Text;
   @Output() returnFocus: EventEmitter<any> = new EventEmitter();
+  allowedFonts: string[] = [];
 
   onMouseDown() {
     if (this.item) this.item.isStyling = true;
   }
 
-  constructor(public alService: AlignService) {
+  constructor(public alService: AlignService,
+              private config:AppConfigService) {
+  }
+  ngOnInit(){
+    this.allowedFonts=this.config.get('allowedFonts');
   }
 
   toggleStyle(style: string) {

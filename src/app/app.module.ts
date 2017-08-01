@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, APP_INITIALIZER} from '@angular/core';
 import {FormsModule}   from '@angular/forms';
 
 import {AppComponent} from './app.component';
@@ -16,13 +16,14 @@ import {Store} from "./data/store";
 import {DroppableDirective} from './result/directives/droppable.directive';
 import {ImageService} from "./utils/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
-import { ColorPickerComponent } from './editor/color-picker/color-picker.component';
-import { HrComponent } from './hr/hr.component';
-import { HrEditorComponent } from './editor/hr-editor/hr-editor.component';
-import { FieldResizeComponent } from './result/field-resize/field-resize.component';
-import { AddResizeDirective } from './result/directives/add-resize.directive';
-import { AlignableDirective } from './result/directives/alignable.directive';
+import {ColorPickerComponent} from './editor/color-picker/color-picker.component';
+import {HrComponent} from './hr/hr.component';
+import {HrEditorComponent} from './editor/hr-editor/hr-editor.component';
+import {FieldResizeComponent} from './result/field-resize/field-resize.component';
+import {AddResizeDirective} from './result/directives/add-resize.directive';
+import {AlignableDirective} from './result/directives/alignable.directive';
 import {AlignService} from "./services/align.service";
+import {AppConfigService} from "./services/app-config.service";
 
 @NgModule({
   declarations: [
@@ -42,14 +43,25 @@ import {AlignService} from "./services/align.service";
     FieldResizeComponent,
     AlignableDirective
   ],
-  entryComponents:[FieldResizeComponent],
+  entryComponents: [FieldResizeComponent],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [Store, DataService, ImageService, AlignService],
+  providers: [Store, DataService, ImageService, AlignService, AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: httpFactory,
+      deps: [AppConfigService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function httpFactory(config: AppConfigService) {
+  return () => config.load();
 }

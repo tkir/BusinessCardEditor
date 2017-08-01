@@ -46,7 +46,7 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" *ngIf="item">
-    <li *ngFor="let font of item.allowedFonts"><a (click)="setFontName(font)">{{font}}</a></li>
+    <li *ngFor="let font of allowedFonts"><a (click)="setFontName(font)">{{font}}</a></li>
   </ul>
 </div>
 
