@@ -1,0 +1,13 @@
+{
+  "host": "localhost:4200",
+  "allowedFonts":[
+    "Work Sans",
+    "Playfair Display",
+    "Open Sans",
+    "Josefin Slab",
+    "Arvo",
+    "Lato"
+  ],
+  "ratio": 7,
+  "fontSizeStep": 0.2
+}
