@@ -2,8 +2,8 @@ import {CardField} from "./interfaces";
 import {getMaxPosition, getMaxSize} from "../utils/size.util";
 export class Line implements CardField {
 
-  constructor(public left: number,
-              public top: number,
+  constructor(public left_mm: number,
+              public top_mm: number,
               public length_mm: number,
               public _thickness: number,
               public isHorizontal: boolean = true,
@@ -18,8 +18,24 @@ export class Line implements CardField {
     this.k = config.get('ratio');
   }
 
+  get left() {
+    return Math.round(this.left_mm * this.k);
+  }
+
+  set left(val) {
+    this.left_mm = val / this.k;
+  }
+
+  get top() {
+    return Math.round(this.top_mm * this.k);
+  }
+
+  set top(val) {
+    this.top_mm = val / this.k;
+  }
+
   get thickness() {
-    return this.design == 'double' ? this._thickness + 2 : this._thickness
+    return this.design == 'double' ? this._thickness + 2 : this._thickness;
   }
 
   set thickness(val) {
@@ -27,7 +43,7 @@ export class Line implements CardField {
   }
 
   get width() {
-    return this.isHorizontal ? this.length_mm * this.k : 0;
+    return this.isHorizontal ? Math.round(this.length_mm) * this.k : 0;
   }
 
   set width(val) {
@@ -36,7 +52,7 @@ export class Line implements CardField {
   }
 
   get height() {
-    return this.isHorizontal ? 0 : this.length_mm * this.k
+    return this.isHorizontal ? 0 : Math.round(this.length_mm * this.k);
   }
 
   set height(val) {

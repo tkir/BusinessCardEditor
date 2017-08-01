@@ -12,8 +12,8 @@ export class Text implements CardField {
               public textDecoration: string,
               public textAlign: string,
               public colorStr: string,
-              public left: number,
-              public top: number) {
+              public left_mm: number,
+              public top_mm: number) {
   }
 
   private k: number;
@@ -38,6 +38,22 @@ export class Text implements CardField {
       'text-align': this.textAlign,
       'color': this.color
     }
+  }
+
+  get left() {
+    return Math.round(this.left_mm * this.k);
+  }
+
+  set left(val) {
+    this.left_mm = val / this.k;
+  }
+
+  get top() {
+    return Math.round(this.top_mm * this.k);
+  }
+
+  set top(val) {
+    this.top_mm = val / this.k;
   }
 
   get fontSize(): number {

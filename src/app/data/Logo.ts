@@ -4,18 +4,20 @@ import {getMaxPosition, getMaxSize} from "../utils/size.util";
 export class Logo implements CardField {
 
   constructor(public src: string,
-              public width: number,
-              public height: number,
-              public left: number,
-              public top: number) {
+              public width_mm: number,
+              public height_mm: number,
+              public left_mm: number,
+              public top_mm: number) {
   }
 
   public isSelected: boolean;
   public dataType: string;
   private _maxWidth: number;
   private _maxHeight: number;
+  private k: number;
 
   public setConstants(config) {
+    this.k = config.get('ratio');
   }
 
   get style() {
@@ -26,6 +28,39 @@ export class Logo implements CardField {
       'background-size': 'cover'
     };
   }
+
+  get width() {
+    return Math.round(this.width_mm * this.k);
+  }
+
+  set width(val) {
+    this.width_mm = val / this.k;
+  }
+
+  get height() {
+    return Math.round(this.height_mm * this.k);
+  }
+
+  set height(val) {
+    this.height_mm = val / this.k;
+  }
+
+  get left() {
+    return Math.round(this.left_mm * this.k);
+  }
+
+  set left(val) {
+    this.left_mm = val / this.k;
+  }
+
+  get top() {
+    return Math.round(this.top_mm * this.k);
+  }
+
+  set top(val) {
+    this.top_mm = val / this.k;
+  }
+
 
   public setMaxSize(maxWidth, maxHeight) {
     this._maxWidth = maxWidth * 0.8;

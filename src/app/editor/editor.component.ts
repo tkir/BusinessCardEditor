@@ -108,4 +108,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.imageService.uploadImage(item, event.target.files[0]);
   }
 
+  save(){
+    console.log(JSON.stringify(this.model));
+  }
+
 }
