@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {EditorComponent} from './editor/editor.component';
 import {DesignComponent} from './design/design.component';
 import {EditorContainerComponent} from './editor-container/editor-container.component';
+import {Http, HttpModule} from "@angular/http";
 
 import {DataService} from "./data/data.service";
 import {ResultComponent} from './result/result.component';
@@ -44,7 +45,8 @@ import {AlignService} from "./services/align.service";
   entryComponents:[FieldResizeComponent],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [Store, DataService, ImageService, AlignService],
   bootstrap: [AppComponent]

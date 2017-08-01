@@ -17,7 +17,7 @@ export class Text implements CardField {
   //TODO to config
   private k = 7;
   private fontSizeStep: number = 0.2;
-  public allowedFonts:string[]=[
+  public allowedFonts: string[] = [
     'Work Sans',
     'Playfair Display',
     'Open Sans',
@@ -29,7 +29,6 @@ export class Text implements CardField {
   public isSelected: boolean = false;
   public isStyling: boolean = false;
   public div: Element = null;
-
 
   get style() {
     return {
@@ -81,10 +80,11 @@ export class Text implements CardField {
     this.left += val - this.right;
   }
 
-  get fontName():string{
+  get fontName(): string {
     return this.fontFamily;
   }
-  set fontName(val){
+
+  set fontName(val) {
     this.fontFamily = val;
   }
 
