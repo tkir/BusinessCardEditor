@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 let WebFont = require('webfontloader');
 import {Text} from "../../data/TextCSS";
 import {AlignService} from "../../services/align.service";
@@ -6,14 +6,17 @@ import {AlignService} from "../../services/align.service";
 @Component({
   selector: 'card-style-editor',
   templateUrl: './style-editor.component.html',
-  styleUrls: ['./style-editor.component.css']
+  styleUrls: ['./style-editor.component.css'],
+  host: {
+    '(mousedown)': 'onMouseDown()'
+  }
 })
-export class StyleEditorComponent {
+export class StyleEditorComponent{
 
   @Input() item: Text;
   @Output() returnFocus: EventEmitter<any> = new EventEmitter();
 
-  @HostListener('mousedown')func() {
+  onMouseDown() {
     if (this.item) this.item.isStyling = true;
   }
 
