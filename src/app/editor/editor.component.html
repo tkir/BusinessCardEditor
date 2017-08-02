@@ -14,14 +14,14 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.owners, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.owners, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.owners, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
           <li *ngIf="!model.owners || !model.owners.length">
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.owners)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -35,7 +35,7 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.positions, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.positions, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.positions, i)"><i
               class="glyphicon glyphicon-minus"></i></a>
           </li>
@@ -43,7 +43,7 @@
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.positions)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.positions)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -59,7 +59,7 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.organisations, i)"><i
+            <a class="input-group-addon" (click)="addTextField(model.organisations, i)"><i
               class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.organisations, i)"><i
               class="glyphicon glyphicon-minus"></i></a>
@@ -68,7 +68,7 @@
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.organisations)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.organisations)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -82,7 +82,7 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.addresses, i)"><i
+            <a class="input-group-addon" (click)="addTextField(model.addresses, i)"><i
               class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.addresses, i)"><i
               class="glyphicon glyphicon-minus"></i></a>
@@ -91,7 +91,7 @@
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.addresses)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.addresses)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -105,14 +105,14 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.phones, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.phones, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.phones, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
           <li *ngIf="!model.phones || !model.phones.length">
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.phones)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.phones)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -128,14 +128,14 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.emails, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.emails, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.emails, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
           <li *ngIf="!model.emails || !model.emails.length">
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.emails)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.emails)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>
@@ -151,14 +151,14 @@
               [(ngModel)]="item.text"
               (focus)="focusItem(item, $event)"
               (blur)="blurItem()">
-            <a class="input-group-addon" (click)="addItem(model.sites, i)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.sites, i)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" (click)="removeItem(model.sites, i)"><i class="glyphicon glyphicon-minus"></i></a>
           </li>
           <li *ngIf="!model.sites || !model.sites.length">
             <input
               type="text"
               class="form-control" disabled>
-            <a class="input-group-addon" (click)="addItem(model.sites)"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="input-group-addon" (click)="addTextField(model.sites)"><i class="glyphicon glyphicon-plus"></i></a>
             <a class="input-group-addon" disabled><i class="glyphicon glyphicon-minus"></i></a>
           </li>
         </ul>

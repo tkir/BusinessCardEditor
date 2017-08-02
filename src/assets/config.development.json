@@ -10,5 +10,8 @@
   ],
   "ratio": 7,
   "fontSizeStep": 0.2,
-  "polygraphPadding": 5
+  "polygraphPadding": 5,
+  "default": {
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png"
+}
 }

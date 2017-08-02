@@ -7,6 +7,7 @@ import {Store} from "../data/store";
 import {ImageService} from "../utils/image.service";
 import {Logo} from "../data/Logo";
 import {Line} from "../data/Line";
+import {AppConfigService} from "../services/app-config.service";
 
 @Component({
   selector: 'card-editor',
@@ -23,7 +24,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   constructor(private dataService: DataService,
               private store: Store,
-              private imageService: ImageService) {
+              private imageService: ImageService,
+              private config: AppConfigService) {
   }
 
   ngOnInit() {
@@ -37,9 +39,9 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  addItem(items: Text[], i?: number) {
+  addTextField(items: Text[], i?: number) {
 
-    let newText: Text = new Text('', this.getItemFont(), 12, 'normal', 'normal', "none", "left", '000', 200, 20);
+    let newText: Text = new Text('', this.getItemFont(), 1.2, "normal", "normal", "none", "left", '000', 30, 5);
 
     if (items && items.length) {
       Object.keys(items[i]).forEach(key => newText[key] = items[i][key]);
@@ -52,15 +54,14 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addLogo(items: Logo[], i?: number) {
 
-    //TODO дефалтная картинка из config
-    let newLogo: Logo = new Logo("https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png", 150, 70, 10, 10);
+    let newLogo: Logo = new Logo(this.config.get('default.logo'), 22, 10, 5, 5);
 
     items.push(newLogo);
     this.dataService.updateCard(this.model);
   }
 
-  addLine(lines:Line[], i) {
-    lines.push(new Line(0, 200, 200, 1, true, 'solid', '000'));
+  addLine(lines: Line[], i) {
+    lines.push(new Line(0, 30, 45, 1, true, 'solid', '00f'));
     this.dataService.updateCard(this.model);
   }
 
@@ -68,7 +69,9 @@ export class EditorComponent implements OnInit, OnDestroy {
     let fontFamily;
     Object.keys(this.model).forEach(key => {
       if (Array.isArray(this.model[key]))
-        this.model[key].forEach(item => fontFamily = item.fontFamily);
+        this.model[key].forEach(item => {
+          if (item.instanceOf == 'Text') fontFamily = item.fontFamily;
+        });
     });
 
     return fontFamily;
@@ -108,7 +111,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.imageService.uploadImage(item, event.target.files[0]);
   }
 
-  save(){
+  save() {
     console.log(JSON.stringify(this.model));
   }
 

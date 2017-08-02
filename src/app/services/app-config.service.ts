@@ -11,10 +11,11 @@ export class AppConfigService {
   constructor(private http:Http) {
   }
 
-
-
   public get(key: any) {
-    return this.config[key];
+    let res:any=this.config;
+    key.split('.')
+      .forEach(k=>res=res[k]);
+    return res;
   }
 
   public getEnv(key: any) {
