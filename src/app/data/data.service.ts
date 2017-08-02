@@ -1,14 +1,18 @@
 import {Injectable} from '@angular/core';
-import {CardData} from "./CardData";
-import {cardData} from "../design/defaultParams";
+import {CardData, cardFactory} from "./CardData";
+import {cardData, cardDesignData, cardFieldsData} from "../design/defaultParams";
 import {Store} from "./store";
 import {AppConfigService} from "../services/app-config.service";
 
 @Injectable()
 export class DataService {
 
-  constructor(private store: Store, private config:AppConfigService) {
+  constructor(private store: Store, private config: AppConfigService) {
+    this.cData = cardFactory(cardFieldsData, cardDesignData, this.config);
+    console.log(this.cData);
   }
+
+  private cData;
 
   updateCard(state): CardData {
     state.logos.forEach(logo => logo.setMaxSize(cardData.background.width, cardData.background.height));
@@ -19,8 +23,7 @@ export class DataService {
   public setCardData(design?: string) {
     switch (design) {
       default:
-        cardData.setConstants(this.config);
-        this.updateCard(cardData);
+        this.updateCard(this.cData);
     }
   }
 }
