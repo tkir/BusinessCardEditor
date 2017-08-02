@@ -2,6 +2,7 @@ import {Logo} from "./Logo";
 import {Background} from "./Background";
 import {Text} from "./TextCSS";
 import {Line} from "./Line";
+let WebFont = require('webfontloader');
 
 export class CardData {
   constructor(public owners: Text[],
@@ -91,6 +92,7 @@ export class BgDesign{
 }
 
 export function cardFactory(fData:CardFieldsData, dData:CardDesignData, config){
+
   let owners: Text[] = createText(fData.owners, dData.owners);
   let positions:Text[]=createText(fData.positions, dData.positions);
   let organisations:Text[]= createText(fData.organisations, dData.organisations);
@@ -117,12 +119,25 @@ export function cardFactory(fData:CardFieldsData, dData:CardDesignData, config){
     dData.background._backgroundColor, dData.background.src, dData.background.width_mm, dData.background.height_mm
   );
 
+  //подгружаем уникальные шрифты
+  loadedFonts = loadedFonts.filter(onlyUnique);
+  loadedFonts.forEach(font =>
+    WebFont.load({
+      google: {
+        families: [font]
+      }
+    }));
+
   let cardData=new CardData(owners, positions, organisations, addresses, phones, emails, sites, logos, lines, bg);
   cardData.setConstants(config);
   return cardData;
 }
 
 function createText(fStrs: string[], tDsns: TextDesign[]): Text[] {
+
+    let fonts = tDsns.map(d => d.fontFamily);
+    loadedFonts.push(...fonts);
+
   return tDsns.map((d, i) => {
     if (fStrs[i])return new Text(
       fStrs[i],
@@ -138,3 +153,9 @@ function createText(fStrs: string[], tDsns: TextDesign[]): Text[] {
     );
   });
 }
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
+var loadedFonts:string[]=[];

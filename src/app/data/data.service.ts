@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CardData, cardFactory} from "./CardData";
-import {cardData, cardDesignData, cardFieldsData} from "../design/defaultParams";
+import {cardDesignData, cardFieldsData} from "../design/defaultParams";
 import {Store} from "./store";
 import {AppConfigService} from "../services/app-config.service";
 
@@ -9,7 +9,6 @@ export class DataService {
 
   constructor(private store: Store, private config: AppConfigService) {
     this.cData = cardFactory(cardFieldsData, cardDesignData, this.config);
-    console.log(this.cData);
   }
 
   private cData;
