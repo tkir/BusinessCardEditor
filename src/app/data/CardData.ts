@@ -27,6 +27,19 @@ export class CardData {
 
     fields.forEach(field=>field.setConstants(config));
   }
+
+  public getFieldsData():CardFieldsData{
+    return new CardFieldsData(
+      this.owners.map(txt=>txt.text),
+      this.positions.map(txt=>txt.text),
+      this.organisations.map(txt=>txt.text),
+      this.addresses.map(txt=>txt.text),
+      this.phones.map(txt=>txt.text),
+      this.emails.map(txt=>txt.text),
+      this.sites.map(txt=>txt.text),
+      this.logos.map(logo=>logo.src),
+    );
+  }
 }
 
 export class CardFieldsData{

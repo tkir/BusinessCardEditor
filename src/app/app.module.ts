@@ -24,6 +24,8 @@ import {AddResizeDirective} from './result/directives/add-resize.directive';
 import {AlignableDirective} from './result/directives/alignable.directive';
 import {AlignService} from "./services/align.service";
 import {AppConfigService} from "./services/app-config.service";
+import { CardContainerComponent } from './card-container/card-container.component';
+import { DesignContainerComponent } from './design-container/design-container.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {AppConfigService} from "./services/app-config.service";
     HrEditorComponent,
     AddResizeDirective,
     FieldResizeComponent,
-    AlignableDirective
+    AlignableDirective,
+    CardContainerComponent,
+    DesignContainerComponent
   ],
   entryComponents: [FieldResizeComponent],
   imports: [
