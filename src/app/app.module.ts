@@ -26,6 +26,10 @@ import {AlignService} from "./services/align.service";
 import {AppConfigService} from "./services/app-config.service";
 import { CardContainerComponent } from './card-container/card-container.component';
 import { DesignContainerComponent } from './design-container/design-container.component';
+import { Page404Component } from './404/404.component';
+import {AppRoutingModule} from "./app-routing.module";
+import {ApiService} from "./services/api.service";
+import {DesignService} from "./services/design.service";
 
 @NgModule({
   declarations: [
@@ -45,15 +49,24 @@ import { DesignContainerComponent } from './design-container/design-container.co
     FieldResizeComponent,
     AlignableDirective,
     CardContainerComponent,
-    DesignContainerComponent
+    DesignContainerComponent,
+    Page404Component
   ],
   entryComponents: [FieldResizeComponent],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
-  providers: [Store, DataService, ImageService, AlignService, AppConfigService,
+  providers: [
+    Store,
+    DataService,
+    ImageService,
+    AlignService,
+    AppConfigService,
+    ApiService,
+    DesignService,
     {
       provide: APP_INITIALIZER,
       useFactory: httpFactory,
@@ -69,3 +82,4 @@ export class AppModule {
 export function httpFactory(config: AppConfigService) {
   return () => config.load();
 }
+

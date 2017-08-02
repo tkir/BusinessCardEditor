@@ -1,6 +1,10 @@
 {
   "host": "localhost:4200",
-  "allowedFonts":[
+  "api": {
+    "endpoint": "https://businesscardeditor.firebaseio.com",
+    "design": "/design"
+  },
+  "allowedFonts": [
     "Work Sans",
     "Playfair Display",
     "Open Sans",
@@ -8,10 +12,15 @@
     "Arvo",
     "Lato"
   ],
+  "allowedDesigns": [
+    "default",
+    "des1",
+    "des2"
+  ],
   "ratio": 7,
   "fontSizeStep": 0.2,
   "polygraphPadding": 5,
   "default": {
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png"
-}
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png"
+  }
 }

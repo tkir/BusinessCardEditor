@@ -1,0 +1,120 @@
+{
+  "default": {
+    "owners": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 2.2,
+        "fontWeight": "bold",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "00f",
+        "left_mm": 30,
+        "top_mm": 0
+      }
+    ],
+    "positions": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 3
+      }
+    ],
+    "organisations": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "bold",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 6
+      }
+    ],
+    "addresses": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 9
+      }
+    ],
+    "phones": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 12
+      }
+    ],
+    "emails": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 15
+      }
+    ],
+    "sites": [
+      {
+        "fontFamily": "Open Sans",
+        "fontSize_mm": 1.2,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "textDecoration": "none",
+        "textAlign": "left",
+        "colorStr": "000",
+        "left_mm": 30,
+        "top_mm": 18
+      }
+    ],
+    "logos": [
+      {
+        "width_mm": 22,
+        "height_mm": 10,
+        "left_mm": 1.5,
+        "top_mm": 1.5
+      }
+    ],
+    "lines": [
+      {
+        "left_mm": 0,
+        "top_mm": 30,
+        "length_mm": 45,
+        "_thickness": 1,
+        "isHorizontal": true,
+        "design": "solid",
+        "_color": "00f"
+      }
+    ],
+    "background": {
+      "_backgroundColor": "#f5f5dc",
+      "src": "",
+      "width_mm": 85,
+      "height_mm": 55
+    }
+  }
+}

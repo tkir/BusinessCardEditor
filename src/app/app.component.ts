@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {cardDesignData} from "./design/defaultParams";
 
 @Component({
   selector: 'business-card-editor',
