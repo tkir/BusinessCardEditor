@@ -18,7 +18,7 @@ export class FieldResizeComponent {
 
   private item: CardField = null;
   private el: Element = null;
-  private background:any = null;
+  private background: any = null;
   private max: { x: number, y: number } = null;
 
   constructor() {
@@ -32,8 +32,8 @@ export class FieldResizeComponent {
     this.updateMax();
   }
 
-  updateMax(){
-    this.max=getMaxSize(this.item.instanceOf, this.background);
+  updateMax() {
+    this.max = getMaxSize(this.item.instanceOf, this.background);
   }
 
   get cursor(): string {
@@ -49,12 +49,12 @@ export class FieldResizeComponent {
 
     let coords = getCoords(this.item, this.el);
 
-    if (this.item.width < this.max.x || event.pageX - coords.right < 0)
+    if (this.item.width + this.item.left < this.max.x || event.pageX - coords.right < 0)
       if (this.item.width > 0 || event.pageX - coords.right > 0)
         this.item.width += event.pageX - coords.right;
 
 
-    if (this.item.height < this.max.y || event.pageY - coords.bottom < 0)
+    if (this.item.height + this.item.top < this.max.y || event.pageY - coords.bottom < 0)
       if (this.item.height > 0 || event.pageY - coords.bottom > 0)
         this.item.height += event.pageY - coords.bottom;
   }

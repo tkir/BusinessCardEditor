@@ -76,8 +76,8 @@ export function getMaxSize(instanceOf:string, bgSize:{width:number, height:numbe
     case 'Logo':
     default:
       return {
-        x: bgSize.width - (2 * bgSize.indent),
-        y: bgSize.height - (2 * bgSize.indent)
+        x: bgSize.width - bgSize.indent,
+        y: bgSize.height - bgSize.indent
       };
   }
 }
