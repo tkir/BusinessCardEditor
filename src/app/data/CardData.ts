@@ -41,7 +41,6 @@ export class CardData {
     this.fields.forEach(field=>field.setConstants(config));
   }
 
-  //todo обновить все макс размеры
   private updateSize(){
     this.logos.forEach(logo => logo.setMax(this.background.width, this.background.height));
   }
