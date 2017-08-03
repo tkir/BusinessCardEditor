@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+let root = require('app-root-path');
 
 @Injectable()
 export class AppConfigService {
 
   private config: Object = null;
-  private env:    Object = null;
+  private env: Object = null;
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
   }
 
   public get(key: any) {
-    let res:any=this.config;
+    let res: any = this.config;
     key.split('.')
-      .forEach(k=>res=res[k]);
+      .forEach(k => res = res[k]);
     return res;
   }
 
@@ -24,35 +25,38 @@ export class AppConfigService {
 
   public load() {
     return new Promise((resolve, reject) => {
-      this.http.get('../../assets/env.json')
-        .map( res => res.json() )
-        .catch((error: any):any => {
-        console.log('Configuration file "env.json" could not be read');
-        resolve(true);
-        return Observable.throw(error.json().error || 'Server error');
-      }).subscribe( (envResponse) => {
+      this.http.get(root + '/assets/env.json')
+        .map(res => res.json())
+        .catch((error: any): any => {
+          console.log('Configuration file "env.json" could not be read');
+          resolve(true);
+          return Observable.throw(error.json().error || 'Server error');
+        }).subscribe((envResponse) => {
         this.env = envResponse;
-        let request:any = null;
+        let request: any = null;
 
         //TODO перед production убрать '../../'
         switch (envResponse.env) {
           case 'production': {
             request = this.http.get('../../assets/config.' + envResponse.env + '.json');
-          } break;
+          }
+            break;
 
           case 'development': {
             request = this.http.get('../../assets/config.' + envResponse.env + '.json');
-          } break;
+          }
+            break;
 
           case 'default': {
             console.error('Environment file is not set or invalid');
             resolve(true);
-          } break;
+          }
+            break;
         }
 
         if (request) {
           request
-            .map( res => res.json() )
+            .map(res => res.json())
             .catch((error: any) => {
               console.error('Error reading ' + envResponse.env + ' configuration file');
               resolve(error);
