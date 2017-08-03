@@ -56,12 +56,15 @@ export class EditorComponent implements OnInit, OnDestroy {
 
     let newLogo: Logo = new Logo(this.config.get('default.logo'), 22, 10, 5, 5);
 
+    newLogo.setConstants(this.config);
     items.push(newLogo);
     this.dataService.updateCard(this.model);
   }
 
   addLine(lines: Line[], i) {
-    lines.push(new Line(0, 30, 45, 1, true, 'solid', '00f'));
+    let newLine:Line=new Line(0, 30, 45, 1, true, 'solid', '00f');
+    newLine.setConstants(this.config);
+    lines.push(newLine);
     this.dataService.updateCard(this.model);
   }
 

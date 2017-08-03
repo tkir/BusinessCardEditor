@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {CardData} from "../data/CardData";
 import {Store} from "./store";
-import {AppConfigService} from "../services/app-config.service";
+import {AppConfigService} from "./app-config.service";
 import {NavigationStart, Router} from "@angular/router";
-import {DesignService} from "../services/design.service";
-import {FieldsDataService} from "../services/fields-data.service";
-import {CardService} from "../services/card.service";
+import {DesignService} from "./design.service";
+import {FieldsDataService} from "./fields-data.service";
+import {CardService} from "./card.service";
 
 @Injectable()
 export class DataService {
