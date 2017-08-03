@@ -1717,7 +1717,7 @@ webpackJsonp([1], {
       }, l.prototype.load = function () {
         var l = this;
         return new Promise(function (n, u) {
-          l.http.get("./assets/env.json").map(function (l) {
+          l.http.get("assets/env.json").map(function (l) {
             return l.json()
           }).catch(function (l) {
             return console.log('Configuration file "env.json" could not be read'), n(!0), e.Observable.throw(l.json().error || "Server error")
