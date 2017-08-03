@@ -7,9 +7,6 @@ import {CardContainerComponent} from "./card-container/card-container.component"
 // import {ShoppingListModule} from "./shopping-list/shopping-list.module";
 
 const APP_ROUTERS: Routes = [
-  // {path: 'shopping-list', component: ShoppingListModule},
-  // {path: 'recipes', component: RecipesModule},
-  // {path: '', redirectTo: '/default', pathMatch: 'full'},
   {path: '**', component: CardContainerComponent},
   {path: '**', component: Page404Component}
 ];

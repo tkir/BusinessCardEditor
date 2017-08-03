@@ -26,7 +26,6 @@ export class ResultComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   ngOnInit() {
-    this.dataService.setCardData();
     this.subscription = this.store.changes
       .subscribe((cardData: any) => {
         this.cardData = cardData;

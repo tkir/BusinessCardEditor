@@ -29,7 +29,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dataService.setCardData();
     this.subscription = this.store.changes
       .subscribe((cardData: any) => this.model = cardData);
   }

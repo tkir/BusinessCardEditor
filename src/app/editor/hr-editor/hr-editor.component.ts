@@ -24,7 +24,6 @@ export class HrEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dataService.setCardData();
     this.subscription = this.store.changes
       .subscribe((cardData: any) =>
         this.background = cardData.background
