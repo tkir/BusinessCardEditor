@@ -5,14 +5,16 @@ import {Store} from "./store";
 import {AppConfigService} from "../services/app-config.service";
 import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
 import {DesignService} from "../services/design.service";
+import {FieldsDataService} from "../services/fields-data.service";
 
 @Injectable()
 export class DataService {
 
   constructor(private store: Store,
               private config: AppConfigService,
-              private router: Router, private route: ActivatedRoute,
-              private designService: DesignService) {
+              private router: Router,
+              private designService: DesignService,
+              private fDataService: FieldsDataService) {
 
     let designs = this.config.get('allowedDesigns');
 
@@ -24,14 +26,19 @@ export class DataService {
         if (designs.indexOf(url) !== -1) {
           this.designService.getDesign(url)
             .subscribe(d => {
-              this.setCardData(d);
+              //проверка, есть ли какие-то данные в карте, если нет - загружаем default fieldsData
+              if (this.isDesignLoad)
+                this.setCardData(d, this.cData.getFieldsData());
+              else
+                this.fDataService.getFieldsData()
+                  .subscribe(fData => this.setCardData(d, fData));
             });
         }
       }
     });
   }
 
-  private cData;
+  private cData: CardData;
   public isDesignLoad = false;
 
   updateCard(state): CardData {
@@ -41,8 +48,8 @@ export class DataService {
     return this.store.state = currentState;
   }
 
-  public setCardData(design?) {
-    this.cData = cardFactory(cardFieldsData, design || cardDesignData, this.config);
+  public setCardData(design?, fieldsData?) {
+    this.cData = cardFactory(fieldsData || cardFieldsData, design || cardDesignData, this.config);
     this.isDesignLoad = true;
     this.updateCard(this.cData);
   }

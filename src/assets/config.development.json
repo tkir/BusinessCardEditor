@@ -2,7 +2,8 @@
   "host": "localhost:4200",
   "api": {
     "endpoint": "https://businesscardeditor.firebaseio.com",
-    "design": "/design"
+    "design": "/design",
+    "data": "/data"
   },
   "allowedFonts": [
     "Work Sans",

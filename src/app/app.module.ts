@@ -30,6 +30,7 @@ import { Page404Component } from './404/404.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {ApiService} from "./services/api.service";
 import {DesignService} from "./services/design.service";
+import {FieldsDataService} from "./services/fields-data.service";
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {DesignService} from "./services/design.service";
     AppConfigService,
     ApiService,
     DesignService,
+    FieldsDataService,
     {
       provide: APP_INITIALIZER,
       useFactory: httpFactory,

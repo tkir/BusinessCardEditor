@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {cardDesignData} from "./design/defaultParams";
+import {Component} from '@angular/core';
 import {DataService} from "./data/data.service";
 
 @Component({
@@ -7,12 +6,9 @@ import {DataService} from "./data/data.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   constructor(public dataService: DataService) {
-  }
-
-  ngOnInit() {
   }
 
 }

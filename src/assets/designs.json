@@ -236,5 +236,33 @@
         "height_mm": 55
       }
     }
+  },
+  "data": {
+    "default": {
+      "owners": [
+        "James Howlett"
+      ],
+      "positions": [
+        "Logan"
+      ],
+      "organisations": [
+        "Marvel Entertainment LLC"
+      ],
+      "addresses": [
+        "New York, NY, USA"
+      ],
+      "phones": [
+        "+(1212)576-400-00"
+      ],
+      "emails": [
+        "marvelsubs@midtowncomics.com"
+      ],
+      "sites": [
+        "marvel.com"
+      ],
+      "logos": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png"
+      ]
+    }
   }
 }
