@@ -62,7 +62,7 @@ export class Logo implements CardField {
   }
 
 
-  public setMaxSize(maxWidth, maxHeight) {
+  public setMax(maxWidth, maxHeight) {
     this._maxWidth = maxWidth * 0.8;
     this._maxHeight = maxHeight * 0.8;
   }

@@ -3,6 +3,7 @@ import {Logo} from "../data/Logo";
 import {ImageResult} from "./image/interfaces";
 import {ImageUpload} from "./image/image-upload";
 import {Subscription} from "rxjs/Subscription";
+import {AppConfigService} from "../services/app-config.service";
 
 @Injectable()
 export class ImageService implements OnInit, OnDestroy {
@@ -10,20 +11,21 @@ export class ImageService implements OnInit, OnDestroy {
   private item;
   private imageUpload: ImageUpload;
   private subscription: Subscription = null;
+  private resizeQuality: number;
+  private resizeType: string;
+  private allowedExtensions: string[] = [];
 
-//TODO to config
-  private resizeQuality: number = 1;
-  private resizeType: string = 'image/png';
-  private allowedExtensions: string[] = ['jpg', 'jpeg', 'png'];
-
-  constructor() {
-    this.imageUpload = new ImageUpload();
-    this.subscription = this.imageUpload.imageSelected
-      .subscribe((res: ImageResult) => this.updateLogo(res));
+  constructor(private config:AppConfigService) {
   }
 
   ngOnInit() {
+    this.imageUpload = new ImageUpload();
+    this.subscription = this.imageUpload.imageSelected
+      .subscribe((res: ImageResult) => this.updateLogo(res));
 
+    this.resizeQuality=this.config.get('imageUpload.resizeQuality');
+    this.resizeType=this.config.get('imageUpload.resizeType');
+    this.allowedExtensions=this.config.get('imageUpload.allowedExtensions');
   }
 
   ngOnDestroy() {

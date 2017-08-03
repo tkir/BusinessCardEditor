@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 
-import {DataService} from "../../data/data.service";
 import {Store} from "../../data/store";
 import {ImageService} from "../../utils/image.service";
 import {Background} from "../../data/Background";
-import {CardData} from "../../data/CardData";
+import {AppConfigService} from "../../services/app-config.service";
 
 @Component({
   selector: 'card-background-editor',
@@ -17,16 +16,11 @@ export class BackgroundEditorComponent implements OnInit, OnDestroy {
   private subscription: Subscription = null;
   background: Background;
   cardData: any = null;
+  allowedSizes: { width: number, height: number }[] = [];
 
-  //TODO to config
-  allowedSizes: { width: number, height: number }[] = [
-    {width: 85, height: 55},
-    {width: 55, height: 85}
-  ];
-
-  constructor(private dataService: DataService,
-              private store: Store,
-              private imageService: ImageService) {
+  constructor(private store: Store,
+              private imageService: ImageService,
+              private config: AppConfigService) {
   }
 
   ngOnInit() {
@@ -35,6 +29,8 @@ export class BackgroundEditorComponent implements OnInit, OnDestroy {
         this.cardData = cardData;
         this.background = cardData.background;
       });
+
+    this.allowedSizes = this.config.get('allowedSizes');
   }
 
   ngOnDestroy(): void {
@@ -47,8 +43,7 @@ export class BackgroundEditorComponent implements OnInit, OnDestroy {
     this.background.width_mm = this.allowedSizes[i].width;
     this.background.height_mm = this.allowedSizes[i].height;
 
-    this.cardData.logos.forEach(logo=>logo.onChangeBgSize(this.background));
-    this.cardData.lines.forEach(line=>line.onChangeBgSize(this.background))
+    this.cardData.onChangeBgSize();
   }
 
   setColor(color: string) {

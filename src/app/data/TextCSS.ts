@@ -1,6 +1,7 @@
 import {CardField} from "./interfaces";
 import {ReflectiveInjector} from '@angular/core';
 import {AppConfigService} from "../services/app-config.service";
+import {getMaxPosition, getMaxSize} from "../utils/size.util";
 
 export class Text implements CardField {
 
@@ -26,6 +27,16 @@ export class Text implements CardField {
   public setConstants(config) {
     this.k = config.get('ratio');
     this.fontSizeStep = config.get('fontSizeStep');
+  }
+
+  public onChangeBgSize(bg: { width, height, indent }) {
+    let max = getMaxSize(this.instanceOf, bg);
+    if (this.width > max.x) this.width = max.x;
+    if (this.height > max.y) this.height = max.y;
+
+    let maxPosition = getMaxPosition(this.instanceOf, {width: this.width, height: this.height}, bg);
+    if (maxPosition.x < this.left) this.left = maxPosition.x;
+    if (maxPosition.y < this.top) this.top = maxPosition.y;
   }
 
   get style() {
@@ -103,14 +114,14 @@ export class Text implements CardField {
   }
 
   get width() {
-    return 0;
+    return parseInt(getComputedStyle(this.div).width);
   }
 
   set width(val) {
   }
 
   get height() {
-    return 0;
+    return parseInt(getComputedStyle(this.div).height);
   }
 
   set height(val) {

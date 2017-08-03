@@ -3,6 +3,7 @@ import {Line} from "../../data/Line";
 import {Store} from "../../data/store";
 import {DataService} from "../../data/data.service";
 import {Subscription} from "rxjs/Subscription";
+import {AppConfigService} from "../../services/app-config.service";
 
 @Component({
   selector: 'card-hr-editor',
@@ -15,11 +16,9 @@ export class HrEditorComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = null;
   background: any;
+  allowedHrDesigns: string[] = [];
 
-  //TODO to config
-  allowedDesigns: string[] = ['solid', 'dashed', 'dotted', 'double'];
-
-  constructor(private dataService: DataService,
+  constructor(private config:AppConfigService,
               private store: Store) {
   }
 
@@ -28,6 +27,8 @@ export class HrEditorComponent implements OnInit, OnDestroy {
       .subscribe((cardData: any) =>
         this.background = cardData.background
       );
+
+    this.allowedHrDesigns=this.config.get('allowedHrDesigns');
   }
 
   ngOnDestroy(): void {

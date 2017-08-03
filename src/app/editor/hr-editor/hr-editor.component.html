@@ -8,7 +8,7 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li *ngFor="let design of allowedDesigns">
+    <li *ngFor="let design of allowedHrDesigns">
       <a (click)="updateHr('design',design)">
         <hr [style.border-top]="design">
       </a></li>

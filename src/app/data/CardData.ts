@@ -15,17 +15,35 @@ export class CardData {
               public logos: Logo[],
               public lines: Line[],
               public background: Background) {
+    this.update();
+  }
+
+  private fields=[];
+
+  public update(){
+    Object.keys(this).forEach(key =>{
+      if (Array.isArray(this[key]))
+        this.fields.push(...this[key]);
+      else this.fields.push(this[key]);
+    });
+
+    this.updateSize();
+  }
+
+  onChangeBgSize(){
+    this.fields.forEach(field=>{
+      if(field.instanceOf=='Text' || field.instanceOf=='Logo' || field.instanceOf=='Line')
+        field.onChangeBgSize(this.background);
+    })
   }
 
   public setConstants(config) {
-    let fields=[];
-    Object.keys(this).forEach(key =>{
-      if (Array.isArray(this[key]))
-        fields.push(...this[key]);
-      else fields.push(this[key]);
-    });
+    this.fields.forEach(field=>field.setConstants(config));
+  }
 
-    fields.forEach(field=>field.setConstants(config));
+  //todo обновить все макс размеры
+  private updateSize(){
+    this.logos.forEach(logo => logo.setMax(this.background.width, this.background.height));
   }
 
   public getFieldsData():CardFieldsData{

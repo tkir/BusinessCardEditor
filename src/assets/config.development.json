@@ -18,9 +18,34 @@
     "des1",
     "des2"
   ],
+  "allowedSizes": [
+    {
+      "width": 85,
+      "height": 55
+    },
+    {
+      "width": 55,
+      "height": 85
+    }
+  ],
+  "allowedHrDesigns": [
+    "solid",
+    "dashed",
+    "dotted",
+    "double"
+  ],
   "ratio": 7,
   "fontSizeStep": 0.2,
   "polygraphPadding": 5,
+  "imageUpload": {
+    "resizeQuality": 1,
+    "resizeType": "image/png",
+    "allowedExtensions": [
+      "jpg",
+      "jpeg",
+      "png"
+    ]
+  },
   "default": {
     "logo": "https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png"
   }

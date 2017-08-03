@@ -3,7 +3,7 @@ import {CardData, cardFactory} from "./CardData";
 import {cardDesignData, cardFieldsData} from "../design/defaultParams";
 import {Store} from "./store";
 import {AppConfigService} from "../services/app-config.service";
-import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
+import {NavigationStart, Router} from "@angular/router";
 import {DesignService} from "../services/design.service";
 import {FieldsDataService} from "../services/fields-data.service";
 
@@ -34,6 +34,10 @@ export class DataService {
                   .subscribe(fData => this.setCardData(d, fData));
             });
         }
+        //если роут неизвестен - грузим базовый
+        else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }
@@ -42,9 +46,8 @@ export class DataService {
   public isDesignLoad = false;
 
   updateCard(state): CardData {
-    state.logos.forEach(logo => logo.setMaxSize(this.cData.background.width, this.cData.background.height));
+    state.update();
     let currentState = state;
-    currentState.setConstants(this.config);
     return this.store.state = currentState;
   }
 
