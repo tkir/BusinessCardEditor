@@ -68,7 +68,7 @@ export class TextField implements CardField {
   }
 
   get fontSize(): number {
-    return this.fontSize_mm * this.k;
+    return Math.round(this.fontSize_mm * this.k);
   }
 
   set fontSize(val: number) {
