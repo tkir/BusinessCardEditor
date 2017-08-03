@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-let WebFont = require('webfontloader');
-import {Text} from "../../data/TextCSS";
+
+import {TextField} from "../../data/TextField";
 import {AlignService} from "../../services/align.service";
 import {AppConfigService} from "../../services/app-config.service";
+let WebFont = require('webfontloader');
 
 @Component({
   selector: 'card-style-editor',
@@ -14,7 +15,7 @@ import {AppConfigService} from "../../services/app-config.service";
 })
 export class StyleEditorComponent implements OnInit{
 
-  @Input() item: Text;
+  @Input() item: TextField;
   @Output() returnFocus: EventEmitter<any> = new EventEmitter();
   allowedFonts: string[] = [];
 

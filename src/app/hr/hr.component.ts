@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Line} from "../data/Line";
 
 @Component({
@@ -6,14 +6,8 @@ import {Line} from "../data/Line";
   templateUrl: './hr.component.html',
   styleUrls: ['./hr.component.css']
 })
-export class HrComponent implements OnInit {
+export class HrComponent {
 
   @Input() line: Line = null;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 
 }

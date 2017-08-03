@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
-import {CardData, cardFactory} from "./CardData";
-import {cardDesignData, cardFieldsData} from "../design/defaultParams";
+import {CardData} from "../data/CardData";
 import {Store} from "./store";
 import {AppConfigService} from "../services/app-config.service";
 import {NavigationStart, Router} from "@angular/router";
 import {DesignService} from "../services/design.service";
 import {FieldsDataService} from "../services/fields-data.service";
+import {CardService} from "../services/card.service";
 
 @Injectable()
 export class DataService {
 
-  constructor(private store: Store,
+  constructor(private cardService: CardService,
+              private store: Store,
               private config: AppConfigService,
               private router: Router,
               private designService: DesignService,
@@ -52,7 +53,7 @@ export class DataService {
   }
 
   public setCardData(design?, fieldsData?) {
-    this.cData = cardFactory(fieldsData || cardFieldsData, design || cardDesignData, this.config);
+    this.cData = this.cardService.getCard(fieldsData, design, this.config);
     this.isDesignLoad = true;
     this.updateCard(this.cData);
   }

@@ -3,7 +3,7 @@ import {ReflectiveInjector} from '@angular/core';
 import {AppConfigService} from "../services/app-config.service";
 import {getMaxPosition, getMaxSize} from "../utils/size.util";
 
-export class Text implements CardField {
+export class TextField implements CardField {
 
   constructor(public text: string,
               public fontFamily: string,

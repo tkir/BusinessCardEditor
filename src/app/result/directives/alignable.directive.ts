@@ -1,12 +1,12 @@
 import {Directive, ElementRef, Input, OnInit} from '@angular/core';
-import {Text} from "../../data/TextCSS";
+import {TextField} from "../../data/TextField";
 
 @Directive({
   selector: '[fieldAlignable]'
 })
 export class AlignableDirective implements OnInit {
 
-  @Input() item: Text = null;
+  @Input() item: TextField = null;
 
   constructor(private elRef: ElementRef) {
   }

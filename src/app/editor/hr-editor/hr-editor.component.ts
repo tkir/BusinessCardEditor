@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Line} from "../../data/Line";
-import {Store} from "../../data/store";
-import {DataService} from "../../data/data.service";
+import {Store} from "../../services/store";
 import {Subscription} from "rxjs/Subscription";
 import {AppConfigService} from "../../services/app-config.service";
 

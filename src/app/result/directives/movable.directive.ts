@@ -11,7 +11,7 @@ import {ResultComponent} from "../result.component";
 import {getMax, getMin, MovEl, updateOffset} from '../../utils/size.util';
 import {Background} from "../../data/Background";
 import {AlignService} from "../../services/align.service";
-import {Text} from "../../data/TextCSS";
+import {TextField} from "../../data/TextField";
 
 
 @Directive({
@@ -96,7 +96,7 @@ export class MovableDirective implements OnInit {
     //  установить мульти alService, отправить в alService selectionArray
     if (this.selectedItems.length > 1) {
       this.alService.isMultiselection = true;
-      this.selectedItems.forEach(obj => this.alService.textFields.push(<Text>obj.item));
+      this.selectedItems.forEach(obj => this.alService.textFields.push(<TextField>obj.item));
     }
     else {
       this.alService.textFields = [];

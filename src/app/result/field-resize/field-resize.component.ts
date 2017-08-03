@@ -3,7 +3,6 @@ import {Component} from '@angular/core';
 import {getCoords, getMaxSize} from "../../utils/size.util";
 import {CardField} from "../../data/interfaces";
 import {Line} from "../../data/Line";
-import {Background} from "../../data/Background";
 
 @Component({
   selector: 'card-field-resize',

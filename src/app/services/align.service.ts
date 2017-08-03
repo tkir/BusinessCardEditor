@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Text} from "../data/TextCSS";
+import {TextField} from "../data/TextField";
 
 @Injectable()
 export class AlignService {
 
-  public textFields: Text[] = [];
+  public textFields: TextField[] = [];
   public isMultiselection = false;
 
   public alignTextFields(alLine: string) {

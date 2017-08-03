@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 
-import {DataService} from "../data/data.service";
-import {Store} from "../data/store";
+import {DataService} from "../services/data.service";
+import {Store} from "../services/store";
 import {CardData} from "../data/CardData";
 import {AddResizeDirective} from "./directives/add-resize.directive";
 

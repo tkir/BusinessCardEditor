@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataService} from "../data/data.service";
+import {DataService} from "../services/data.service";
 import {CardData} from "../data/CardData";
-import {Text} from "../data/TextCSS";
+import {TextField} from "../data/TextField";
 import {Subscription} from "rxjs/Subscription";
-import {Store} from "../data/store";
+import {Store} from "../services/store";
 import {ImageService} from "../utils/image.service";
 import {Logo} from "../data/Logo";
 import {Line} from "../data/Line";
@@ -17,7 +17,7 @@ import {AppConfigService} from "../services/app-config.service";
 export class EditorComponent implements OnInit, OnDestroy {
 
   model: CardData = null;
-  selectedItem: Text = null;
+  selectedItem: TextField = null;
   selectedInput: any = null;
 
   private subscription: Subscription;
@@ -38,9 +38,9 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  addTextField(items: Text[], i?: number) {
+  addTextField(items: TextField[], i?: number) {
 
-    let newText: Text = new Text('', this.getItemFont(), 1.2, "normal", "normal", "none", "left", '000', 30, 5);
+    let newText: TextField = new TextField('', this.getItemFont(), 1.2, "normal", "normal", "none", "left", '000', 30, 5);
 
     if (items && items.length) {
       Object.keys(items[i]).forEach(key => newText[key] = items[i][key]);
@@ -82,7 +82,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.dataService.updateCard(this.model);
   }
 
-  focusItem(item: Text, event) {
+  focusItem(item: TextField, event) {
     Object.keys(this.model).forEach(key => {
       if (Array.isArray(this.model[key]))
         this.model[key].forEach(item => item.isSelected = false);

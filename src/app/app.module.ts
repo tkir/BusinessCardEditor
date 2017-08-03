@@ -8,11 +8,11 @@ import {DesignComponent} from './design/design.component';
 import {EditorContainerComponent} from './editor-container/editor-container.component';
 import {Http, HttpModule} from "@angular/http";
 
-import {DataService} from "./data/data.service";
+import {DataService} from "./services/data.service";
 import {ResultComponent} from './result/result.component';
 import {StyleEditorComponent} from './editor/style-editor/style-editor.component';
 import {MovableDirective} from './result/directives/movable.directive';
-import {Store} from "./data/store";
+import {Store} from "./services/store";
 import {DroppableDirective} from './result/directives/droppable.directive';
 import {ImageService} from "./utils/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
@@ -26,11 +26,11 @@ import {AlignService} from "./services/align.service";
 import {AppConfigService} from "./services/app-config.service";
 import { CardContainerComponent } from './card-container/card-container.component';
 import { DesignContainerComponent } from './design-container/design-container.component';
-import { Page404Component } from './404/404.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {ApiService} from "./services/api.service";
 import {DesignService} from "./services/design.service";
 import {FieldsDataService} from "./services/fields-data.service";
+import {CardService} from "./services/card.service";
 
 @NgModule({
   declarations: [
@@ -50,8 +50,7 @@ import {FieldsDataService} from "./services/fields-data.service";
     FieldResizeComponent,
     AlignableDirective,
     CardContainerComponent,
-    DesignContainerComponent,
-    Page404Component
+    DesignContainerComponent
   ],
   entryComponents: [FieldResizeComponent],
   imports: [
@@ -61,6 +60,7 @@ import {FieldsDataService} from "./services/fields-data.service";
     AppRoutingModule
   ],
   providers: [
+    CardService,
     Store,
     DataService,
     ImageService,

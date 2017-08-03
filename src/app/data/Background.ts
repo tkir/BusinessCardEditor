@@ -1,7 +1,5 @@
 export class Background {
 
-  // public width: number;
-  // public height: number;
   public dataType: string;
 
   constructor(public _backgroundColor: string,

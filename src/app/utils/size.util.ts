@@ -1,5 +1,4 @@
 import {CardField} from "../data/interfaces";
-import {Background} from "../data/Background";
 
 export function getCoords(item, elem: Element) {
   return {

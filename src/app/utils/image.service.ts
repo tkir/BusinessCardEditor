@@ -1,5 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, OnInit} from '@angular/core';
-import {Logo} from "../data/Logo";
+import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {ImageResult} from "./image/interfaces";
 import {ImageUpload} from "./image/image-upload";
 import {Subscription} from "rxjs/Subscription";
@@ -15,7 +14,7 @@ export class ImageService implements OnInit, OnDestroy {
   private resizeType: string;
   private allowedExtensions: string[] = [];
 
-  constructor(private config:AppConfigService) {
+  constructor(private config: AppConfigService) {
   }
 
   ngOnInit() {
@@ -23,9 +22,9 @@ export class ImageService implements OnInit, OnDestroy {
     this.subscription = this.imageUpload.imageSelected
       .subscribe((res: ImageResult) => this.updateLogo(res));
 
-    this.resizeQuality=this.config.get('imageUpload.resizeQuality');
-    this.resizeType=this.config.get('imageUpload.resizeType');
-    this.allowedExtensions=this.config.get('imageUpload.allowedExtensions');
+    this.resizeQuality = this.config.get('imageUpload.resizeQuality');
+    this.resizeType = this.config.get('imageUpload.resizeType');
+    this.allowedExtensions = this.config.get('imageUpload.allowedExtensions');
   }
 
   ngOnDestroy() {
@@ -48,15 +47,15 @@ export class ImageService implements OnInit, OnDestroy {
   }
 
   private updateLogo(imageResult: ImageResult) {
-    if(imageResult.resized) {
+    if (imageResult.resized) {
       this.item.width = imageResult.resized.width;
-      this.item.height=imageResult.resized.height;
-      this.item.dataType=imageResult.resized.type;
-      this.item.src=imageResult.resized.dataURL;
+      this.item.height = imageResult.resized.height;
+      this.item.dataType = imageResult.resized.type;
+      this.item.src = imageResult.resized.dataURL;
     }
 
     //TODO обработать ошибки загрузки файлов
-    if(imageResult.error)console.error(imageResult.error);
+    if (imageResult.error) console.error(imageResult.error);
   }
 
 }
