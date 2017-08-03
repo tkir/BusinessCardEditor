@@ -19,6 +19,7 @@ export class CardData {
   }
 
   public fields = [];
+  private config;
 
   public update() {
     this.fields = [];
@@ -40,6 +41,7 @@ export class CardData {
   }
 
   public setConstants(config) {
+    this.config = config;
     this.fields.forEach(field => field.setConstants(config));
   }
 

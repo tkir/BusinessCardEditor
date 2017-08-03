@@ -47,6 +47,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       newText.top += 20;
     }
 
+    newText.setConstants(this.config);
     items.push(newText);
     this.dataService.updateCard(this.model);
   }
@@ -66,11 +67,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   private getItemFont(): string {
     let fontFamily;
-    Object.keys(this.model).forEach(key => {
-      if (Array.isArray(this.model[key]))
-        this.model[key].forEach(item => {
-          if (item.instanceOf == 'Text') fontFamily = item.fontFamily;
-        });
+    this.model.fields.forEach(item=>{
+      if (item.instanceOf == 'Text') fontFamily = item.fontFamily;
     });
 
     return fontFamily;
@@ -83,9 +81,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   focusItem(item: TextField, event) {
-    Object.keys(this.model).forEach(key => {
-      if (Array.isArray(this.model[key]))
-        this.model[key].forEach(item => item.isSelected = false);
+    this.model.fields.forEach(item=>{
+      if(item.isSelected)item.isSelected=false;
     });
 
     item.isSelected = true;
@@ -112,6 +109,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   save() {
     console.log(JSON.stringify(this.model));
+  }
+
+  getHtml(){
+
   }
 
 }
