@@ -26,6 +26,6 @@ app.listen(4201, () => {
 });
 
 
-function pdfCreator(req, res) {
-  res.send(req.params.hash);
+function pdfCreator(obj) {
+
 }

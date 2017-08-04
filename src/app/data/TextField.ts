@@ -126,4 +126,19 @@ export class TextField implements CardField {
 
   set height(val) {
   }
+
+  get json() {
+    return {
+      text: this.text,
+      fontFamily: this.fontFamily,
+      fontSize_mm: this.fontSize_mm,
+      fontWeight: this.fontWeight,
+      fontStyle: this.fontStyle,
+      textDecoration: this.textDecoration,
+      textAlign: this.textAlign,
+      color: this.color,
+      left_mm: this.left_mm,
+      top_mm: this.top_mm
+    }
+  }
 }

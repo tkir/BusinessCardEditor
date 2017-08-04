@@ -88,4 +88,14 @@ export class Logo implements CardField {
     if (maxPosition.x < this.left) this.left = maxPosition.x;
     if (maxPosition.y < this.top) this.top = maxPosition.y;
   }
+
+  get json() {
+    return {
+      src: this.src,
+      width_mm: this.width_mm,
+      height_mm: this.height_mm,
+      left_mm: this.left_mm,
+      top_mm:this.top_mm
+    }
+  }
 }

@@ -45,4 +45,13 @@ export class Background {
   get instanceOf(): string {
     return 'Background';
   }
+
+  get json() {
+    return {
+      backgroundColor: this.backgroundColor,
+      src: this.src,
+      width_mm: this.width_mm,
+      height_mm: this.height_mm
+    }
+  }
 }

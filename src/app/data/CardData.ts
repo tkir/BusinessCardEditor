@@ -18,19 +18,16 @@ export class CardData {
     this.update();
   }
 
-  private _fields = [];
-  public get fields(){
-    return this._fields;
-  }
+  public fields = [];
   private config;
 
   public update() {
-    this._fields = [];
+    this.fields = [];
     Object.keys(this).forEach(key => {
-      if (key != 'fields') {
+      if (key != 'fields' && key != 'config') {
         if (Array.isArray(this[key]))
-          this._fields.push(...this[key]);
-        else this._fields.push(this[key]);
+          this.fields.push(...this[key]);
+        else this.fields.push(this[key]);
       }
     });
     this.updateSize();
@@ -63,6 +60,20 @@ export class CardData {
       this.sites.map(txt => txt.text),
       this.logos.map(logo => logo.src),
     );
+  }
+
+  public get json() {
+    console.log(this.fields);
+    let obj = {};
+
+    this.fields.forEach(f => {
+      if (!obj.hasOwnProperty(f.instanceOf))
+        obj[f.instanceOf] = [];
+      obj[f.instanceOf].push(f.json);
+      console.log(f);
+    });
+
+    return obj;
   }
 }
 

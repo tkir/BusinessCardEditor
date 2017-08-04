@@ -92,4 +92,16 @@ export class Line implements CardField {
     if (maxPosition.x < this.left) this.left = maxPosition.x;
     if (maxPosition.y < this.top) this.top = maxPosition.y;
   }
+
+  get json() {
+    return {
+      left_mm: this.left_mm,
+      top_mm: this.top_mm,
+      length_mm: this.length_mm,
+      thickness: this.thickness,
+      isHorizontal:this.isHorizontal,
+      design:this.design,
+      color:this.color
+    }
+  }
 }
