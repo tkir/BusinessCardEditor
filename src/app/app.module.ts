@@ -31,6 +31,8 @@ import {ApiService} from "./services/api.service";
 import {DesignService} from "./services/design.service";
 import {FieldsDataService} from "./services/fields-data.service";
 import {CardService} from "./services/card.service";
+import {DbService} from "./services/db.service";
+import {PdfService} from "./services/pdf.service";
 
 @NgModule({
   declarations: [
@@ -67,8 +69,10 @@ import {CardService} from "./services/card.service";
     AlignService,
     AppConfigService,
     ApiService,
+    DbService,
     DesignService,
     FieldsDataService,
+    PdfService,
     {
       provide: APP_INITIALIZER,
       useFactory: httpFactory,

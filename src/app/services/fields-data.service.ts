@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {AppConfigService} from "./app-config.service";
-import {ApiService} from "./api.service";
+import {DbService} from "./db.service";
 
 @Injectable()
 export class FieldsDataService {
 
   constructor(private config: AppConfigService,
-              private api: ApiService) {
-    this.path = this.config.get('api.data');
+              private db: DbService) {
+    this.path = this.config.get('host.db.data');
   }
 
   private path: string;
 
   getFieldsData(fieldData: string = 'default') {
-    return this.api.get(`${this.path}/${fieldData}`);
+    return this.db.get(`${this.path}/${fieldData}`);
   }
 
 }

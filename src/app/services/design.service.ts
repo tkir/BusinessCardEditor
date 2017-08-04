@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {AppConfigService} from "./app-config.service";
-import {ApiService} from "./api.service";
+import {DbService} from "./db.service";
 
 @Injectable()
 export class DesignService {
 
   constructor(private config: AppConfigService,
-              private api: ApiService) {
-    this.path = this.config.get('api.design');
+              private db: DbService) {
+    this.path = this.config.get('host.db.design');
   }
 
   private path: string;
 
   getDesign(design: string) {
-    return this.api.get(`${this.path}/${design}`);
+    return this.db.get(`${this.path}/${design}`);
   }
 
 }

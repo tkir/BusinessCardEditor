@@ -18,16 +18,19 @@ export class CardData {
     this.update();
   }
 
-  public fields = [];
+  private _fields = [];
+  public get fields(){
+    return this._fields;
+  }
   private config;
 
   public update() {
-    this.fields = [];
+    this._fields = [];
     Object.keys(this).forEach(key => {
       if (key != 'fields') {
         if (Array.isArray(this[key]))
-          this.fields.push(...this[key]);
-        else this.fields.push(this[key]);
+          this._fields.push(...this[key]);
+        else this._fields.push(this[key]);
       }
     });
     this.updateSize();

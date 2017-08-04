@@ -8,6 +8,7 @@ import {ImageService} from "../utils/image.service";
 import {Logo} from "../data/Logo";
 import {Line} from "../data/Line";
 import {AppConfigService} from "../services/app-config.service";
+import {PdfService} from "../services/pdf.service";
 
 @Component({
   selector: 'card-editor',
@@ -25,6 +26,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService,
               private store: Store,
               private imageService: ImageService,
+              private pdfService: PdfService,
               private config: AppConfigService) {
   }
 
@@ -62,7 +64,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   addLine(lines: Line[], i) {
-    let newLine:Line=new Line(0, 30, 45, 1, true, 'solid', '00f');
+    let newLine: Line = new Line(0, 30, 45, 1, true, 'solid', '00f');
     newLine.setConstants(this.config);
     lines.push(newLine);
     this.dataService.updateCard(this.model);
@@ -70,7 +72,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   private getItemFont(): string {
     let fontFamily;
-    this.model.fields.forEach(item=>{
+    this.model.fields.forEach(item => {
       if (item.instanceOf == 'Text') fontFamily = item.fontFamily;
     });
 
@@ -84,8 +86,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   focusItem(item: TextField, event) {
-    this.model.fields.forEach(item=>{
-      if(item.isSelected)item.isSelected=false;
+    this.model.fields.forEach(item => {
+      if (item.isSelected) item.isSelected = false;
     });
 
     item.isSelected = true;
@@ -114,8 +116,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     console.log(JSON.stringify(this.model));
   }
 
-  getHtml(){
-
+  getHtml() {
+    this.pdfService.post(this.model)
+      .subscribe(res=>{});
   }
-
 }

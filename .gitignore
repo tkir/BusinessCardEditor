@@ -8,6 +8,7 @@
 
 # dependencies
 /node_modules
+/ExpressAPI/node_modules
 
 # IDEs and editors
 /.idea
@@ -35,6 +36,7 @@ testem.log
 /typings
 
 # e2e
+/e2e
 /e2e/*.js
 /e2e/*.map
 
@@ -42,6 +44,7 @@ testem.log
 .DS_Store
 Thumbs.db
 BusinessCardEditor.iml
+ExpressAPI.iml
 
 # Images #
 src/images/*
