@@ -63,14 +63,12 @@ export class CardData {
   }
 
   public get json() {
-    console.log(this.fields);
     let obj = {};
 
     this.fields.forEach(f => {
       if (!obj.hasOwnProperty(f.instanceOf))
         obj[f.instanceOf] = [];
       obj[f.instanceOf].push(f.json);
-      console.log(f);
     });
 
     return obj;
