@@ -11,7 +11,6 @@ export class TextField implements CardField {
               public fontWeight: string,
               public fontStyle: string,
               public textDecoration: string,
-              public textAlign: string,
               public colorStr: string,
               public left_mm: number,
               public top_mm: number) {
@@ -46,7 +45,6 @@ export class TextField implements CardField {
       'font-weight': this.fontWeight,
       'font-style': this.fontStyle,
       'text-decoration': this.textDecoration,
-      'text-align': this.textAlign,
       'color': this.color
     }
   }
@@ -135,7 +133,6 @@ export class TextField implements CardField {
       fontWeight: this.fontWeight,
       fontStyle: this.fontStyle,
       textDecoration: this.textDecoration,
-      textAlign: this.textAlign,
       color: this.color,
       left_mm: this.left_mm,
       top_mm: this.top_mm

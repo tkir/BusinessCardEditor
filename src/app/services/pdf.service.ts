@@ -8,14 +8,14 @@ export class PdfService {
 
   private pdfAPI: string;
   private pdfPath: string;
-  private hash:string;
+  private hash: string;
 
   constructor(private api: ApiService,
               private config: AppConfigService,
               private location: PlatformLocation) {
     this.pdfAPI = config.get('host.api.endpoint');
     this.pdfPath = config.get('host.api.pdf');
-    this.hash=config.get('hash');
+    this.hash = config.get('hash');
   }
 
   post(data) {

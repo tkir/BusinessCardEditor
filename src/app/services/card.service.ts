@@ -65,7 +65,6 @@ export class CardService {
         d.fontWeight,
         d.fontStyle,
         d.textDecoration,
-        d.textAlign,
         d.colorStr,
         d.left_mm,
         d.top_mm

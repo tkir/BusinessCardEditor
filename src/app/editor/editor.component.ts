@@ -42,7 +42,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addTextField(items: TextField[], i?: number) {
 
-    let newText: TextField = new TextField('', this.getItemFont(), 1.2, "normal", "normal", "none", "left", '000', 30, 5);
+    let newText: TextField = new TextField('', this.getItemFont(), 1.2, "normal", "normal", "none", '000', 30, 5);
 
     if (items && items.length) {
       Object.keys(items[i]).forEach(key => newText[key] = items[i][key]);

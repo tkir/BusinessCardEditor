@@ -45,7 +45,6 @@ export class TextDesign{
               public fontWeight: string,
               public fontStyle: string,
               public textDecoration: string,
-              public textAlign: string,
               public colorStr: string,
               public left_mm: number,
               public top_mm: number){}
