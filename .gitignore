@@ -43,8 +43,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-BusinessCardEditor.iml
-/ExpressAPI/ExpressAPI.iml
+*.iml
 
 # Images #
 src/images/*
