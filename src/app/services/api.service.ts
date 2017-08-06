@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {Headers, Http, Response, ResponseContentType} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/Rx';
-import {AppConfigService} from "./app-config.service";
 
 @Injectable()
 export class ApiService {
@@ -12,10 +11,13 @@ export class ApiService {
 
   private headers: Headers = new Headers({
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    responseType: ResponseContentType.Blob
   });
 
-  private getJSON(resp: Response): string {
+  private getJSON(resp: Response): any {
+    if(~resp.headers.get('content-type').indexOf('application/pdf'))
+      return new Blob([resp['_body']], {type: 'application/pdf'});
     return resp.json();
   }
 

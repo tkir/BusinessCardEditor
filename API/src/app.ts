@@ -5,18 +5,25 @@ let bodyParser = require('body-parser');
 
 let app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('PDF app listening on port 3000!');
 });
 
 app.post('/pdf/:hash', (req, res) => {
   let pdfCreator = new PdfCreator();
-  let html = pdfCreator.getPDF(req.body.data);
-  // res.send(html);
+  pdfCreator.getPDF(req.body.data, (err, buffer) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    res.contentType('application/pdf');
+    res.end(buffer);
+  });
 });

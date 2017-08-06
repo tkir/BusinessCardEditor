@@ -8,11 +8,11 @@ export class PdfCreator {
   private lineArr: string[] = [];
   private bg: string;
 
-  constructor(private k: number = 10,
+  constructor(private k: number = 3.78,
               private z: number = 100) {
   }
 
-  public getHTML(obj): string {
+  private getBg(obj): string {
     Object.keys(obj)
       .forEach(key => obj[key].forEach(it => {
           let item;
@@ -47,16 +47,6 @@ export class PdfCreator {
       );
 
     if (this.bg) {
-//       this.bg = `
-// <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
-// <script>
-// WebFont.load({
-//   google: {
-//     families: ['Open Sans']
-//   }
-// });
-// </script>
-// ${this.bg}`;
       this.logoArr.forEach(logo => this.bg += logo);
       this.lineArr.forEach(line => this.bg += line);
       this.textArr.forEach(txt => this.bg += txt);
@@ -66,17 +56,28 @@ export class PdfCreator {
     return this.bg;
   }
 
-  public getPDF(obj) {
-    let html = this.getHTML(obj);
-    // pdf.create(html).toBuffer(function(err, buffer){
-    //   console.log('This is a buffer:', Buffer.isBuffer(buffer));
-    // });
+  private getHTML(obj): string {
+    let bg = this.getBg(obj);
+    return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body style="margin: 0; padding: 0;">
+${bg};
+</body>
+</html>`
+  }
 
+  public getPDF(obj, cb) {
     let config = {
+      "height": `${obj.Background[0].height_mm}mm`,
+      "width": `${obj.Background[0].width_mm}mm`
     };
-    pdf.create(html, config).toFile('./API/test.pdf', function (err, res) {
-      console.log(err);
-      console.log(res.filename);
-    });
+    let html = this.getHTML(obj);
+
+    pdf.create(html, config)
+      .toBuffer((err, buffer) => cb(err, buffer));
   }
 }
