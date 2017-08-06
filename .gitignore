@@ -5,10 +5,12 @@
 /out-tsc
 /dist
 /dist/*
+**/dist
+**/dist/*
 
 # dependencies
 /node_modules
-/ExpressAPI/node_modules
+/API/node_modules
 
 # IDEs and editors
 /.idea

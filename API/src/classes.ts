@@ -1,4 +1,9 @@
 export class TextField {
+
+  constructor(obj) {
+    for (var prop in obj) this[prop] = obj[prop];
+  }
+
   text: string;
   fontFamily: string;
   fontSize_mm: number;
@@ -30,6 +35,11 @@ export class TextField {
 }
 
 export class Logo {
+
+  constructor(obj) {
+    for (var prop in obj) this[prop] = obj[prop];
+  }
+
   src: string;
   width_mm: number;
   height_mm: number;
@@ -45,12 +55,17 @@ export class Logo {
       left: ${this.left_mm * k}px;
       top: ${this.top_mm * k}px;
       position: relative;
-      z-index: ${z-100};
+      z-index: ${z - 100};
     `
   }
 }
 
 export class Line {
+
+  constructor(obj) {
+    for (var prop in obj) this[prop] = obj[prop];
+  }
+
   left_mm: number;
   top_mm: number;
   length_mm: number;
@@ -82,6 +97,11 @@ export class Line {
 }
 
 export class Background {
+
+  constructor(obj) {
+    for (var prop in obj) this[prop] = obj[prop];
+  }
+
   backgroundColor: string;
   src: string;
   width_mm: number;
