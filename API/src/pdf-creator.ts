@@ -1,5 +1,5 @@
 import {Background, Line, Logo, TextField} from "./classes";
-import {compile} from 'json-schema-to-typescript'
+let pdf = require('html-pdf');
 
 export class PdfCreator {
 
@@ -54,5 +54,16 @@ export class PdfCreator {
     }
 
     return this.bg;
+  }
+
+  public getPDF(obj){
+    let html = this.getHTML(obj);
+    // pdf.create(html).toBuffer(function(err, buffer){
+    //   console.log('This is a buffer:', Buffer.isBuffer(buffer));
+    // });
+
+    pdf.create(html).toFile('./API/test.pdf', function(err, res){console.log(err);
+      console.log(res.filename);
+    });
   }
 }
