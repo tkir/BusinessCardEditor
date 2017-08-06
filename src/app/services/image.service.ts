@@ -1,11 +1,11 @@
 import {Injectable, OnDestroy, OnInit} from '@angular/core';
-import {ImageResult} from "./image/interfaces";
-import {ImageUpload} from "./image/image-upload";
+import {ImageResult} from "../utils/image/interfaces";
+import {ImageUpload} from "../utils/image/image-upload";
 import {Subscription} from "rxjs/Subscription";
-import {AppConfigService} from "../services/app-config.service";
+import {AppConfigService} from "./app-config.service";
 
 @Injectable()
-export class ImageService implements OnInit, OnDestroy {
+export class ImageService implements OnDestroy {
 
   private item;
   private imageUpload: ImageUpload;
@@ -15,9 +15,6 @@ export class ImageService implements OnInit, OnDestroy {
   private allowedExtensions: string[] = [];
 
   constructor(private config: AppConfigService) {
-  }
-
-  ngOnInit() {
     this.imageUpload = new ImageUpload();
     this.subscription = this.imageUpload.imageSelected
       .subscribe((res: ImageResult) => this.updateLogo(res));
@@ -32,7 +29,7 @@ export class ImageService implements OnInit, OnDestroy {
     this.subscription = null;
   }
 
-  uploadImage(item, image: File) {
+  uploadImage(item, image: File) {console.log(this.imageUpload);
     this.item = item;
 
     let resizeOptions = {

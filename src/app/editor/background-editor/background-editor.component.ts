@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 
 import {Store} from "../../services/store";
-import {ImageService} from "../../utils/image.service";
+import {ImageService} from "../../services/image.service";
 import {Background} from "../../data/Background";
 import {AppConfigService} from "../../services/app-config.service";
 

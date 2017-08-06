@@ -4,7 +4,7 @@ import {CardData} from "../data/CardData";
 import {TextField} from "../data/TextField";
 import {Subscription} from "rxjs/Subscription";
 import {Store} from "../services/store";
-import {ImageService} from "../utils/image.service";
+import {ImageService} from "../services/image.service";
 import {Logo} from "../data/Logo";
 import {Line} from "../data/Line";
 import {AppConfigService} from "../services/app-config.service";

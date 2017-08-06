@@ -14,7 +14,7 @@ import {StyleEditorComponent} from './editor/style-editor/style-editor.component
 import {MovableDirective} from './result/directives/movable.directive';
 import {Store} from "./services/store";
 import {DroppableDirective} from './result/directives/droppable.directive';
-import {ImageService} from "./utils/image.service";
+import {ImageService} from "./services/image.service";
 import {BackgroundEditorComponent} from './editor/background-editor/background-editor.component';
 import {ColorPickerComponent} from './editor/color-picker/color-picker.component';
 import {HrComponent} from './hr/hr.component';
