@@ -9,6 +9,7 @@ import {Logo} from "../data/Logo";
 import {Line} from "../data/Line";
 import {AppConfigService} from "../services/app-config.service";
 import {PdfService} from "../services/pdf.service";
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'card-editor',
@@ -118,6 +119,9 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   getPDF() {
     this.pdfService.post(this.model.json)
-      .subscribe(res => {});
+      .subscribe(res => {
+        FileSaver.saveAs(res, 'qqqqqqqqqq.pdf');
+        console.log('saved');
+      });
   }
 }

@@ -49,6 +49,8 @@
     "tslint": "~5.3.2",
     "typescript": "latest",
     "jquery": "latest",
-    "webfontloader": "latest"
+    "webfontloader": "latest",
+    "file-saver": "latest",
+    "@types/file-saver": "latest"
   }
 }
