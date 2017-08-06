@@ -29,7 +29,7 @@ export class ImageService implements OnDestroy {
     this.subscription = null;
   }
 
-  uploadImage(item, image: File) {console.log(this.imageUpload);
+  uploadImage(item, image: File) {
     this.item = item;
 
     let resizeOptions = {
