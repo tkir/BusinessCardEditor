@@ -20,29 +20,27 @@ export class PdfCreator {
           switch (key) {
             case 'Text':
               item = new TextField(it);
-              this.textArr.push(
-                '<div style="' + item.getDivStyle(this.k, ++this.z) +
-                '"><span style="' + item.getSpanStyle(this.k) + '">' + item.text +
-                '</span></div>');
+
+              this.textArr.push(`
+<div style="${item.getDivStyle(this.k, ++this.z)}">
+  <span style="${item.getSpanStyle(this.k)}">${item.text}</span>
+</div>
+              `);
               break;
 
             case 'Logo':
               item = new Logo(it);
-              this.logoArr.push(
-                '<div style="' + item.getDivStyle(this.k, ++this.z - 100) + '"></div>'
-              );
+              this.logoArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 60)}"></div>`);
               break;
 
             case 'Line':
               item = new Line(it);
-              this.lineArr.push(
-                '<div style="' + item.getDivStyle(this.k, ++this.z - 50) + '"></div>'
-              );
+              this.lineArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 50)}"></div>`);
               break;
 
             case 'Background':
               item = new Background(it);
-              this.bg = '<div style="' + item.getDivStyle(this.k, ++this.z - 50) + '">';
+              this.bg = `<div style="${item.getDivStyle(this.k, 0)}">`;
               break;
           }
         })

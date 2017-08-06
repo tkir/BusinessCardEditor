@@ -118,8 +118,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   getPDF() {
     this.pdfService.post(this.model.json)
-      .subscribe(res => this.res=res);
+      .subscribe(res => {});
   }
-
-  res: any;
 }

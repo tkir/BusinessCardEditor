@@ -16,21 +16,20 @@ export class TextField {
 
   getSpanStyle(k: number) {
     return `
-      font-family: ${this.fontFamily};
+      font-family: '${this.fontFamily}';
       font-size: ${this.fontSize_mm * k}px;
       font-weight: ${this.fontWeight};
       font-style: ${this.fontStyle};
       text-decoration: ${this.textDecoration};
-      color: ${this.color};
-    `;
+      color: ${this.color};`;
   }
 
   getDivStyle(k: number, z: number) {
     return `
+      position: absolute;
       left: ${this.left_mm * k}px;
       top: ${this.top_mm * k}px;
-      z-index: ${z};
-    `;
+      z-index: ${z};`;
   }
 }
 
@@ -50,13 +49,12 @@ export class Logo {
     return `
       width: ${this.width_mm * k}px;
       height: ${this.height_mm * k}px;
-      background-image: url(${this.src});
+      background-image: url('${this.src}');
       background-size: cover;
       left: ${this.left_mm * k}px;
       top: ${this.top_mm * k}px;
-      position: relative;
-      z-index: ${z - 100};
-    `
+      position: absolute;
+      z-index: ${z};`;
   }
 }
 
@@ -78,19 +76,17 @@ export class Line {
     let direction = this.isHorizontal ? 'top' : 'right';
 
     let style = `
+      position: absolute;
+      left: ${this.left_mm * k}px;
+      top: ${this.top_mm * k}px;
       border-${direction}-style: ${this.design};
-      border-${direction}-width.px: ${this.thickness}px;
-      border-${direction}-color: ${this.color};
-      position: relative;
+      border-${direction}-width: ${this.thickness}px;
+      border-${direction}-color: ${this.color};      
       margin: 0;
     `;
     if (this.isHorizontal)
-      style += `
-        width: ${Math.round(this.length_mm) * k}px;
-      `;
-    else style += `
-        height: ${Math.round(this.length_mm) * k}px;
-      `;
+      style += `width: ${Math.round(this.length_mm) * k}px;`;
+    else style += `height: ${Math.round(this.length_mm) * k}px;`;
 
     return style;
   }
@@ -108,13 +104,15 @@ export class Background {
   height_mm: number;
 
   getDivStyle(k: number, z: number) {
+    let bgImg=this.src==''?'':
+      `background-image: url('${this.src}');
+      background-size: cover;`
+
     return `
       width: ${this.width_mm * k}px;
       height: ${this.height_mm * k}px;
-      background-image: url(${this.src});
       background-color: ${this.backgroundColor};
-      background-size: cover;
-      position: absolute;
-    `
+      ${bgImg}
+      position: absolute;`;
   }
 }
