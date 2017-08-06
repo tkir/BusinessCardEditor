@@ -23,8 +23,9 @@ export class Background {
   get style() {
     return {
       'background-color': `#${this._backgroundColor.replace('#', '')}`,
-      'background-image': `url(${this.src})`,
+      'background-image': `url('${this.src}')`,
       'background-repeat': 'no-repeat',
+      'background-size': 'cover',
       'width.px': this.width,
       'height.px': this.height
     };
@@ -40,6 +41,14 @@ export class Background {
 
   get backgroundColor() {
     return `#${this._backgroundColor.replace('#', '')}`;
+  }
+
+  get maxWidth(): number {
+    return this.width;
+  }
+
+  get maxHeight(): number {
+    return this.height;
   }
 
   get instanceOf(): string {

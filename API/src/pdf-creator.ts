@@ -47,6 +47,16 @@ export class PdfCreator {
       );
 
     if (this.bg) {
+//       this.bg = `
+// <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+// <script>
+// WebFont.load({
+//   google: {
+//     families: ['Open Sans']
+//   }
+// });
+// </script>
+// ${this.bg}`;
       this.logoArr.forEach(logo => this.bg += logo);
       this.lineArr.forEach(line => this.bg += line);
       this.textArr.forEach(txt => this.bg += txt);
@@ -56,13 +66,16 @@ export class PdfCreator {
     return this.bg;
   }
 
-  public getPDF(obj){
+  public getPDF(obj) {
     let html = this.getHTML(obj);
     // pdf.create(html).toBuffer(function(err, buffer){
     //   console.log('This is a buffer:', Buffer.isBuffer(buffer));
     // });
 
-    pdf.create(html).toFile('./API/test.pdf', function(err, res){console.log(err);
+    let config = {
+    };
+    pdf.create(html, config).toFile('./API/test.pdf', function (err, res) {
+      console.log(err);
       console.log(res.filename);
     });
   }

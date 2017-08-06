@@ -17,7 +17,10 @@ export class ImageService implements OnDestroy {
   constructor(private config: AppConfigService) {
     this.imageUpload = new ImageUpload();
     this.subscription = this.imageUpload.imageSelected
-      .subscribe((res: ImageResult) => this.updateLogo(res));
+      .subscribe((res: ImageResult) => {
+        if (this.item.instanceOf == 'Logo') this.updateLogo(res);
+        else if (this.item.instanceOf == 'Background') this.updateBg(res)
+      });
 
     this.resizeQuality = this.config.get('imageUpload.resizeQuality');
     this.resizeType = this.config.get('imageUpload.resizeType');
@@ -49,6 +52,15 @@ export class ImageService implements OnDestroy {
       this.item.height = imageResult.resized.height;
       this.item.dataType = imageResult.resized.type;
       this.item.src = imageResult.resized.dataURL;
+    }
+
+    //TODO обработать ошибки загрузки файлов
+    if (imageResult.error) console.error(imageResult.error);
+  }
+
+  private updateBg(imageResult: ImageResult) {
+    if (imageResult.resized) {
+        this.item.src = imageResult.resized.dataURL;
     }
 
     //TODO обработать ошибки загрузки файлов
