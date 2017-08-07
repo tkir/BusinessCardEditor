@@ -4,11 +4,11 @@ let pdf = require('html-pdf');
 export class PdfCreator {
 
 
-  constructor(private k: number = 3.78,
-              private z: number = 100) {
-  }
+  // constructor(private k: number = 3.78,
+  //             private z: number = 100) {
+  // }
 
-  private getHTML(obj): string {
+  private static getHTML(obj, k: number = 3.78, z: number = 100): string {
 
     let textArr: string[] = [];
     let logoArr: string[] = [];
@@ -24,25 +24,25 @@ export class PdfCreator {
               item = new TextField(it);
 
               textArr.push(`
-<div style="${item.getDivStyle(this.k, ++this.z)}">
-  <span style="${item.getSpanStyle(this.k)}">${item.text}</span>
+<div style="${item.getDivStyle(k, ++z)}">
+  <span style="${item.getSpanStyle(k)}">${item.text}</span>
 </div>
               `);
               break;
 
             case 'Logo':
               item = new Logo(it);
-              logoArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 60)}"></div>`);
+              logoArr.push(`<div style="${item.getDivStyle(k, ++z - 60)}"></div>`);
               break;
 
             case 'Line':
               item = new Line(it);
-              lineArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 50)}"></div>`);
+              lineArr.push(`<div style="${item.getDivStyle(k, ++z - 50)}"></div>`);
               break;
 
             case 'Background':
               item = new Background(it);
-              bg = `<body style="${item.getDivStyle(this.k, 0)}">`;
+              bg = `<body style="${item.getDivStyle(k, 0)}">`;
               break;
           }
         })
@@ -65,12 +65,12 @@ export class PdfCreator {
     </html>`;
   }
 
-  public getPDF(obj, cb) {
+  public static getPDF(obj, cb) {
     let config = {
       "height": `${obj.Background[0].height_mm}mm`,
       "width": `${obj.Background[0].width_mm}mm`
     };
-    let html = this.getHTML(obj);
+    let html = PdfCreator.getHTML(obj);
 
     pdf.create(html, config)
       .toBuffer((err, buffer) => cb(err, buffer));

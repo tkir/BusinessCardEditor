@@ -16,8 +16,7 @@ app.listen(3000, function () {
 });
 
 app.post('/pdf/:hash', (req, res) => {
-  let pdfCreator = new PdfCreator();
-  pdfCreator.getPDF(req.body.data, (err, buffer) => {
+  PdfCreator.getPDF(req.body.data, (err, buffer) => {
     if (err) {
       console.error(err);
       return;
