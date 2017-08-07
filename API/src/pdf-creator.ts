@@ -75,7 +75,8 @@ export class PdfCreator {
 
     pdf.create(html, config)
       .toBuffer((err, buffer) => {
-        fs.writeFile('q123.pdf', buffer);
+        //можно сохранить себе pdf
+        // fs.writeFile('q123.pdf', buffer);
         cb(err, buffer);
       });
   }

@@ -20,16 +20,13 @@ export class PdfService {
     this.hash = config.get('hash');
   }
 
-  post(data) {
+  getPdf(data) {
 
-    return this.http.post(`${this.pdfAPI}${this.pdfPath}/${this.hash}`,
-      {base_href: this.location.getBaseHrefFromDOM(), data: data},
-      {responseType: ResponseContentType.Blob})
-      .map((res: any) => res.blob())
+    return this.api.postBlob(`${this.pdfAPI}${this.pdfPath}/${this.hash}`,
+      {base_href: this.location.getBaseHrefFromDOM(), data: data})
       .subscribe(
         data => {
-          let blob = new Blob([data], {type: 'application/pdf'});
-          FileSaver.saveAs(blob, "testData.pdf");
+          FileSaver.saveAs(new Blob([data], {type: 'application/pdf'}), "BusinessCard.pdf");
         },
         err => console.error(err)
       );
