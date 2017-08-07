@@ -3,16 +3,18 @@ let pdf = require('html-pdf');
 
 export class PdfCreator {
 
-  private textArr: string[] = [];
-  private logoArr: string[] = [];
-  private lineArr: string[] = [];
-  private bg: string;
 
   constructor(private k: number = 3.78,
               private z: number = 100) {
   }
 
-  private getBg(obj): string {
+  private getHTML(obj): string {
+
+    let textArr: string[] = [];
+    let logoArr: string[] = [];
+    let lineArr: string[] = [];
+    let bg: string = '';
+
     Object.keys(obj)
       .forEach(key => obj[key].forEach(it => {
           let item;
@@ -21,7 +23,7 @@ export class PdfCreator {
             case 'Text':
               item = new TextField(it);
 
-              this.textArr.push(`
+              textArr.push(`
 <div style="${item.getDivStyle(this.k, ++this.z)}">
   <span style="${item.getSpanStyle(this.k)}">${item.text}</span>
 </div>
@@ -30,44 +32,37 @@ export class PdfCreator {
 
             case 'Logo':
               item = new Logo(it);
-              this.logoArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 60)}"></div>`);
+              logoArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 60)}"></div>`);
               break;
 
             case 'Line':
               item = new Line(it);
-              this.lineArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 50)}"></div>`);
+              lineArr.push(`<div style="${item.getDivStyle(this.k, ++this.z - 50)}"></div>`);
               break;
 
             case 'Background':
               item = new Background(it);
-              this.bg = `<div style="${item.getDivStyle(this.k, 0)}">`;
+              bg = `<body style="${item.getDivStyle(this.k, 0)}">`;
               break;
           }
         })
       );
 
-    if (this.bg) {
-      this.logoArr.forEach(logo => this.bg += logo);
-      this.lineArr.forEach(line => this.bg += line);
-      this.textArr.forEach(txt => this.bg += txt);
-      this.bg += '</div>';
+
+    if (bg != '') {
+      logoArr.forEach(logo => bg += logo);
+      lineArr.forEach(line => bg += line);
+      textArr.forEach(txt => bg += txt);
+      bg += '</body>';
     }
 
-    return this.bg;
-  }
-
-  private getHTML(obj): string {
-    let bg = this.getBg(obj);
-    return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-</head>
-<body style="margin: 0; padding: 0;">
-${bg};
-</body>
-</html>`
+    return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+    </head>
+    ${bg};
+    </html>`;
   }
 
   public getPDF(obj, cb) {

@@ -109,13 +109,9 @@ export class Background {
       background-size: cover;`
 
     return `
-      width: ${Math.round(this.width_mm * k)}px;
-      height: ${Math.round(this.height_mm * k)}px;
       background-color: ${this.backgroundColor};
       ${bgImg}
-      position: absolute;
       margin: 0;
-      padding: 0;
-      `;
+      padding: 0;`;
   }
 }
