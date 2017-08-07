@@ -104,7 +104,7 @@ export class Background {
   height_mm: number;
 
   getDivStyle(k: number, z: number) {
-    let bgImg=this.src==''?'':
+    let bgImg = this.src == '' ? '' :
       `background-image: url('${this.src}');
       background-size: cover;`
 
@@ -112,6 +112,8 @@ export class Background {
       background-color: ${this.backgroundColor};
       ${bgImg}
       margin: 0;
-      padding: 0;`;
+      padding: 0;
+      width: ${Math.round(this.width_mm * k)}px;
+      height: ${Math.round(this.height_mm * k)}px;`;
   }
 }

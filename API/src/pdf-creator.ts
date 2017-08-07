@@ -1,5 +1,6 @@
 import {Background, Line, Logo, TextField} from "./classes";
 let pdf = require('html-pdf');
+let fs=require('fs');
 
 export class PdfCreator {
 
@@ -61,7 +62,7 @@ export class PdfCreator {
     <head>
       <meta charset="UTF-8">
     </head>
-    ${bg};
+    ${bg}
     </html>`;
   }
 
@@ -73,6 +74,9 @@ export class PdfCreator {
     let html = PdfCreator.getHTML(obj);
 
     pdf.create(html, config)
-      .toBuffer((err, buffer) => cb(err, buffer));
+      .toBuffer((err, buffer) => {
+        fs.writeFile('q123.pdf', buffer);
+        cb(err, buffer);
+      });
   }
 }
