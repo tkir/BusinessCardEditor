@@ -15,9 +15,9 @@ export class ApiService {
     responseType: ResponseContentType.Blob
   });
 
-  private getJSON(resp: Response): any {
-    if(~resp.headers.get('content-type').indexOf('application/pdf'))
-      return new Blob([resp['_body']], {type: 'application/pdf'});
+  private getRes(resp: Response): any {
+    if(~resp.headers.get('content-type').indexOf('application/pdf')){
+      return new Blob([resp['_body']], {type: 'application/pdf'});}
     return resp.json();
   }
 
@@ -35,27 +35,27 @@ export class ApiService {
     return this.http.get(path, {headers: this.headers})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJSON);
+      .map(this.getRes);
   }
 
   post(path: string, body: any): Observable<any> {
     return this.http.post(path, JSON.stringify(body), {headers: this.headers})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJSON);
+      .map(this.getRes);
   }
 
   delete(path: string): Observable<any> {
     return this.http.get(path, {headers: this.headers})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJSON);
+      .map(this.getRes);
   }
 
   put(path: string, body: any): Observable<any> {
     return this.http.put(path, JSON.stringify(body), {headers: this.headers})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJSON);
+      .map(this.getRes);
   }
 }

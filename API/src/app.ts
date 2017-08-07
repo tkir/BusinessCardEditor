@@ -22,7 +22,11 @@ app.post('/pdf/:hash', (req, res) => {
       return;
     }
 
-    res.contentType('application/pdf');
-    res.end(buffer);
+    res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename=test.pdf',
+      'Content-Length': buffer.length
+    });
+    res.end(buffer, 'binary');
   });
 });

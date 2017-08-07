@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
 import {AppConfigService} from "./app-config.service";
 import {PlatformLocation} from "@angular/common";
+import {Http, ResponseContentType} from "@angular/http";
+import * as FileSaver from 'file-saver';
 
 @Injectable()
 export class PdfService {
@@ -12,15 +14,25 @@ export class PdfService {
 
   constructor(private api: ApiService,
               private config: AppConfigService,
-              private location: PlatformLocation) {
+              private location: PlatformLocation, private http: Http) {
     this.pdfAPI = config.get('host.api.endpoint');
     this.pdfPath = config.get('host.api.pdf');
     this.hash = config.get('hash');
   }
 
   post(data) {
-    return this.api.post(`${this.pdfAPI}${this.pdfPath}/${this.hash}`,
-      {base_href: this.location.getBaseHrefFromDOM(), data: data});
+
+    return this.http.post(`${this.pdfAPI}${this.pdfPath}/${this.hash}`,
+      {base_href: this.location.getBaseHrefFromDOM(), data: data},
+      {responseType: ResponseContentType.Blob})
+      .map((res: any) => res.blob())
+      .subscribe(
+        data => {
+          let blob = new Blob([data], {type: 'application/pdf'});
+          FileSaver.saveAs(blob, "testData.pdf");
+        },
+        err => console.error(err)
+      );
   }
 
 }

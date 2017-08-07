@@ -118,10 +118,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   getPDF() {
-    this.pdfService.post(this.model.json)
-      .subscribe(res => {
-        FileSaver.saveAs(res, 'qqqqqqqqqq.pdf');
-        console.log('saved');
-      });
+    this.pdfService.post(this.model.json);
   }
 }
