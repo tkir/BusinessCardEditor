@@ -30,3 +30,18 @@ app.post('/pdf/:hash', (req, res) => {
     res.end(buffer, 'binary');
   });
 });
+
+app.post('/preview/:hash', (req, res) => {
+  PdfCreator.getPreview(req.body.data, (err, buffer) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'image/jpeg',
+      'Content-Length': buffer.length
+    });
+    res.end(buffer, 'binary');
+  });
+});

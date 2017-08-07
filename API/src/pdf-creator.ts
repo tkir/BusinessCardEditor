@@ -1,14 +1,10 @@
 import {Background, Line, Logo, TextField} from "./classes";
 let pdf = require('html-pdf');
-let fs=require('fs');
+let fs = require('fs');
 
 export class PdfCreator {
 
-
-  // constructor(private k: number = 3.78,
-  //             private z: number = 100) {
-  // }
-
+  //TODO to config
   private static getHTML(obj, k: number = 3.78, z: number = 100): string {
 
     let textArr: string[] = [];
@@ -77,6 +73,24 @@ export class PdfCreator {
       .toBuffer((err, buffer) => {
         //можно сохранить себе pdf
         // fs.writeFile('q123.pdf', buffer);
+        cb(err, buffer);
+      });
+  }
+
+  public static getPreview(obj, cb) {
+    //  TODO to config
+    let config = {
+      // "height": `${obj.Background[0].height_mm / 10}mm`,
+      // "width": `${obj.Background[0].width_mm / 10}mm`,
+      "type": "jpeg",             // allowed file types: png, jpeg, pdf
+      "quality": "100",            // only used for types png & jpeg
+    };
+    let html = PdfCreator.getHTML(obj);
+
+    pdf.create(html, config)
+      .toBuffer((err, buffer) => {
+        //можно сохранить себе pdf
+        // fs.writeFile('q123.jpg', buffer);
         cb(err, buffer);
       });
   }

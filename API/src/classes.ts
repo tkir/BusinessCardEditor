@@ -113,6 +113,7 @@ export class Background {
       ${bgImg}
       margin: 0;
       padding: 0;
+      overflow: hidden;
       width: ${Math.round(this.width_mm * k)}px;
       height: ${Math.round(this.height_mm * k)}px;`;
   }

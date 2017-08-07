@@ -8,7 +8,8 @@
     },
     "api":{
       "endpoint": "http://localhost:3000",
-      "pdf": "/pdf"
+      "pdf": "/pdf",
+      "preview": "/preview"
     }
   },
   "allowedFonts": [
