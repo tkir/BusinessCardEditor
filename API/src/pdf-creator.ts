@@ -80,16 +80,14 @@ export class PdfCreator {
   public static getPreview(obj, cb) {
     //  TODO to config
     let config = {
-      // "height": `${obj.Background[0].height_mm / 10}mm`,
-      // "width": `${obj.Background[0].width_mm / 10}mm`,
-      "type": "jpeg",             // allowed file types: png, jpeg, pdf
-      "quality": "100",            // only used for types png & jpeg
+      "type": "jpeg",
+      "quality": "100"
     };
     let html = PdfCreator.getHTML(obj);
 
     pdf.create(html, config)
       .toBuffer((err, buffer) => {
-        //можно сохранить себе pdf
+        //можно сохранить себе jpg
         // fs.writeFile('q123.jpg', buffer);
         cb(err, buffer);
       });
