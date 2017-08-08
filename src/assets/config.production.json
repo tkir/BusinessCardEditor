@@ -1,3 +1,17 @@
 {
-  "host": "127.0.0.1:4200"
+  "html": "<!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\">\n    </head>\n    <body style=\"\n      background-color: #f5f5dc;\n      \n      margin: 0;\n      padding: 0;\n      overflow: hidden;\n      width: 321px;\n      height: 208px;\"><div style=\"\n      width: 83.16px;\n      height: 37.8px;\n      background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/69/Marvel_Cinematic_Universe_Logo.png');\n      background-size: cover;\n      left: 5.67px;\n      top: 5.67px;\n      position: absolute;\n      z-index: 48;\"></div><div style=\"\n      position: absolute;\n      left: 0px;\n      top: 113.39999999999999px;\n      border-top-style: solid;\n      border-top-width: 1px;\n      border-top-color: #00f;      \n      margin: 0;\n    width: 170.1px;\"></div>\n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 0px;\n      z-index: 101;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 8.316px;\n      font-weight: bold;\n      font-style: normal;\n      text-decoration: none;\n      color: #00f;\">James Howlett</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 11.34px;\n      z-index: 102;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: normal;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">Logan</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 22.68px;\n      z-index: 103;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: bold;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">Marvel Entertainment LLC</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 34.019999999999996px;\n      z-index: 104;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: normal;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">New York, NY, USA</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 45.36px;\n      z-index: 105;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: normal;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">+(1212)576-400-00</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 56.699999999999996px;\n      z-index: 106;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: normal;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">marvelsubs@midtowncomics.com</span>\n</div>\n              \n<div style=\"\n      position: absolute;\n      left: 113.39999999999999px;\n      top: 68.03999999999999px;\n      z-index: 107;\">\n  <span style=\"\n      font-family: 'Open Sans';\n      font-size: 4.536px;\n      font-weight: normal;\n      font-style: normal;\n      text-decoration: none;\n      color: #000;\">marvel.com</span>\n</div>\n              </body>\n    </html>",
+  "options": {
+    "type": "jpeg",
+    "quality": "100",
+    "viewportSize": {
+      "width": 100,
+      "height": 100
+    },
+    "phantomPath": "C:\\GIT\\BusinessCardEditor\\API\\node_modules\\phantomjs-prebuilt\\lib\\phantom\\bin\\phantomjs.exe",
+    "phantomArgs": [],
+    "timeout": 30000
+  }
 }
+
+
+

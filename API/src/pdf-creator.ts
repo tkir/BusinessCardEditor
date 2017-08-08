@@ -81,7 +81,8 @@ export class PdfCreator {
     //  TODO to config
     let config = {
       "type": "jpeg",
-      "quality": "100"
+      "quality": "100",
+      "viewportSize": {"width":100, "height":100}
     };
     let html = PdfCreator.getHTML(obj);
 
