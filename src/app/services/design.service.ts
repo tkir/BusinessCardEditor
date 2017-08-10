@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AppConfigService} from "./app-config.service";
 import {DbService} from "./db.service";
-import {CardData} from "../data/CardData";
 import {CardDesignData, CardFieldsData} from "../data/interfaces";
 import {DesignStore} from "./design-store";
 const objectHash = require('object-hash');
@@ -29,18 +28,18 @@ export class DesignService {
     let cardHash = objectHash(obj);
 
     this.config.post('allowedDesigns', cardHash);
-    this.updateDesignes(this.config.get('allowedDesigns'));
+    this.updateDesigns(this.config.get('allowedDesigns'));
     // return this.db.post(
     //   `${this.path}/${this.config.get('hash')}/${cardHash}`, obj);
   }
 
-  getAllowedDesignes(){
-    this.updateDesignes(this.config.get('allowedDesigns'));
+  getAllowedDesigns(){
+    this.updateDesigns(this.config.get('allowedDesigns'));
 
     return this.store.changes;
   }
 
-  updateDesignes(state){
+  updateDesigns(state){
     let currentState = state;
     return this.store.state = currentState;
   }

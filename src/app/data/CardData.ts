@@ -79,16 +79,17 @@ export class CardData {
   public get designData(): CardDesignData {
     return new CardDesignData(
       {
-      owners: this.owners.map(txt => txt.designData),
-      positions: this.positions.map(txt => txt.designData),
-      organisations: this.organisations.map(txt => txt.designData),
-      addresses: this.addresses.map(txt => txt.designData),
-      phones: this.phones.map(txt => txt.designData),
-      emails: this.emails.map(txt => txt.designData),
-      sites: this.sites.map(txt => txt.designData),
-      logos: this.logos.map(logo => logo.designData),
-      background: this.background.designData
-    });
+        owners: this.owners.map(txt => txt.designData),
+        positions: this.positions.map(txt => txt.designData),
+        organisations: this.organisations.map(txt => txt.designData),
+        addresses: this.addresses.map(txt => txt.designData),
+        phones: this.phones.map(txt => txt.designData),
+        emails: this.emails.map(txt => txt.designData),
+        sites: this.sites.map(txt => txt.designData),
+        logos: this.logos.map(logo => logo.designData),
+        lines: this.lines.map(line => line.designData),
+        background: this.background.designData
+      });
   }
 }
 

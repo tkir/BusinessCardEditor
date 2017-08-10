@@ -9,7 +9,8 @@ export class AppConfigService {
   private config: Object = null;
   private env: Object = null;
   //TODO перед production убрать '../..'
-  private configPath:string='../../assets/config.';
+  private configPath: string = `${this.location.getBaseHrefFromDOM()}assets/config.`;
+  public imagePath: string = `${this.location.getBaseHrefFromDOM()}assets/img`;
   private headers: Headers = new Headers({
     'Content-Type': 'application/json',
     Accept: 'application/json'

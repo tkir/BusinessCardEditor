@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 import {DesignService} from "../services/design.service";
+import {AppConfigService} from "../services/app-config.service";
 
 @Component({
   selector: 'card-design-container',
@@ -9,15 +10,19 @@ import {DesignService} from "../services/design.service";
 })
 export class DesignContainerComponent implements OnInit, OnDestroy {
 
-  private allowedDesigns = [];
+  public allowedDesigns = [];
+  public imagePath:string='';
   private subscription: Subscription = null;
 
-  constructor(private designService: DesignService) {
+  constructor(private designService: DesignService,
+              private config: AppConfigService) {
   }
 
   ngOnInit() {
-    this.subscription = this.designService.getAllowedDesignes()
+    this.subscription = this.designService.getAllowedDesigns()
       .subscribe((designs: any) => this.allowedDesigns = designs);
+
+    this.imagePath=this.config.imagePath;
   }
 
   ngOnDestroy() {
