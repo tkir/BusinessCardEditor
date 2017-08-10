@@ -43,7 +43,17 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addTextField(items: TextField[], i?: number) {
 
-    let newText: TextField = new TextField('', this.getItemFont(), 1.2, "normal", "normal", "none", '000', 30, 5);
+    let newText: TextField = new TextField('',
+      {
+        fontFamily: this.getItemFont(),
+        fontSize_mm: 1.2,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        textDecoration: "none",
+        colorStr: '000',
+        left_mm: 30,
+        top_mm: 5
+      });
 
     if (items && items.length) {
       Object.keys(items[i]).forEach(key => newText[key] = items[i][key]);
@@ -57,7 +67,13 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addLogo(items: Logo[], i?: number) {
 
-    let newLogo: Logo = new Logo(this.config.get('default.logo'), 22, 10, 5, 5);
+    let newLogo: Logo = new Logo(this.config.get('default.logo'),
+      {
+        width_mm: 22,
+        height_mm: 10,
+        left_mm: 5,
+        top_mm: 5
+      });
 
     newLogo.setConstants(this.config);
     items.push(newLogo);
@@ -65,7 +81,16 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   addLine(lines: Line[], i) {
-    let newLine: Line = new Line(0, 30, 45, 1, true, 'solid', '00f');
+    let newLine: Line = new Line(
+      {
+        left_mm: 0,
+        top_mm: 30,
+        length_mm: 45,
+        _thickness: 1,
+        isHorizontal: true,
+        design: 'solid',
+        _color: '00f'
+      });
     newLine.setConstants(this.config);
     lines.push(newLine);
     this.dataService.updateCard(this.model);

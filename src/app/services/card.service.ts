@@ -22,21 +22,12 @@ export class CardService {
 
     let logos: Logo[] = dData.logos.map((d, i) => {
       if (fData.logos[i]) return new Logo(
-        fData.logos[i],
-        d.width_mm,
-        d.height_mm,
-        d.left_mm,
-        d.top_mm
-      );
+        fData.logos[i], d);
     });
 
-    let lines:Line[]=dData.lines.map((d,i)=>new Line(
-      d.left_mm, d.top_mm, d.length_mm, d._thickness, d.isHorizontal, d.design, d._color
-    ));
+    let lines:Line[]=dData.lines.map((d,i)=>new Line(d));
 
-    let bg:Background=new Background(
-      dData.background._backgroundColor, dData.background.src, dData.background.width_mm, dData.background.height_mm
-    );
+    let bg:Background=new Background(dData.background);
 
     //подгружаем уникальные шрифты
     this.loadedFonts = this.loadedFonts.filter(this.onlyUnique);
@@ -58,17 +49,7 @@ export class CardService {
     this.loadedFonts.push(...fonts);
 
     return tDsns.map((d, i) => {
-      if (fStrs[i])return new TextField(
-        fStrs[i],
-        d.fontFamily,
-        d.fontSize_mm,
-        d.fontWeight,
-        d.fontStyle,
-        d.textDecoration,
-        d.colorStr,
-        d.left_mm,
-        d.top_mm
-      );
+      if (fStrs[i])return new TextField(fStrs[i], d);
     });
   }
 

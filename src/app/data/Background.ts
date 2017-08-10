@@ -2,11 +2,14 @@ export class Background {
 
   public dataType: string;
 
-  constructor(public _backgroundColor: string,
-              public src: string,
-              public width_mm: number,
-              public height_mm: number) {
+  constructor(obj) {
+    Object.keys(obj).forEach(key => this[key] = obj[key]);
   }
+
+  public _backgroundColor: string;
+  public src: string;
+  public width_mm: number;
+  public height_mm: number;
 
   private k: number;
   private polygraphPadding: number;
@@ -58,6 +61,15 @@ export class Background {
   get json() {
     return {
       backgroundColor: this.backgroundColor,
+      src: this.src,
+      width_mm: this.width_mm,
+      height_mm: this.height_mm
+    }
+  }
+
+  get designData() {
+    return {
+      _backgroundColor: this._backgroundColor,
       src: this.src,
       width_mm: this.width_mm,
       height_mm: this.height_mm

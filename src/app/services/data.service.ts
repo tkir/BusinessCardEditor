@@ -29,7 +29,7 @@ export class DataService {
             .subscribe(d => {
               //проверка, есть ли какие-то данные в карте, если нет - загружаем default fieldsData
               if (this.isDesignLoad)
-                this.setCardData(d, this.cData.getFieldsData());
+                this.setCardData(d, this.cData.fieldsData);
               else
                 this.fDataService.getFieldsData()
                   .subscribe(fData => this.setCardData(d, fData));

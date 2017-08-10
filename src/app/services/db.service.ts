@@ -15,4 +15,8 @@ export class DbService {
     return this.api.get(`${this.dbURL}${path}.json`)
   }
 
+  post(path:string, data:any){
+    return this.api.post(`${this.dbURL}${path}.json`, JSON.stringify(data));
+  }
+
 }

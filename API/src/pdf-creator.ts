@@ -88,8 +88,6 @@ export class PdfCreator {
 
     pdf.create(html, config)
       .toBuffer((err, buffer) => {
-        //можно сохранить себе jpg
-        // fs.writeFile('q123.jpg', buffer);
         cb(err, buffer);
       });
   }

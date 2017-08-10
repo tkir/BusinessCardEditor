@@ -2,14 +2,17 @@ import {CardField} from "./interfaces";
 import {getMaxPosition, getMaxSize} from "../utils/size.util";
 export class Line implements CardField {
 
-  constructor(public left_mm: number,
-              public top_mm: number,
-              public length_mm: number,
-              public _thickness: number,
-              public isHorizontal: boolean = true,
-              public design: string = 'solid',
-              public _color: string = '000') {
+  constructor(obj) {
+    Object.keys(obj).forEach(key => this[key] = obj[key]);
   }
+
+  public left_mm: number;
+  public top_mm: number;
+  public length_mm: number;
+  public _thickness: number;
+  public isHorizontal: boolean = true;
+  public design: string = 'solid';
+  public _color: string = '000';
 
   private k;
   public isSelected: boolean = false;
@@ -99,9 +102,21 @@ export class Line implements CardField {
       top_mm: this.top_mm,
       length_mm: this.length_mm,
       thickness: this.thickness,
-      isHorizontal:this.isHorizontal,
-      design:this.design,
-      color:this.color
+      isHorizontal: this.isHorizontal,
+      design: this.design,
+      color: this.color
+    }
+  }
+
+  get designData() {
+    return {
+      left_mm: this.left_mm,
+      top_mm: this.top_mm,
+      length_mm: this.length_mm,
+      _thickness: this._thickness,
+      isHorizontal: this.isHorizontal,
+      design: this.design,
+      _color: this._color
     }
   }
 }

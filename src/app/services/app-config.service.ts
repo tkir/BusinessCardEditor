@@ -7,12 +7,25 @@ export class AppConfigService {
 
   private config: Object = null;
   private env: Object = null;
+  //TODO перед production убрать '../../'
+  private configPath:string='../../assets/config.';
   private headers: Headers = new Headers({
     'Content-Type': 'application/json',
     Accept: 'application/json'
   });
 
   constructor(private http: Http) {
+  }
+
+  public post(key, value): boolean {
+    let res: any = this.config;
+    key.split('.')
+      .forEach(k => res = res[k]);
+
+    if (!Array.isArray(res) || res.indexOf(value) != -1)return false;
+    res.push(value);
+    this.save();
+    return true;
   }
 
   public get(key: any) {
@@ -38,15 +51,17 @@ export class AppConfigService {
         this.env = envResponse;
         let request: any = null;
 
-        //TODO перед production убрать '../../'
+
         switch (envResponse.env) {
           case 'production': {
-            request = this.http.get('../../assets/config.' + envResponse.env + '.json');
+            this.configPath += envResponse.env + '.json';
+            request = this.http.get(this.configPath);
           }
             break;
 
           case 'development': {
-            request = this.http.get('../../assets/config.' + envResponse.env + '.json');
+            this.configPath += envResponse.env + '.json';
+            request = this.http.get(this.configPath);
           }
             break;
 
@@ -76,6 +91,10 @@ export class AppConfigService {
       });
 
     });
+  }
+
+  private save() {
+    
   }
 
 }

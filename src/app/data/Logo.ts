@@ -3,12 +3,16 @@ import {getMaxPosition, getMaxSize} from "../utils/size.util";
 
 export class Logo implements CardField {
 
-  constructor(public src: string,
-              public width_mm: number,
-              public height_mm: number,
-              public left_mm: number,
-              public top_mm: number) {
+  constructor(fData: string, dData) {
+    this.src = fData;
+    Object.keys(dData).forEach(key => this[key] = dData[key]);
   }
+
+  public src: string;
+  public width_mm: number;
+  public height_mm: number;
+  public left_mm: number;
+  public top_mm: number;
 
   public isSelected: boolean;
   public dataType: string;
@@ -95,7 +99,16 @@ export class Logo implements CardField {
       width_mm: this.width_mm,
       height_mm: this.height_mm,
       left_mm: this.left_mm,
-      top_mm:this.top_mm
+      top_mm: this.top_mm
+    }
+  }
+
+  get designData() {
+    return {
+      width_mm: this.width_mm,
+      height_mm: this.height_mm,
+      left_mm: this.left_mm,
+      top_mm: this.top_mm
     }
   }
 }

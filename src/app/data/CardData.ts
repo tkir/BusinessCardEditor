@@ -2,7 +2,7 @@ import {Logo} from "./Logo";
 import {Background} from "./Background";
 import {TextField} from "./TextField";
 import {Line} from "./Line";
-import {CardFieldsData} from "./interfaces";
+import {CardDesignData, CardFieldsData} from "./interfaces";
 
 export class CardData {
   constructor(public owners: TextField[],
@@ -49,19 +49,6 @@ export class CardData {
     this.logos.forEach(logo => logo.setMax(this.background.width, this.background.height));
   }
 
-  public getFieldsData(): CardFieldsData {
-    return new CardFieldsData(
-      this.owners.map(txt => txt.text),
-      this.positions.map(txt => txt.text),
-      this.organisations.map(txt => txt.text),
-      this.addresses.map(txt => txt.text),
-      this.phones.map(txt => txt.text),
-      this.emails.map(txt => txt.text),
-      this.sites.map(txt => txt.text),
-      this.logos.map(logo => logo.src),
-    );
-  }
-
   public get json() {
     let obj = {};
 
@@ -72,6 +59,36 @@ export class CardData {
     });
 
     return obj;
+  }
+
+  public get fieldsData(): CardFieldsData {
+    return new CardFieldsData(
+      {
+        owners: this.owners.map(txt => txt.text),
+        positions: this.positions.map(txt => txt.text),
+        organisations: this.organisations.map(txt => txt.text),
+        addresses: this.addresses.map(txt => txt.text),
+        phones: this.phones.map(txt => txt.text),
+        emails: this.emails.map(txt => txt.text),
+        sites: this.sites.map(txt => txt.text),
+        logos: this.logos.map(logo => logo.src)
+      }
+    );
+  }
+
+  public get designData(): CardDesignData {
+    return new CardDesignData(
+      {
+      owners: this.owners.map(txt => txt.designData),
+      positions: this.positions.map(txt => txt.designData),
+      organisations: this.organisations.map(txt => txt.designData),
+      addresses: this.addresses.map(txt => txt.designData),
+      phones: this.phones.map(txt => txt.designData),
+      emails: this.emails.map(txt => txt.designData),
+      sites: this.sites.map(txt => txt.designData),
+      logos: this.logos.map(logo => logo.designData),
+      background: this.background.designData
+    });
   }
 }
 

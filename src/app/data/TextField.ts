@@ -5,16 +5,20 @@ import {getMaxPosition, getMaxSize} from "../utils/size.util";
 
 export class TextField implements CardField {
 
-  constructor(public text: string,
-              public fontFamily: string,
-              public fontSize_mm: number,
-              public fontWeight: string,
-              public fontStyle: string,
-              public textDecoration: string,
-              public colorStr: string,
-              public left_mm: number,
-              public top_mm: number) {
+  constructor(fData: string, dData) {
+    this.text = fData;
+    Object.keys(dData).forEach(key => this[key] = dData[key]);
   }
+
+  public text: string;
+  public fontFamily: string;
+  public fontSize_mm: number;
+  public fontWeight: string;
+  public fontStyle: string;
+  public textDecoration: string;
+  public colorStr: string;
+  public left_mm: number;
+  public top_mm: number;
 
   private k: number;
   private fontSizeStep: number;
@@ -134,6 +138,19 @@ export class TextField implements CardField {
       fontStyle: this.fontStyle,
       textDecoration: this.textDecoration,
       color: this.color,
+      left_mm: this.left_mm,
+      top_mm: this.top_mm
+    }
+  }
+
+  get designData() {
+    return {
+      fontFamily: this.fontFamily,
+      fontSize_mm: this.fontSize_mm,
+      fontWeight: this.fontWeight,
+      fontStyle: this.fontStyle,
+      textDecoration: this.textDecoration,
+      colorStr: this.colorStr,
       left_mm: this.left_mm,
       top_mm: this.top_mm
     }
