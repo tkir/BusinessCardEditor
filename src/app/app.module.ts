@@ -33,6 +33,7 @@ import {FieldsDataService} from "./services/fields-data.service";
 import {CardService} from "./services/card.service";
 import {DbService} from "./services/db.service";
 import {PdfService} from "./services/pdf.service";
+import {DesignStore} from "./services/design-store";
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {PdfService} from "./services/pdf.service";
   providers: [
     CardService,
     Store,
+    DesignStore,
     DataService,
     ImageService,
     AlignService,

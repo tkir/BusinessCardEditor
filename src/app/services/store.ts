@@ -42,7 +42,7 @@ export class Store {
     return this.store.value;
   }
 
-  get changes(){
+  get changes() {
     return this._changes;
   }
 

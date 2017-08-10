@@ -1,20 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+import {PlatformLocation} from "@angular/common";
 
 @Injectable()
 export class AppConfigService {
 
   private config: Object = null;
   private env: Object = null;
-  //TODO перед production убрать '../../'
+  //TODO перед production убрать '../..'
   private configPath:string='../../assets/config.';
   private headers: Headers = new Headers({
     'Content-Type': 'application/json',
     Accept: 'application/json'
   });
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private location: PlatformLocation,) {
   }
 
   public post(key, value): boolean {
@@ -94,7 +96,7 @@ export class AppConfigService {
   }
 
   private save() {
-    
+    console.log(this.location.getBaseHrefFromDOM());
   }
 
 }

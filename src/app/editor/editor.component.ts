@@ -10,6 +10,7 @@ import {Line} from "../data/Line";
 import {AppConfigService} from "../services/app-config.service";
 import {PdfService} from "../services/pdf.service";
 import * as FileSaver from 'file-saver';
+import {DesignService} from "../services/design.service";
 
 @Component({
   selector: 'card-editor',
@@ -27,6 +28,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService,
               private store: Store,
               private imageService: ImageService,
+              private designService:DesignService,
               private pdfService: PdfService,
               private config: AppConfigService) {
   }
@@ -139,7 +141,11 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.pdfService.getPreview(this.model.json);
+    this.designService.saveDesign(
+      this.model.fieldsData,
+      this.model.designData,
+      this.pdfService.getPreview(this.model.json)
+    );
   }
 
   getPDF() {

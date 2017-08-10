@@ -1,3 +1,5 @@
-<a routerLink="/">Home</a>
-<br>
-<a routerLink="/des1">design1</a>
+<button type="button"
+        *ngFor="let design of allowedDesigns"
+        routerLink="/{{design}}"
+>{{design}}
+</button>
