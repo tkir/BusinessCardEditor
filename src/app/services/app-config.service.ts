@@ -8,16 +8,23 @@ export class AppConfigService {
 
   private config: Object = null;
   private env: Object = null;
-  //TODO перед production убрать '../..'
-  private configPath: string = `${this.location.getBaseHrefFromDOM()}assets/config.`;
-  public imagePath: string = `${this.location.getBaseHrefFromDOM()}assets/img`;
-  private headers: Headers = new Headers({
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  });
+
+  private base: string;
+  private configPath: string;
+  private envPath: string;
+  public imagePath: string;
+  private headers: Headers;
 
   constructor(private http: Http,
               private location: PlatformLocation,) {
+    this.base = this.location.getBaseHrefFromDOM();
+    this.configPath = `${this.base}assets/config.`;
+    this.envPath = `${this.base}assets/env.json`;
+    this.imagePath = `${this.base}assets/img`;
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    });
   }
 
   public post(key, value): boolean {
@@ -44,7 +51,7 @@ export class AppConfigService {
 
   public load() {
     return new Promise((resolve, reject) => {
-      this.http.get('../../assets/env.json', {headers: this.headers})
+      this.http.get(this.envPath, {headers: this.headers})
         .map(res => res.json())
         .catch((error: any): any => {
           console.log('Configuration file "env.json" could not be read');
