@@ -1,9 +1,16 @@
 {
-  "host": "localhost:4200",
-  "api": {
-    "endpoint": "https://businesscardeditor.firebaseio.com",
-    "design": "/design",
-    "data": "/data"
+  "hash": "111222333",
+  "host": {
+    "db":{
+      "endpoint": "https://businesscardeditor.firebaseio.com",
+      "design": "/design",
+      "data": "/data"
+    },
+    "api":{
+      "endpoint": "http://localhost:3000",
+      "pdf": "/pdf",
+      "preview": "/preview"
+    }
   },
   "allowedFonts": [
     "Work Sans",
