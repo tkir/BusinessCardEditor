@@ -7,6 +7,7 @@ export class PdfCreator {
   //TODO to config
   private static getHTML(obj, k: number = 3.78, z: number = 100): string {
 
+
     let textArr: string[] = [];
     let logoArr: string[] = [];
     let lineArr: string[] = [];
@@ -62,12 +63,12 @@ export class PdfCreator {
     </html>`;
   }
 
-  public static getPDF(obj, cb) {
+  public static getPDF(obj, k, cb) {
     let config = {
       "height": `${obj.Background[0].height_mm}mm`,
       "width": `${obj.Background[0].width_mm}mm`
     };
-    let html = PdfCreator.getHTML(obj);
+    let html = PdfCreator.getHTML(obj, k);
 
     pdf.create(html, config)
       .toBuffer((err, buffer) => {
@@ -82,7 +83,7 @@ export class PdfCreator {
     let config = {
       "type": "jpeg",
       "quality": "100",
-      "viewportSize": {"width":100, "height":100}
+      "viewportSize": {"width": 100, "height": 100}
     };
     let html = PdfCreator.getHTML(obj);
 
