@@ -7,7 +7,7 @@
       "data": "/data"
     },
     "api":{
-      "endpoint": "http://localhost:3000",
+      "endpoint": "https://html-pdf-api.appspot.com",
       "pdf": "/pdf",
       "preview": "/preview"
     }
