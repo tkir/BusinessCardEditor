@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {PlatformLocation} from "@angular/common";
+declare var businessCardCreatorOptions: any;
 
 @Injectable()
 export class AppConfigService {
 
-  private config: Object = null;
+  private config: any = null;
   private env: Object = null;
 
   private base: string;
@@ -51,6 +52,12 @@ export class AppConfigService {
 
   public load() {
     return new Promise((resolve, reject) => {
+
+      //TODO wordpress plugin
+      // this.configPath = '';
+      // this.config = businessCardCreatorOptions;
+      // resolve(true);
+
       this.http.get(this.envPath, {headers: this.headers})
         .map(res => res.json())
         .catch((error: any): any => {
@@ -64,8 +71,9 @@ export class AppConfigService {
 
         switch (envResponse.env) {
           case 'production': {
-            this.configPath += envResponse.env + '.json';
-            request = this.http.get(this.configPath);
+            this.configPath = '';
+            this.config = businessCardCreatorOptions;
+            resolve(true);
           }
             break;
 
@@ -73,6 +81,25 @@ export class AppConfigService {
             this.configPath += envResponse.env + '.json';
             request = this.http.get(this.configPath);
           }
+
+            if (request) {
+              request
+                .map(res => res.json())
+                .catch((error: any) => {
+                  console.error('Error reading ' + envResponse.env + ' configuration file');
+                  resolve(error);
+                  return Observable.throw(error.json().error || 'Server error');
+                })
+                .subscribe((responseData) => {
+                  this.config = responseData;
+                  this.config.imagePath = this.imagePath;
+                  resolve(true);
+                });
+            } else {
+              console.error('Env config file "env.json" is not valid');
+              resolve(true);
+            }
+
             break;
 
           case 'default': {
@@ -82,22 +109,7 @@ export class AppConfigService {
             break;
         }
 
-        if (request) {
-          request
-            .map(res => res.json())
-            .catch((error: any) => {
-              console.error('Error reading ' + envResponse.env + ' configuration file');
-              resolve(error);
-              return Observable.throw(error.json().error || 'Server error');
-            })
-            .subscribe((responseData) => {
-              this.config = responseData;
-              resolve(true);
-            });
-        } else {
-          console.error('Env config file "env.json" is not valid');
-          resolve(true);
-        }
+
       });
 
     });

@@ -11,7 +11,7 @@ import {AppConfigService} from "../services/app-config.service";
 export class DesignContainerComponent implements OnInit, OnDestroy {
 
   public allowedDesigns = [];
-  public imagePath:string='';
+  public imagePath: string = '';
   private subscription: Subscription = null;
 
   constructor(private designService: DesignService,
@@ -22,7 +22,7 @@ export class DesignContainerComponent implements OnInit, OnDestroy {
     this.subscription = this.designService.getAllowedDesigns()
       .subscribe((designs: any) => this.allowedDesigns = designs);
 
-    this.imagePath=this.config.imagePath;
+    this.imagePath = this.config.get('imagePath');
   }
 
   ngOnDestroy() {
